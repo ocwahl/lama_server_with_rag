@@ -1,14 +1,9 @@
 // coversations is stored in localStorage
 // format: { [convId]: { id: string, lastModified: number, messages: [...] } }
 
-import {
-  CONFIG_DEFAULT,
-  //getRagConnection,
-  //getSelectedRagConnection,
-} from '../Config';
+import { CONFIG_DEFAULT } from '../Config';
 import { Conversation, Message, TimingReport } from './types';
 import Dexie, { Table } from 'dexie';
-//import { allowedNodeEnvironmentFlags } from 'process';
 
 const event = new EventTarget();
 
@@ -198,27 +193,15 @@ const StorageUtils = {
 
   // manage config
   getConfig(): typeof CONFIG_DEFAULT {
-    const savedVal: typeof CONFIG_DEFAULT = JSON.parse(
-      localStorage.getItem('config') || '{}'
-    );
+    const savedVal = JSON.parse(localStorage.getItem('config') || '{}');
     // to prevent breaking changes in the future, we always provide default value for missing keys
-    const merged_config: typeof CONFIG_DEFAULT = {
+    return {
       ...CONFIG_DEFAULT,
       ...savedVal,
     };
-    if (savedVal.rag_connections.length != 0)
-      merged_config.rag_connections = savedVal.rag_connections;
-
-    // for (const rag_conn in CONFIG_DEFAULT.rag_connections) {
-    //   const conn2 = getRagConnection(merged_config, rag_conn.name);
-    // }
-
-    return merged_config;
   },
   setConfig(config: typeof CONFIG_DEFAULT) {
-    alert(JSON.stringify({ saved_config: config }));
-    const savedVal: string = JSON.stringify(config);
-    localStorage.setItem('config', savedVal);
+    localStorage.setItem('config', JSON.stringify(config));
   },
   getTheme(): string {
     return localStorage.getItem('theme') || 'auto';

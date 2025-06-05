@@ -166,8 +166,6 @@ export const AppContextProvider = ({
     if (isGenerating(convId)) return;
 
     const config = StorageUtils.getConfig();
-    alert(JSON.stringify({ message_config: config }));
-
     const currConversation = await StorageUtils.getOneConversation(convId);
     if (!currConversation) {
       throw new Error('Current conversation is not found');

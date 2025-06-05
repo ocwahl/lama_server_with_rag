@@ -18,6 +18,7 @@ import { BtnWithTooltips } from '../utils/common';
 import { useAppContext } from '../utils/app.context';
 import { getSelectedRagConnection } from '../Config';
 import toast from 'react-hot-toast';
+import { Logo } from '@/components/logo';
 //import { config } from 'process';
 
 export default function Sidebar() {
@@ -165,8 +166,8 @@ export default function Sidebar() {
         ></label>
         <div className="flex flex-col bg-base-200 min-h-full max-w-64 py-4 px-4">
           <div className="flex flex-row items-center justify-between mb-4 mt-4">
-            <h2 className="font-bold ml-4">Conversations</h2>
-
+            {/* <h2 className="font-bold ml-4">Conversations</h2> */}
+            <Logo />
             <label htmlFor="toggle-drawer" className="btn btn-ghost lg:hidden">
               <XMarkIcon className="w-5 h-5" />
             </label>

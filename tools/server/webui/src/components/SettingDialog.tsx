@@ -246,7 +246,7 @@ export default function SettingDialog({
           key: 'rag_connections',
           component: () => (
             <RagConnectionManager
-              localConfig={localConfig}
+              //localConfig={localConfig}
               setLocalConfig={setLocalConfig}
             />
           ),
@@ -328,7 +328,6 @@ export default function SettingDialog({
   };
 
   const handleSave = () => {
-    alert(JSON.stringify({ to_save: localConfig }));
     const newConfig: typeof CONFIG_DEFAULT = JSON.parse(
       JSON.stringify(localConfig)
     );
@@ -367,42 +366,42 @@ export default function SettingDialog({
       }
     }
 
-    // const currentSelectedConnectionName =
-    //   newConfig.selected_rag_connection_name;
-    // const currentRagDbDetails: RagConnection = {
-    //   connection_name: currentSelectedConnectionName,
-    //   host: 'localhost',
-    //   port: 5432,
-    //   name: '<name>',
-    //   user: '<user>',
-    //   password: '<password>',
-    //   id: '',
-    // };
+    const currentSelectedConnectionName =
+      newConfig.selected_rag_connection_name;
+    const currentRagDbDetails: RagConnection = {
+      connection_name: currentSelectedConnectionName,
+      host: 'localhost',
+      port: 5432,
+      name: '<name>',
+      user: '<user>',
+      password: '<password>',
+      id: '',
+    };
 
-    // let foundExistingConnection = false;
-    // newConfig.rag_connections = newConfig.rag_connections.map((conn) => {
-    //   if (conn.connection_name === currentSelectedConnectionName) {
-    //     foundExistingConnection = true;
-    //     return {
-    //       ...conn,
-    //       host: currentRagDbDetails.host,
-    //       port: currentRagDbDetails.port,
-    //       name: currentRagDbDetails.name,
-    //       user: currentRagDbDetails.user,
-    //       password: currentRagDbDetails.password,
-    //     };
-    //   }
-    //   return conn;
-    // });
+    let foundExistingConnection = false;
+    newConfig.rag_connections = newConfig.rag_connections.map((conn) => {
+      if (conn.connection_name === currentSelectedConnectionName) {
+        foundExistingConnection = true;
+        return {
+          ...conn,
+          host: currentRagDbDetails.host,
+          port: currentRagDbDetails.port,
+          name: currentRagDbDetails.name,
+          user: currentRagDbDetails.user,
+          password: currentRagDbDetails.password,
+        };
+      }
+      return conn;
+    });
 
-    // if (!foundExistingConnection && currentSelectedConnectionName !== '...') {
-    //   currentRagDbDetails.id = Date.now().toString();
-    //   newConfig.rag_connections.push(currentRagDbDetails);
-    // } else if (currentSelectedConnectionName === '...') {
-    //   console.warn(
-    //     "Attempted to save a connection with name '...' without providing a new name. Not saving."
-    //   );
-    // }
+    if (!foundExistingConnection && currentSelectedConnectionName !== '...') {
+      currentRagDbDetails.id = Date.now().toString();
+      newConfig.rag_connections.push(currentRagDbDetails);
+    } else if (currentSelectedConnectionName === '...') {
+      console.warn(
+        "Attempted to save a connection with name '...' without providing a new name. Not saving."
+      );
+    }
 
     if (isDev) console.log('Saving config', newConfig);
     saveConfig(newConfig);

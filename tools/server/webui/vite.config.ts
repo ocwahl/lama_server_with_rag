@@ -4,10 +4,11 @@ import { viteSingleFile } from 'vite-plugin-singlefile';
 import path from 'node:path';
 import fs from 'node:fs';
 import * as fflate from 'fflate';
+import tailwindcss from '@tailwindcss/vite';
 
 /* eslint-disable */
 
-const MAX_BUNDLE_SIZE = 1.5 * 1024 * 1024; // only increase when absolutely necessary
+const MAX_BUNDLE_SIZE = 2 * 1024 * 1024; // only increase when absolutely necessary
 
 const GUIDE_FOR_FRONTEND = `
 <!--
@@ -18,7 +19,7 @@ const GUIDE_FOR_FRONTEND = `
 -->
 `.trim();
 
-const FRONTEND_PLUGINS = [react()];
+const FRONTEND_PLUGINS = [react(), tailwindcss()];
 
 const BUILD_PLUGINS = [
   ...FRONTEND_PLUGINS,
@@ -69,6 +70,11 @@ const BUILD_PLUGINS = [
 export default defineConfig({
   // @ts-ignore
   plugins: process.env.ANALYZE ? FRONTEND_PLUGINS : BUILD_PLUGINS,
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
+  },
   server: {
     proxy: {
       '/v1': 'http://localhost:8080',

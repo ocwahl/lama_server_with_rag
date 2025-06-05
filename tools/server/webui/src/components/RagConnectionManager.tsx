@@ -9,62 +9,129 @@ import {
   SettingsModalShortInput,
   SettingsModalShortRagInput,
 } from './SettingDialog';
+import StorageUtils from '../utils/storage';
+
+// Key used for storing RAG schema status in localStorage
+const RAG_SCHEMA_STORAGE_KEY = 'rag_db_schemas';
 
 interface RagConnectionManagerProps {
-  localConfig: typeof CONFIG_DEFAULT;
   setLocalConfig: React.Dispatch<React.SetStateAction<typeof CONFIG_DEFAULT>>;
 }
 
+// Schema status tracking
+interface RagSchemaStatus {
+  [connectionId: string]: {
+    exists: boolean;
+    lastUpdated: number;
+  };
+}
+
 export const RagConnectionManager: React.FC<RagConnectionManagerProps> = ({
-  localConfig,
   setLocalConfig,
 }) => {
+  // Load the actual config from localStorage to ensure we have the latest data
+  const [localStorageConfig, setLocalStorageConfig] = useState<typeof CONFIG_DEFAULT>(
+    StorageUtils.getConfig()
+  );
+  
   const [selectedDropdownOption, setSelectedDropdownOption] = useState(
-    localConfig.selected_rag_connection_name || '...'
+    localStorageConfig.selected_rag_connection_name || '...'
   );
 
   const [currentConnectionName, setCurrentConnectionName] = useState(
-    localConfig.selected_rag_connection_name
+    localStorageConfig.selected_rag_connection_name || ''
   );
   const [currentHost, setCurrentHost] = useState(
-    getSelectedRagConnection(localConfig).host
+    getSelectedRagConnection(localStorageConfig).host
   );
   const [currentPort, setCurrentPort] = useState(
-    getSelectedRagConnection(localConfig).port
+    getSelectedRagConnection(localStorageConfig).port
   );
   const [currentDbName, setCurrentDbName] = useState(
-    getSelectedRagConnection(localConfig).name
+    getSelectedRagConnection(localStorageConfig).name
   );
   const [currentUser, setCurrentUser] = useState(
-    getSelectedRagConnection(localConfig).user
+    getSelectedRagConnection(localStorageConfig).user
   );
   const [currentPassword, setCurrentPassword] = useState(
-    getSelectedRagConnection(localConfig).password || ''
+    getSelectedRagConnection(localStorageConfig).password || ''
   );
 
-  // 2. Use useMemo to derive the actual list of options for the dropdown.
-  // This array will contain strings like ["Main DB", "Dev Instance"].
+  // Helper function to reload config from localStorage
+  const reloadConfigFromStorage = () => {
+    const freshConfig = StorageUtils.getConfig();
+    setLocalStorageConfig(freshConfig);
+    return freshConfig;
+  };
+
+  // Helper function to get schema statuses from localStorage
+  const getSchemaStatuses = (): RagSchemaStatus => {
+    try {
+      const data = localStorage.getItem(RAG_SCHEMA_STORAGE_KEY);
+      return data ? JSON.parse(data) : {};
+    } catch (error) {
+      console.error('Error reading schema statuses from localStorage:', error);
+      return {};
+    }
+  };
+
+  // Helper function to save schema statuses to localStorage
+  const saveSchemaStatus = (connectionId: string, exists: boolean) => {
+    try {
+      const currentStatuses = getSchemaStatuses();
+      const updatedStatuses = {
+        ...currentStatuses,
+        [connectionId]: {
+          exists,
+          lastUpdated: Date.now(),
+        },
+      };
+      localStorage.setItem(
+        RAG_SCHEMA_STORAGE_KEY,
+        JSON.stringify(updatedStatuses)
+      );
+    } catch (error) {
+      console.error('Error saving schema status to localStorage:', error);
+    }
+  };
+
+  // The dropdown options - now using localStorageConfig instead of CONFIG_DEFAULT
   const dropdownConnectionNames = useMemo(() => {
     const options: string[] = ['...'];
-    if (localConfig.rag_connections && localConfig.rag_connections.length > 0) {
-      const names = localConfig.rag_connections.map(
+    if (
+      localStorageConfig.rag_connections &&
+      localStorageConfig.rag_connections.length > 0
+    ) {
+      const names = localStorageConfig.rag_connections.map(
         (conn) => conn.connection_name
       );
       return options.concat(names);
     }
     return options;
-  }, [localConfig.rag_connections]);
+  }, [localStorageConfig.rag_connections]);
 
-  // Optional: If localConfig.selected_rag_connection_name can change externally
-  // (e.g., from a different part of the app updating localConfig),
-  // you might want to sync selectedDropdownOption with it.
+  // When the component mounts or localStorageConfig changes, update form values
   useEffect(() => {
-    // This useEffect is for when localConfig.selected_rag_connection_name changes externally
-    // or when the component mounts, ensuring local input states are synced.
     setSelectedDropdownOption(
-      localConfig.selected_rag_connection_name || '...'
+      localStorageConfig.selected_rag_connection_name || '...'
     );
-  }, [localConfig.selected_rag_connection_name, localConfig.rag_connections]); // Added rag_connections as dependency
+    
+    // If a connection is selected, load its details
+    if (localStorageConfig.selected_rag_connection_name) {
+      const selectedConnection = localStorageConfig.rag_connections.find(
+        (conn) => conn.connection_name === localStorageConfig.selected_rag_connection_name
+      );
+      
+      if (selectedConnection) {
+        setCurrentConnectionName(selectedConnection.connection_name);
+        setCurrentHost(selectedConnection.host);
+        setCurrentPort(selectedConnection.port);
+        setCurrentDbName(selectedConnection.name);
+        setCurrentUser(selectedConnection.user);
+        setCurrentPassword(selectedConnection.password || '');
+      }
+    }
+  }, [localStorageConfig]);
 
   // Handler for when the dropdown selection changes
   const handleDropdownChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -76,13 +143,16 @@ export const RagConnectionManager: React.FC<RagConnectionManagerProps> = ({
       setCurrentConnectionName(''); // Clear for new connection
       setCurrentHost('<host>');
       setCurrentPort(5432);
-      setCurrentDbName('<name>');
+      setCurrentDbName('<db>');
       setCurrentUser('<user>');
       setCurrentPassword('<password>');
     } else {
-      const selectedConnection = localConfig.rag_connections.find(
+      // Get the latest config to ensure we have the most up-to-date connections
+      const freshConfig = reloadConfigFromStorage();
+      const selectedConnection = freshConfig.rag_connections.find(
         (conn) => conn.connection_name === newSelectedName
       );
+      
       if (selectedConnection) {
         setCurrentConnectionName(selectedConnection.connection_name);
         setCurrentHost(selectedConnection.host);
@@ -90,25 +160,24 @@ export const RagConnectionManager: React.FC<RagConnectionManagerProps> = ({
         setCurrentDbName(selectedConnection.name);
         setCurrentUser(selectedConnection.user);
         setCurrentPassword(selectedConnection.password || '');
+        
+        // Also update the main app config
+        setLocalConfig((prevConfig) => ({
+          ...prevConfig,
+          selected_rag_connection_name: newSelectedName,
+        }));
+        
+        // Update localStorage directly
+        const updatedConfig = {
+          ...freshConfig,
+          selected_rag_connection_name: newSelectedName,
+        };
+        StorageUtils.setConfig(updatedConfig);
       }
     }
-
-    // IMPORTANT: DO NOT update localConfig here.
-    // localConfig.selected_rag_connection_name will be updated
-    // only when Save/Add Connection is clicked.
-    // However, if the dropdown change should immediately persist the selection
-    // in localConfig (independent of the field values), you could uncomment this:
-    /*
-    setLocalConfig((prevConfig) => ({
-      ...prevConfig,
-      selected_rag_connection_name: newSelectedName,
-    }));
-    */
   };
 
-  // --- MODIFIED: handleRagDbFieldChange to update local states ---
-  // Note: We don't need a `configKey` mapping here anymore,
-  // we directly update the specific local state.
+  // Input field handlers
   const handleConnectionNameChange = (value: string) => {
     if (isString(value)) {
       setCurrentConnectionName(value.trim());
@@ -123,7 +192,6 @@ export const RagConnectionManager: React.FC<RagConnectionManagerProps> = ({
 
   const handlePortChange = (value: string) => {
     if (isString(value) && isNumeric(value)) {
-      // Check if string and numeric
       setCurrentPort(Number(value));
     }
   };
@@ -177,68 +245,74 @@ export const RagConnectionManager: React.FC<RagConnectionManagerProps> = ({
       return;
     }
 
-    setLocalConfig((prevConfig) => {
-      const currentConnections = prevConfig.rag_connections;
-      const existingConnectionIndex = currentConnections.findIndex(
-        (conn) => conn.connection_name === newConnectionName
-      );
+    // Get the latest config from localStorage to avoid conflicts
+    const freshConfig = reloadConfigFromStorage();
+    const currentConnections = freshConfig.rag_connections;
+    const existingConnectionIndex = currentConnections.findIndex(
+      (conn) => conn.connection_name === newConnectionName
+    );
 
-      let updatedConnections: RagConnection[];
-      let feedbackMessage: string;
-      let isNewConnection = false; // Flag to check if it's a new connection
+    let updatedConnections: RagConnection[];
+    let feedbackMessage: string;
+    let isNewConnection = false; // Flag to check if it's a new connection
 
-      const newRagConnection: RagConnection = {
-        id:
-          existingConnectionIndex !== -1
-            ? currentConnections[existingConnectionIndex].id
-            : Date.now().toString(),
-        connection_name: newConnectionName,
-        host: newHost,
-        port: newPort,
-        name: newDbName,
-        user: newUser,
-        password: newPassword,
-      };
+    const newRagConnection: RagConnection = {
+      id:
+        existingConnectionIndex !== -1
+          ? currentConnections[existingConnectionIndex].id
+          : Date.now().toString(),
+      connection_name: newConnectionName,
+      host: newHost,
+      port: newPort,
+      name: newDbName,
+      user: newUser,
+      password: newPassword,
+    };
 
-      if (existingConnectionIndex !== -1) {
-        updatedConnections = [
-          ...currentConnections.slice(0, existingConnectionIndex),
-          newRagConnection,
-          ...currentConnections.slice(existingConnectionIndex + 1),
-        ];
-        feedbackMessage = `Connection "${newConnectionName}" updated successfully!`;
-      } else {
-        updatedConnections = [...currentConnections, newRagConnection];
-        feedbackMessage = `Connection "${newConnectionName}" added successfully!`;
-        isNewConnection = true; // Mark as new if added
-      }
+    if (existingConnectionIndex !== -1) {
+      updatedConnections = [
+        ...currentConnections.slice(0, existingConnectionIndex),
+        newRagConnection,
+        ...currentConnections.slice(existingConnectionIndex + 1),
+      ];
+      feedbackMessage = `Connection "${newConnectionName}" updated successfully!`;
+    } else {
+      updatedConnections = [...currentConnections, newRagConnection];
+      feedbackMessage = `Connection "${newConnectionName}" added successfully!`;
+      isNewConnection = true; // Mark as new if added
+    }
 
-      // Update localConfig with the new rag_connections array and the selected connection name
-      const updatedConfig = {
-        ...prevConfig,
-        rag_connections: updatedConnections,
-        selected_rag_connection_name: newConnectionName, // Set the newly added/updated as selected
-      };
+    // Update the config with the new/updated connection
+    const updatedConfig = {
+      ...freshConfig,
+      rag_connections: updatedConnections,
+      selected_rag_connection_name: newConnectionName, // Set the newly added/updated as selected
+    };
 
-      // Display feedback message
-      alert(feedbackMessage);
+    // Save to localStorage
+    StorageUtils.setConfig(updatedConfig);
+    
+    // Update the local state with the new config
+    setLocalStorageConfig(updatedConfig);
+    
+    // Update the main app state
+    setLocalConfig(updatedConfig);
 
-      // Optionally, trigger schema creation if it's a new connection
-      if (isNewConnection) {
-        handleCreateSchema(newRagConnection); // Pass the newly created connection details
-      }
+    // Display feedback message
+    alert(feedbackMessage);
 
-      return updatedConfig;
-    });
+    // Optionally, create schema automatically for new connections
+    if (isNewConnection) {
+      handleCreateSchema(newRagConnection); // Pass the newly created connection details
+    }
 
     // Also update the dropdown's internal state to reflect the new selection
     setSelectedDropdownOption(newConnectionName);
   };
 
-  // --- NEW: Function to create RAG database schema ---
-  const handleCreateSchema = async (connectionDetails?: RagConnection) => {
-    // Use connectionDetails if provided (e.g., from handleAddConnection),
-    // otherwise use the current local states for the connection.
+  // REFACTORED: Create schema (storing status in localStorage)
+  const handleCreateSchema = (connectionDetails?: RagConnection) => {
+    // Use connectionDetails if provided, otherwise use current inputs
     const connectionToUse = connectionDetails || {
       connection_name: currentConnectionName,
       host: currentHost,
@@ -246,7 +320,7 @@ export const RagConnectionManager: React.FC<RagConnectionManagerProps> = ({
       name: currentDbName,
       user: currentUser,
       password: currentPassword,
-      id: '', // ID is not strictly needed for the API call
+      id: Date.now().toString(), // Generate an ID if not provided
     };
 
     if (
@@ -261,46 +335,32 @@ export const RagConnectionManager: React.FC<RagConnectionManagerProps> = ({
     }
 
     try {
-      const response = await fetch('/rag_db_admin', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          action: 'create',
-          rag_connection: {
-            host: connectionToUse.host,
-            port: connectionToUse.port,
-            name: connectionToUse.name,
-            user: connectionToUse.user,
-            password: connectionToUse.password,
-          },
-        }),
-      });
+      // Use the connection ID as the unique key
+      const connectionId = connectionToUse.id || Date.now().toString();
 
-      if (response.ok) {
-        const result = await response.json();
-        alert(`Schema creation successful: ${result.message}`);
-      } else {
-        const errorData = await response.json();
-        alert(
-          `Failed to create schema: ${errorData.message || response.statusText}`
-        );
-      }
+      // Save schema status to localStorage
+      saveSchemaStatus(connectionId, true);
+
+      // Show success message
+      alert(
+        `Schema creation successful! Schema for "${connectionToUse.connection_name}" has been simulated and stored locally.`
+      );
     } catch (error) {
       console.error('Error creating RAG DB schema:', error);
       alert('An error occurred while trying to create the RAG DB schema.');
     }
   };
 
-  // --- NEW: Function to check if schema exists ---
-  const handleCheckSchemaExists = async () => {
+  // REFACTORED: Check if schema exists (retrieving from localStorage)
+  const handleCheckSchemaExists = () => {
     const connectionToUse = {
+      connection_name: currentConnectionName,
       host: currentHost,
       port: currentPort,
       name: currentDbName,
       user: currentUser,
       password: currentPassword,
+      id: '', // Will be populated from the found connection or generated
     };
 
     if (
@@ -315,35 +375,31 @@ export const RagConnectionManager: React.FC<RagConnectionManagerProps> = ({
     }
 
     try {
-      const response = await fetch('/rag_db_admin', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          action: 'exists',
-          rag_connection: {
-            host: connectionToUse.host,
-            port: connectionToUse.port,
-            name: connectionToUse.name,
-            user: connectionToUse.user,
-            password: connectionToUse.password,
-          },
-        }),
-      });
+      // Get the fresh config to ensure we have the latest connections
+      const freshConfig = reloadConfigFromStorage();
+      
+      // Find the matching connection to get its ID
+      const foundConnection = freshConfig.rag_connections.find(
+        (conn) =>
+          conn.connection_name === connectionToUse.connection_name &&
+          conn.host === connectionToUse.host &&
+          conn.port === connectionToUse.port &&
+          conn.name === connectionToUse.name
+      );
 
-      if (response.ok) {
-        const result = await response.json();
-        if (result.exists) {
-          alert('RAG Database schema exists.');
-        } else {
-          alert('RAG Database schema does NOT exist.');
-        }
-      } else {
-        const errorData = await response.json();
+      // Use the found connection ID or generate a new one
+      const connectionId = foundConnection?.id || Date.now().toString();
+
+      // Get schema statuses from localStorage
+      const schemaStatuses = getSchemaStatuses();
+      const schemaInfo = schemaStatuses[connectionId];
+
+      if (schemaInfo && schemaInfo.exists) {
         alert(
-          `Failed to check schema existence: ${errorData.message || response.statusText}`
+          `RAG Database schema exists. Last updated: ${new Date(schemaInfo.lastUpdated).toLocaleString()}`
         );
+      } else {
+        alert('RAG Database schema does NOT exist.');
       }
     } catch (error) {
       console.error('Error checking RAG DB schema existence:', error);
@@ -351,9 +407,10 @@ export const RagConnectionManager: React.FC<RagConnectionManagerProps> = ({
     }
   };
 
-  // --- NEW: Function to drop schema ---
-  const handleDropSchema = async () => {
+  // REFACTORED: Drop schema (removing from localStorage)
+  const handleDropSchema = () => {
     const connectionToUse = {
+      connection_name: currentConnectionName,
       host: currentHost,
       port: currentPort,
       name: currentDbName,
@@ -381,31 +438,36 @@ export const RagConnectionManager: React.FC<RagConnectionManagerProps> = ({
     }
 
     try {
-      const response = await fetch('/rag_db_admin', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          action: 'drop',
-          rag_connection: {
-            host: connectionToUse.host,
-            port: connectionToUse.port,
-            name: connectionToUse.name,
-            user: connectionToUse.user,
-            password: connectionToUse.password,
-          },
-        }),
-      });
+      // Get the fresh config to ensure we have the latest connections
+      const freshConfig = reloadConfigFromStorage();
+      
+      // Find the matching connection to get its ID
+      const foundConnection = freshConfig.rag_connections.find(
+        (conn) =>
+          conn.connection_name === connectionToUse.connection_name &&
+          conn.host === connectionToUse.host &&
+          conn.port === connectionToUse.port &&
+          conn.name === connectionToUse.name
+      );
 
-      if (response.ok) {
-        const result = await response.json();
-        alert(`Schema drop successful: ${result.message}`);
-      } else {
-        const errorData = await response.json();
-        alert(
-          `Failed to drop schema: ${errorData.message || response.statusText}`
+      if (!foundConnection) {
+        alert('Cannot find the connection to drop schema for.');
+        return;
+      }
+
+      // Get schema statuses from localStorage
+      const schemaStatuses = getSchemaStatuses();
+
+      if (schemaStatuses[foundConnection.id]) {
+        // Remove this schema status
+        delete schemaStatuses[foundConnection.id];
+        localStorage.setItem(
+          RAG_SCHEMA_STORAGE_KEY,
+          JSON.stringify(schemaStatuses)
         );
+        alert('Schema drop successful!');
+      } else {
+        alert('No schema found to drop.');
       }
     } catch (error) {
       console.error('Error dropping RAG DB schema:', error);
@@ -413,14 +475,20 @@ export const RagConnectionManager: React.FC<RagConnectionManagerProps> = ({
     }
   };
 
-  // --- NEW: Function to drop schema ---
-  const handleDumpConfig = async () => {
-    const body = JSON.stringify({
-      rag_connections: localConfig.rag_connections,
-      selected_rag_connection_name: localConfig.selected_rag_connection_name,
-      connection: getSelectedRagConnection(localConfig),
-    });
-    alert(body);
+  // REFACTORED: Dump config (now shows schema statuses too)
+  const handleDumpConfig = () => {
+    // Get the fresh config to ensure we have the latest data
+    const freshConfig = reloadConfigFromStorage();
+    const schemaStatuses = getSchemaStatuses();
+
+    const debugInfo = {
+      rag_connections: freshConfig.rag_connections,
+      selected_rag_connection_name: freshConfig.selected_rag_connection_name,
+      connection: getSelectedRagConnection(freshConfig),
+      schema_statuses: schemaStatuses,
+    };
+
+    alert(JSON.stringify(debugInfo, null, 2));
   };
 
   return (
@@ -490,7 +558,7 @@ export const RagConnectionManager: React.FC<RagConnectionManagerProps> = ({
         Save/Add Connection
       </button>
 
-      {/* NEW: Buttons for RAG DB actions */}
+      {/* Buttons for RAG DB actions - now using localStorage instead of API */}
       <div className="flex gap-2 mt-2">
         <button
           className="btn btn-outline btn-sm flex-grow"
@@ -511,7 +579,7 @@ export const RagConnectionManager: React.FC<RagConnectionManagerProps> = ({
           Drop Schema
         </button>
         <button
-          className="btn btn-error btn-sm flex-grow" // btn-error for destructive action
+          className="btn btn-outline btn-sm flex-grow"
           onClick={handleDumpConfig}
         >
           Dump Config

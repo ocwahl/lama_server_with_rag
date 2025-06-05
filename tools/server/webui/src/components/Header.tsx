@@ -28,25 +28,29 @@ export default function Header() {
   }, [selectedTheme]);
 
   return (
-    <div className="flex flex-row items-center pt-6 pb-6 sticky top-0 z-10 bg-base-100">
+    <div className="flex flex-row items-center p-6 sticky top-0 z-10">
       {/* open sidebar button */}
       <label htmlFor="toggle-drawer" className="btn btn-ghost lg:hidden">
         <Bars3Icon className="h-5 w-5" />
       </label>
 
-      <div className="grow text-2xl font-bold ml-2">llama.cpp</div>
+      <div className="grow text-2xl font-bold ml-2">Klave AI</div>
 
       {/* action buttons (top right) */}
       <div className="flex items-center">
-        <div className="tooltip tooltip-bottom" data-tip="Settings">
-          <button className="btn" onClick={() => setShowSettings(true)}>
+        <div
+          className="tooltip tooltip-bottom"
+          data-tip="Settings"
+          onClick={() => setShowSettings(true)}
+        >
+          <button className="btn" aria-hidden={true}>
             {/* settings button */}
             <Cog8ToothIcon className="w-5 h-5" />
           </button>
         </div>
 
         {/* theme controller is copied from https://daisyui.com/components/theme-controller/ */}
-        <div className="tooltip tooltip-bottom" data-tip="Themes">
+        {/* <div className="tooltip tooltip-bottom" data-tip="Themes">
           <div className="dropdown dropdown-end dropdown-bottom">
             <div tabIndex={0} role="button" className="btn m-1">
               <MoonIcon className="w-5 h-5" />
@@ -81,7 +85,7 @@ export default function Header() {
               ))}
             </ul>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

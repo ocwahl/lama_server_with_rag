@@ -115,20 +115,6 @@ export const THEMES = ['light', 'dark']
     Object.keys(daisyuiThemes).filter((t) => t !== 'light' && t !== 'dark')
   );
 
-export const getRagConnection = (
-  currentLocalConfig: typeof CONFIG_DEFAULT,
-  conn_name: string
-): RagConnection | undefined => {
-  // Check if a connection name is selected and it's not the "..." placeholder
-  if (conn_name && conn_name !== '...') {
-    const foundConnection = currentLocalConfig.rag_connections.find(
-      (conn) => conn.connection_name === conn_name
-    );
-    return foundConnection;
-  }
-  return undefined;
-};
-
 // Helper function to get the currently selected RAG connection
 export const getSelectedRagConnection = (
   currentLocalConfig: typeof CONFIG_DEFAULT
