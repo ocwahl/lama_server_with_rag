@@ -10,6 +10,8 @@ import {
   SettingsModalShortRagInput,
 } from './SettingDialog';
 import StorageUtils from '../utils/storage';
+import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
 
 // Key used for storing RAG schema status in localStorage
 const RAG_SCHEMA_STORAGE_KEY = 'rag_db_schemas';
@@ -30,10 +32,10 @@ export const RagConnectionManager: React.FC<RagConnectionManagerProps> = ({
   setLocalConfig,
 }) => {
   // Load the actual config from localStorage to ensure we have the latest data
-  const [localStorageConfig, setLocalStorageConfig] = useState<typeof CONFIG_DEFAULT>(
-    StorageUtils.getConfig()
-  );
-  
+  const [localStorageConfig, setLocalStorageConfig] = useState<
+    typeof CONFIG_DEFAULT
+  >(StorageUtils.getConfig());
+
   const [selectedDropdownOption, setSelectedDropdownOption] = useState(
     localStorageConfig.selected_rag_connection_name || '...'
   );
@@ -115,13 +117,15 @@ export const RagConnectionManager: React.FC<RagConnectionManagerProps> = ({
     setSelectedDropdownOption(
       localStorageConfig.selected_rag_connection_name || '...'
     );
-    
+
     // If a connection is selected, load its details
     if (localStorageConfig.selected_rag_connection_name) {
       const selectedConnection = localStorageConfig.rag_connections.find(
-        (conn) => conn.connection_name === localStorageConfig.selected_rag_connection_name
+        (conn) =>
+          conn.connection_name ===
+          localStorageConfig.selected_rag_connection_name
       );
-      
+
       if (selectedConnection) {
         setCurrentConnectionName(selectedConnection.connection_name);
         setCurrentHost(selectedConnection.host);
@@ -152,7 +156,7 @@ export const RagConnectionManager: React.FC<RagConnectionManagerProps> = ({
       const selectedConnection = freshConfig.rag_connections.find(
         (conn) => conn.connection_name === newSelectedName
       );
-      
+
       if (selectedConnection) {
         setCurrentConnectionName(selectedConnection.connection_name);
         setCurrentHost(selectedConnection.host);
@@ -160,13 +164,13 @@ export const RagConnectionManager: React.FC<RagConnectionManagerProps> = ({
         setCurrentDbName(selectedConnection.name);
         setCurrentUser(selectedConnection.user);
         setCurrentPassword(selectedConnection.password || '');
-        
+
         // Also update the main app config
         setLocalConfig((prevConfig) => ({
           ...prevConfig,
           selected_rag_connection_name: newSelectedName,
         }));
-        
+
         // Update localStorage directly
         const updatedConfig = {
           ...freshConfig,
@@ -291,10 +295,10 @@ export const RagConnectionManager: React.FC<RagConnectionManagerProps> = ({
 
     // Save to localStorage
     StorageUtils.setConfig(updatedConfig);
-    
+
     // Update the local state with the new config
     setLocalStorageConfig(updatedConfig);
-    
+
     // Update the main app state
     setLocalConfig(updatedConfig);
 
@@ -377,7 +381,7 @@ export const RagConnectionManager: React.FC<RagConnectionManagerProps> = ({
     try {
       // Get the fresh config to ensure we have the latest connections
       const freshConfig = reloadConfigFromStorage();
-      
+
       // Find the matching connection to get its ID
       const foundConnection = freshConfig.rag_connections.find(
         (conn) =>
@@ -440,7 +444,7 @@ export const RagConnectionManager: React.FC<RagConnectionManagerProps> = ({
     try {
       // Get the fresh config to ensure we have the latest connections
       const freshConfig = reloadConfigFromStorage();
-      
+
       // Find the matching connection to get its ID
       const foundConnection = freshConfig.rag_connections.find(
         (conn) =>
@@ -495,10 +499,8 @@ export const RagConnectionManager: React.FC<RagConnectionManagerProps> = ({
     <div className="mb-4 p-4 border rounded-lg shadow-sm bg-base-100">
       <h4 className="font-semibold text-md mb-3">RAG Connections</h4>
 
-      <label className="form-control mb-2">
-        <div className="label">
-          <span className="label-text">Select Existing Connection</span>
-        </div>
+      <label className="form-control mb-2 space-y-2">
+        <Label>Select Existing Connection</Label>
         <select
           className="select select-bordered w-full"
           value={selectedDropdownOption}
@@ -551,39 +553,48 @@ export const RagConnectionManager: React.FC<RagConnectionManagerProps> = ({
         label="RAG DB Password"
       />
 
-      <button
-        className="btn btn-primary w-full mt-4"
+      <Button
+        variant="default"
+        className="w-full mt-4 hover:cursor-pointer"
         onClick={handleAddConnection}
       >
-        Save/Add Connection
-      </button>
+        Add Connection
+      </Button>
 
       {/* Buttons for RAG DB actions - now using localStorage instead of API */}
-      <div className="flex gap-2 mt-2">
-        <button
-          className="btn btn-outline btn-sm flex-grow"
-          onClick={() => handleCreateSchema()} // Call without specific connection to use current inputs
+      <div className="grid grid-cols-2 gap-2 mt-2">
+        <Button
+          variant="outline"
+          size="sm"
+          className="flex-grow hover:cursor-pointer"
+          onClick={() => handleCreateSchema()}
         >
           Create Schema
-        </button>
-        <button
-          className="btn btn-outline btn-sm flex-grow"
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          className="flex-grow hover:cursor-pointer"
           onClick={handleCheckSchemaExists}
         >
           Check Schema
-        </button>
-        <button
-          className="btn btn-error btn-sm flex-grow" // btn-error for destructive action
+        </Button>
+        <Button
+          variant="destructive"
+          size="sm"
+          className="flex-grow hover:cursor-pointer"
           onClick={handleDropSchema}
         >
           Drop Schema
-        </button>
-        <button
-          className="btn btn-outline btn-sm flex-grow"
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          className="flex-grow hover:cursor-pointer"
           onClick={handleDumpConfig}
         >
-          Dump Config
-        </button>
+          Debug
+        </Button>
       </div>
     </div>
   );

@@ -92,14 +92,15 @@ export function useChatExtraContext(): ChatExtraContextApi {
             },
           ]);
         } else if (mimeType.startsWith('application/pdf')) {
-          if (config.pdfAsImage && !isSupportVision) {
+          const pdfAsImage = (config as any).pdfAsImage || false;
+          if (pdfAsImage && !isSupportVision) {
             toast(
               'Multimodal is not supported, PDF will be converted to text instead of image.'
             );
             break;
           }
 
-          if (config.pdfAsImage && isSupportVision) {
+          if (pdfAsImage && isSupportVision) {
             // Convert PDF to images
             const base64Urls = await convertPDFToImage(file);
             addItems(

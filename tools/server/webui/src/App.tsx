@@ -1,7 +1,6 @@
 import { HashRouter, Outlet, Route, Routes } from 'react-router';
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 import Header from './components/Header';
-import Sidebar from './components/Sidebar';
 import { AppSidebar } from './components/app-sidebar';
 import { AppContextProvider, useAppContext } from './utils/app.context';
 import ChatScreen from './components/ChatScreen';
@@ -34,10 +33,7 @@ function AppLayout() {
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset>
-        <main
-          className="flex flex-1 flex-col"
-          id="main-scroll"
-        >
+        <main className="flex flex-1 flex-col" id="main-scroll">
           <Header />
           <Outlet />
         </main>

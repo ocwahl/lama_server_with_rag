@@ -6,10 +6,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import {
-  MessageCirclePlus,
-  FilePlus2,
-} from 'lucide-react';
+import { MessageCirclePlus, FilePlus2 } from 'lucide-react';
 import { Button } from '../ui/button';
 import { useNavigate } from 'react-router';
 import { useRef } from 'react';
@@ -18,7 +15,6 @@ import { getSelectedRagConnection } from '../../Config';
 import { useAppContext } from '../../utils/app.context';
 
 export function NavAdmin() {
-    
   const navigate = useNavigate();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { config: gconfig } = useAppContext();

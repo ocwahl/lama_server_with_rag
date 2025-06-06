@@ -18,6 +18,10 @@ import {
   SquaresPlusIcon,
 } from '@heroicons/react/24/outline';
 import { OpenInNewTab } from '../utils/common';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Switch } from '@/components/ui/switch';
+import { Button } from '@/components/ui/button';
 
 // Import the new component
 import { RagConnectionManager } from './RagConnectionManager';
@@ -524,15 +528,23 @@ export default function SettingDialog({
         </div>
 
         <div className="modal-action">
-          <button className="btn" onClick={resetConfig}>
+          <Button
+            className="hover:cursor-pointer"
+            variant="secondary"
+            onClick={resetConfig}
+          >
             Reset to default
-          </button>
-          <button className="btn" onClick={onClose}>
+          </Button>
+          <Button
+            className="hover:cursor-pointer"
+            variant="secondary"
+            onClick={onClose}
+          >
             Close
-          </button>
-          <button className="btn btn-primary" onClick={handleSave}>
+          </Button>
+          <Button className="hover:cursor-pointer" onClick={handleSave}>
             Save
-          </button>
+          </Button>
         </div>
       </div>
     </dialog>
@@ -552,15 +564,16 @@ export const SettingsModalLongInput = React.memo(
     label?: string;
   }) {
     return (
-      <label className="form-control mb-2">
-        <div className="label inline">{label || configKey}</div>
-        <textarea
-          className="textarea textarea-bordered h-24"
+      <div className="mb-4 space-y-2">
+        <Label htmlFor={`input-${configKey}`}>{label || configKey}</Label>
+        <Input
+          id={`input-${configKey}`}
+          className="h-24 resize-y"
           placeholder={`Default: ${CONFIG_DEFAULT[configKey] || 'none'}`}
           value={value}
           onChange={(e) => onChange(e.target.value)}
         />
-      </label>
+      </div>
     );
   }
 );
@@ -581,38 +594,28 @@ export const SettingsModalShortInput = React.memo(
     const helpMsg = CONFIG_INFO[configKey];
 
     return (
-      <>
+      <div className="mb-4 space-y-2">
+        <div className="flex flex-col gap-2">
+          <Label htmlFor={`input-${configKey}`}>{label || configKey}</Label>
+          {helpMsg && (
+            <div className="hidden md:block text-sm text-muted-foreground">
+              {helpMsg}
+            </div>
+          )}
+        </div>
         {helpMsg && (
           <div className="block md:hidden mb-1">
-            <b>{label || configKey}</b>
-            <br />
-            <p className="text-xs">{helpMsg}</p>
+            <p className="text-xs text-muted-foreground">{helpMsg}</p>
           </div>
         )}
-        <label className="input input-bordered join-item grow flex items-center gap-2 mb-2">
-          <div className="dropdown dropdown-hover">
-            <div
-              tabIndex={0}
-              role="button"
-              className="font-bold hidden md:block"
-            >
-              {label || configKey}
-            </div>
-            {helpMsg && (
-              <div className="dropdown-content menu bg-base-100 rounded-box z-10 w-64 p-2 shadow mt-4">
-                {helpMsg}
-              </div>
-            )}
-          </div>
-          <input
-            type="text"
-            className="grow"
-            placeholder={`Default: ${CONFIG_DEFAULT[configKey] || 'none'}`}
-            value={value}
-            onChange={(e) => onChange(e.target.value)}
-          />
-        </label>
-      </>
+        <Input
+          id={`input-${configKey}`}
+          type="text"
+          placeholder={`Default: ${CONFIG_DEFAULT[configKey] || 'none'}`}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+        />
+      </div>
     );
   }
 );
@@ -633,38 +636,28 @@ export const SettingsModalShortRagInput = React.memo(
     const helpMsg = CONFIG_INFO[ragKey];
 
     return (
-      <>
+      <div className="mb-4 space-y-2">
+        <div className="flex items-center justify-between">
+          <Label htmlFor={`input-${ragKey}`}>{label || ragKey}</Label>
+          {helpMsg && (
+            <div className="hidden md:block text-sm text-muted-foreground">
+              {helpMsg}
+            </div>
+          )}
+        </div>
         {helpMsg && (
           <div className="block md:hidden mb-1">
-            <b>{label || ragKey}</b>
-            <br />
-            <p className="text-xs">{helpMsg}</p>
+            <p className="text-xs text-muted-foreground">{helpMsg}</p>
           </div>
         )}
-        <label className="input input-bordered join-item grow flex items-center gap-2 mb-2">
-          <div className="dropdown dropdown-hover">
-            <div
-              tabIndex={0}
-              role="button"
-              className="font-bold hidden md:block"
-            >
-              {label || ragKey}
-            </div>
-            {helpMsg && (
-              <div className="dropdown-content menu bg-base-100 rounded-box z-10 w-64 p-2 shadow mt-4">
-                {helpMsg}
-              </div>
-            )}
-          </div>
-          <input
-            type="text"
-            className="grow"
-            placeholder={`Default: ${getSelectedRagConnection(CONFIG_DEFAULT)[ragKey] || 'none'}`}
-            value={value}
-            onChange={(e) => onChange(e.target.value)}
-          />
-        </label>
-      </>
+        <Input
+          id={`input-${ragKey}`}
+          type="text"
+          placeholder={`Default: ${getSelectedRagConnection(CONFIG_DEFAULT)[ragKey] || 'none'}`}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+        />
+      </div>
     );
   }
 );
@@ -681,14 +674,15 @@ export const SettingsModalCheckbox = React.memo(function SettingsModalCheckbox({
   label: string;
 }) {
   return (
-    <div className="flex flex-row items-center mb-2">
-      <input
-        type="checkbox"
-        className="toggle"
+    <div className="flex items-center justify-between mb-4">
+      <Label htmlFor={`switch-${configKey}`} className="cursor-pointer">
+        {label || configKey}
+      </Label>
+      <Switch
+        id={`switch-${configKey}`}
         checked={value}
-        onChange={(e) => onChange(e.target.checked)}
+        onCheckedChange={onChange}
       />
-      <span className="ml-4">{label || configKey}</span>
     </div>
   );
 });

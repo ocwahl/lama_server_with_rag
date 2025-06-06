@@ -16,18 +16,12 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { NavLink, useNavigate, useParams } from 'react-router';
-import {
-  MoreHorizontal,
-  Trash2,
-  Download,
-  PenSquare
-} from 'lucide-react';
+import { MoreHorizontal, Trash2, Download, PenSquare } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 import { Conversation } from '../../utils/types';
 import StorageUtils from '../../utils/storage';
 import { useAppContext } from '../../utils/app.context';
 import toast from 'react-hot-toast';
-
 
 // Group conversations by date
 export interface GroupedConversations {
@@ -133,7 +127,7 @@ export function NavChats({
   const { isGenerating } = useAppContext();
 
   const [conversations, setConversations] = useState<Conversation[]>([]);
-  const [currConv, setCurrConv] = useState<Conversation | null>(null);
+  const [_currConv, setCurrConv] = useState<Conversation | null>(null);
 
   useEffect(() => {
     StorageUtils.getOneConversation(params.id ?? '').then(setCurrConv);
@@ -160,8 +154,7 @@ export function NavChats({
       <SidebarGroupLabel>Chats</SidebarGroupLabel>
       <SidebarGroupContent>
         <SidebarMenu>
-
-            {/* Group conversations by date */}
+          {/* Group conversations by date */}
           {groupedConv.map((group, i) => (
             <React.Fragment key={i}>
               {/* Group title */}
