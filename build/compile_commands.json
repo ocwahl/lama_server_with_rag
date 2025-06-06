@@ -1,0 +1,914 @@
+[
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/ggml/src",
+  "command": "/usr/bin/cc -DGGML_BUILD -DGGML_SCHED_MAX_COPIES=4 -DGGML_SHARED -D_DARWIN_C_SOURCE -D_XOPEN_SOURCE=600 -Dggml_base_EXPORTS -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu11 -arch arm64 -fPIC -Wshadow -Wstrict-prototypes -Wpointer-arith -Wmissing-prototypes -Werror=implicit-int -Werror=implicit-function-declaration -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wdouble-promotion -o CMakeFiles/ggml-base.dir/ggml.c.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml.c",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml.c",
+  "output": "ggml/src/CMakeFiles/ggml-base.dir/ggml.c.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/ggml/src",
+  "command": "/usr/bin/cc -DGGML_BUILD -DGGML_SCHED_MAX_COPIES=4 -DGGML_SHARED -D_DARWIN_C_SOURCE -D_XOPEN_SOURCE=600 -Dggml_base_EXPORTS -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu11 -arch arm64 -fPIC -Wshadow -Wstrict-prototypes -Wpointer-arith -Wmissing-prototypes -Werror=implicit-int -Werror=implicit-function-declaration -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wdouble-promotion -o CMakeFiles/ggml-base.dir/ggml-alloc.c.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-alloc.c",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-alloc.c",
+  "output": "ggml/src/CMakeFiles/ggml-base.dir/ggml-alloc.c.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/ggml/src",
+  "command": "/usr/bin/c++ -DGGML_BUILD -DGGML_SCHED_MAX_COPIES=4 -DGGML_SHARED -D_DARWIN_C_SOURCE -D_XOPEN_SOURCE=600 -Dggml_base_EXPORTS -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/ggml-base.dir/ggml-backend.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-backend.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-backend.cpp",
+  "output": "ggml/src/CMakeFiles/ggml-base.dir/ggml-backend.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/ggml/src",
+  "command": "/usr/bin/c++ -DGGML_BUILD -DGGML_SCHED_MAX_COPIES=4 -DGGML_SHARED -D_DARWIN_C_SOURCE -D_XOPEN_SOURCE=600 -Dggml_base_EXPORTS -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/ggml-base.dir/ggml-opt.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-opt.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-opt.cpp",
+  "output": "ggml/src/CMakeFiles/ggml-base.dir/ggml-opt.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/ggml/src",
+  "command": "/usr/bin/c++ -DGGML_BUILD -DGGML_SCHED_MAX_COPIES=4 -DGGML_SHARED -D_DARWIN_C_SOURCE -D_XOPEN_SOURCE=600 -Dggml_base_EXPORTS -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/ggml-base.dir/ggml-threading.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-threading.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-threading.cpp",
+  "output": "ggml/src/CMakeFiles/ggml-base.dir/ggml-threading.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/ggml/src",
+  "command": "/usr/bin/cc -DGGML_BUILD -DGGML_SCHED_MAX_COPIES=4 -DGGML_SHARED -D_DARWIN_C_SOURCE -D_XOPEN_SOURCE=600 -Dggml_base_EXPORTS -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu11 -arch arm64 -fPIC -Wshadow -Wstrict-prototypes -Wpointer-arith -Wmissing-prototypes -Werror=implicit-int -Werror=implicit-function-declaration -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wdouble-promotion -o CMakeFiles/ggml-base.dir/ggml-quants.c.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-quants.c",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-quants.c",
+  "output": "ggml/src/CMakeFiles/ggml-base.dir/ggml-quants.c.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/ggml/src",
+  "command": "/usr/bin/c++ -DGGML_BUILD -DGGML_SCHED_MAX_COPIES=4 -DGGML_SHARED -D_DARWIN_C_SOURCE -D_XOPEN_SOURCE=600 -Dggml_base_EXPORTS -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/ggml-base.dir/gguf.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/gguf.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/gguf.cpp",
+  "output": "ggml/src/CMakeFiles/ggml-base.dir/gguf.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/ggml/src",
+  "command": "/usr/bin/cc -DACCELERATE_LAPACK_ILP64 -DACCELERATE_NEW_LAPACK -DGGML_BACKEND_BUILD -DGGML_BACKEND_SHARED -DGGML_SCHED_MAX_COPIES=4 -DGGML_SHARED -DGGML_USE_ACCELERATE -DGGML_USE_CPU_AARCH64 -DGGML_USE_LLAMAFILE -D_DARWIN_C_SOURCE -D_XOPEN_SOURCE=600 -Dggml_cpu_EXPORTS -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/.. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-cpu -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -F/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks -O3 -DNDEBUG -std=gnu11 -arch arm64 -fPIC -Wshadow -Wstrict-prototypes -Wpointer-arith -Wmissing-prototypes -Werror=implicit-int -Werror=implicit-function-declaration -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wdouble-promotion -mcpu=native+dotprod+noi8mm+nosve+nosme -o CMakeFiles/ggml-cpu.dir/ggml-cpu/ggml-cpu.c.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-cpu/ggml-cpu.c",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-cpu/ggml-cpu.c",
+  "output": "ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/ggml-cpu.c.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/ggml/src",
+  "command": "/usr/bin/c++ -DACCELERATE_LAPACK_ILP64 -DACCELERATE_NEW_LAPACK -DGGML_BACKEND_BUILD -DGGML_BACKEND_SHARED -DGGML_SCHED_MAX_COPIES=4 -DGGML_SHARED -DGGML_USE_ACCELERATE -DGGML_USE_CPU_AARCH64 -DGGML_USE_LLAMAFILE -D_DARWIN_C_SOURCE -D_XOPEN_SOURCE=600 -Dggml_cpu_EXPORTS -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/.. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-cpu -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -F/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -mcpu=native+dotprod+noi8mm+nosve+nosme -o CMakeFiles/ggml-cpu.dir/ggml-cpu/ggml-cpu.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-cpu/ggml-cpu.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-cpu/ggml-cpu.cpp",
+  "output": "ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/ggml-cpu.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/ggml/src",
+  "command": "/usr/bin/c++ -DACCELERATE_LAPACK_ILP64 -DACCELERATE_NEW_LAPACK -DGGML_BACKEND_BUILD -DGGML_BACKEND_SHARED -DGGML_SCHED_MAX_COPIES=4 -DGGML_SHARED -DGGML_USE_ACCELERATE -DGGML_USE_CPU_AARCH64 -DGGML_USE_LLAMAFILE -D_DARWIN_C_SOURCE -D_XOPEN_SOURCE=600 -Dggml_cpu_EXPORTS -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/.. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-cpu -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -F/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -mcpu=native+dotprod+noi8mm+nosve+nosme -o CMakeFiles/ggml-cpu.dir/ggml-cpu/ggml-cpu-aarch64.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-cpu/ggml-cpu-aarch64.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-cpu/ggml-cpu-aarch64.cpp",
+  "output": "ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/ggml-cpu-aarch64.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/ggml/src",
+  "command": "/usr/bin/c++ -DACCELERATE_LAPACK_ILP64 -DACCELERATE_NEW_LAPACK -DGGML_BACKEND_BUILD -DGGML_BACKEND_SHARED -DGGML_SCHED_MAX_COPIES=4 -DGGML_SHARED -DGGML_USE_ACCELERATE -DGGML_USE_CPU_AARCH64 -DGGML_USE_LLAMAFILE -D_DARWIN_C_SOURCE -D_XOPEN_SOURCE=600 -Dggml_cpu_EXPORTS -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/.. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-cpu -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -F/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -mcpu=native+dotprod+noi8mm+nosve+nosme -o CMakeFiles/ggml-cpu.dir/ggml-cpu/ggml-cpu-hbm.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-cpu/ggml-cpu-hbm.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-cpu/ggml-cpu-hbm.cpp",
+  "output": "ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/ggml-cpu-hbm.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/ggml/src",
+  "command": "/usr/bin/cc -DACCELERATE_LAPACK_ILP64 -DACCELERATE_NEW_LAPACK -DGGML_BACKEND_BUILD -DGGML_BACKEND_SHARED -DGGML_SCHED_MAX_COPIES=4 -DGGML_SHARED -DGGML_USE_ACCELERATE -DGGML_USE_CPU_AARCH64 -DGGML_USE_LLAMAFILE -D_DARWIN_C_SOURCE -D_XOPEN_SOURCE=600 -Dggml_cpu_EXPORTS -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/.. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-cpu -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -F/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks -O3 -DNDEBUG -std=gnu11 -arch arm64 -fPIC -Wshadow -Wstrict-prototypes -Wpointer-arith -Wmissing-prototypes -Werror=implicit-int -Werror=implicit-function-declaration -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wdouble-promotion -mcpu=native+dotprod+noi8mm+nosve+nosme -o CMakeFiles/ggml-cpu.dir/ggml-cpu/ggml-cpu-quants.c.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-cpu/ggml-cpu-quants.c",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-cpu/ggml-cpu-quants.c",
+  "output": "ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/ggml-cpu-quants.c.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/ggml/src",
+  "command": "/usr/bin/c++ -DACCELERATE_LAPACK_ILP64 -DACCELERATE_NEW_LAPACK -DGGML_BACKEND_BUILD -DGGML_BACKEND_SHARED -DGGML_SCHED_MAX_COPIES=4 -DGGML_SHARED -DGGML_USE_ACCELERATE -DGGML_USE_CPU_AARCH64 -DGGML_USE_LLAMAFILE -D_DARWIN_C_SOURCE -D_XOPEN_SOURCE=600 -Dggml_cpu_EXPORTS -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/.. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-cpu -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -F/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -mcpu=native+dotprod+noi8mm+nosve+nosme -o CMakeFiles/ggml-cpu.dir/ggml-cpu/ggml-cpu-traits.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-cpu/ggml-cpu-traits.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-cpu/ggml-cpu-traits.cpp",
+  "output": "ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/ggml-cpu-traits.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/ggml/src",
+  "command": "/usr/bin/c++ -DACCELERATE_LAPACK_ILP64 -DACCELERATE_NEW_LAPACK -DGGML_BACKEND_BUILD -DGGML_BACKEND_SHARED -DGGML_SCHED_MAX_COPIES=4 -DGGML_SHARED -DGGML_USE_ACCELERATE -DGGML_USE_CPU_AARCH64 -DGGML_USE_LLAMAFILE -D_DARWIN_C_SOURCE -D_XOPEN_SOURCE=600 -Dggml_cpu_EXPORTS -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/.. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-cpu -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -F/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -mcpu=native+dotprod+noi8mm+nosve+nosme -o CMakeFiles/ggml-cpu.dir/ggml-cpu/amx/amx.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-cpu/amx/amx.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-cpu/amx/amx.cpp",
+  "output": "ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/amx/amx.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/ggml/src",
+  "command": "/usr/bin/c++ -DACCELERATE_LAPACK_ILP64 -DACCELERATE_NEW_LAPACK -DGGML_BACKEND_BUILD -DGGML_BACKEND_SHARED -DGGML_SCHED_MAX_COPIES=4 -DGGML_SHARED -DGGML_USE_ACCELERATE -DGGML_USE_CPU_AARCH64 -DGGML_USE_LLAMAFILE -D_DARWIN_C_SOURCE -D_XOPEN_SOURCE=600 -Dggml_cpu_EXPORTS -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/.. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-cpu -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -F/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -mcpu=native+dotprod+noi8mm+nosve+nosme -o CMakeFiles/ggml-cpu.dir/ggml-cpu/amx/mmq.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-cpu/amx/mmq.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-cpu/amx/mmq.cpp",
+  "output": "ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/amx/mmq.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/ggml/src",
+  "command": "/usr/bin/c++ -DACCELERATE_LAPACK_ILP64 -DACCELERATE_NEW_LAPACK -DGGML_BACKEND_BUILD -DGGML_BACKEND_SHARED -DGGML_SCHED_MAX_COPIES=4 -DGGML_SHARED -DGGML_USE_ACCELERATE -DGGML_USE_CPU_AARCH64 -DGGML_USE_LLAMAFILE -D_DARWIN_C_SOURCE -D_XOPEN_SOURCE=600 -Dggml_cpu_EXPORTS -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/.. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-cpu -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -F/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -mcpu=native+dotprod+noi8mm+nosve+nosme -o CMakeFiles/ggml-cpu.dir/ggml-cpu/binary-ops.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-cpu/binary-ops.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-cpu/binary-ops.cpp",
+  "output": "ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/binary-ops.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/ggml/src",
+  "command": "/usr/bin/c++ -DACCELERATE_LAPACK_ILP64 -DACCELERATE_NEW_LAPACK -DGGML_BACKEND_BUILD -DGGML_BACKEND_SHARED -DGGML_SCHED_MAX_COPIES=4 -DGGML_SHARED -DGGML_USE_ACCELERATE -DGGML_USE_CPU_AARCH64 -DGGML_USE_LLAMAFILE -D_DARWIN_C_SOURCE -D_XOPEN_SOURCE=600 -Dggml_cpu_EXPORTS -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/.. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-cpu -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -F/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -mcpu=native+dotprod+noi8mm+nosve+nosme -o CMakeFiles/ggml-cpu.dir/ggml-cpu/unary-ops.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-cpu/unary-ops.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-cpu/unary-ops.cpp",
+  "output": "ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/unary-ops.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/ggml/src",
+  "command": "/usr/bin/c++ -DACCELERATE_LAPACK_ILP64 -DACCELERATE_NEW_LAPACK -DGGML_BACKEND_BUILD -DGGML_BACKEND_SHARED -DGGML_SCHED_MAX_COPIES=4 -DGGML_SHARED -DGGML_USE_ACCELERATE -DGGML_USE_CPU_AARCH64 -DGGML_USE_LLAMAFILE -D_DARWIN_C_SOURCE -D_XOPEN_SOURCE=600 -Dggml_cpu_EXPORTS -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/.. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-cpu -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -F/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -mcpu=native+dotprod+noi8mm+nosve+nosme -o CMakeFiles/ggml-cpu.dir/ggml-cpu/vec.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-cpu/vec.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-cpu/vec.cpp",
+  "output": "ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/vec.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/ggml/src",
+  "command": "/usr/bin/c++ -DACCELERATE_LAPACK_ILP64 -DACCELERATE_NEW_LAPACK -DGGML_BACKEND_BUILD -DGGML_BACKEND_SHARED -DGGML_SCHED_MAX_COPIES=4 -DGGML_SHARED -DGGML_USE_ACCELERATE -DGGML_USE_CPU_AARCH64 -DGGML_USE_LLAMAFILE -D_DARWIN_C_SOURCE -D_XOPEN_SOURCE=600 -Dggml_cpu_EXPORTS -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/.. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-cpu -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -F/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -mcpu=native+dotprod+noi8mm+nosve+nosme -o CMakeFiles/ggml-cpu.dir/ggml-cpu/ops.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-cpu/ops.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-cpu/ops.cpp",
+  "output": "ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/ops.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/ggml/src",
+  "command": "/usr/bin/c++ -DACCELERATE_LAPACK_ILP64 -DACCELERATE_NEW_LAPACK -DGGML_BACKEND_BUILD -DGGML_BACKEND_SHARED -DGGML_SCHED_MAX_COPIES=4 -DGGML_SHARED -DGGML_USE_ACCELERATE -DGGML_USE_CPU_AARCH64 -DGGML_USE_LLAMAFILE -D_DARWIN_C_SOURCE -D_XOPEN_SOURCE=600 -Dggml_cpu_EXPORTS -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/.. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-cpu -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -F/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -mcpu=native+dotprod+noi8mm+nosve+nosme -o CMakeFiles/ggml-cpu.dir/ggml-cpu/llamafile/sgemm.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-cpu/llamafile/sgemm.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-cpu/llamafile/sgemm.cpp",
+  "output": "ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/llamafile/sgemm.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/ggml/src",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_BUILD -DGGML_SCHED_MAX_COPIES=4 -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -D_DARWIN_C_SOURCE -D_XOPEN_SOURCE=600 -Dggml_EXPORTS -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/ggml.dir/ggml-backend-reg.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-backend-reg.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-backend-reg.cpp",
+  "output": "ggml/src/CMakeFiles/ggml.dir/ggml-backend-reg.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/ggml/src/ggml-blas",
+  "command": "/usr/bin/c++ -DACCELERATE_LAPACK_ILP64 -DACCELERATE_NEW_LAPACK -DGGML_BACKEND_BUILD -DGGML_BACKEND_SHARED -DGGML_BLAS_USE_ACCELERATE -DGGML_SCHED_MAX_COPIES=4 -DGGML_SHARED -D_DARWIN_C_SOURCE -D_XOPEN_SOURCE=600 -Dggml_blas_EXPORTS -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-blas/.. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -F/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/ggml-blas.dir/ggml-blas.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-blas/ggml-blas.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-blas/ggml-blas.cpp",
+  "output": "ggml/src/ggml-blas/CMakeFiles/ggml-blas.dir/ggml-blas.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/ggml/src/ggml-metal",
+  "command": "/usr/bin/cc -DGGML_BACKEND_BUILD -DGGML_BACKEND_SHARED -DGGML_METAL_EMBED_LIBRARY -DGGML_SCHED_MAX_COPIES=4 -DGGML_SHARED -D_DARWIN_C_SOURCE -D_XOPEN_SOURCE=600 -Dggml_metal_EXPORTS -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-metal/.. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -F/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks -O3 -DNDEBUG -std=gnu11 -arch arm64 -fPIC -Wshadow -Wstrict-prototypes -Wpointer-arith -Wmissing-prototypes -Werror=implicit-int -Werror=implicit-function-declaration -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wdouble-promotion -o CMakeFiles/ggml-metal.dir/ggml-metal.m.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-metal/ggml-metal.m",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-metal/ggml-metal.m",
+  "output": "ggml/src/ggml-metal/CMakeFiles/ggml-metal.dir/ggml-metal.m.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/ggml/src/ggml-metal",
+  "command": "/usr/bin/cc -DGGML_BACKEND_BUILD -DGGML_BACKEND_SHARED -DGGML_METAL_EMBED_LIBRARY -DGGML_SCHED_MAX_COPIES=4 -DGGML_SHARED -D_DARWIN_C_SOURCE -D_XOPEN_SOURCE=600 -Dggml_metal_EXPORTS -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/ggml-metal/.. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Foundation.framework -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Metal.framework -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/MetalKit.framework -O3 -DNDEBUG -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -fPIC -o CMakeFiles/ggml-metal.dir/__/__/__/autogenerated/ggml-metal-embed.s.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/autogenerated/ggml-metal-embed.s",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/autogenerated/ggml-metal-embed.s",
+  "output": "ggml/src/ggml-metal/CMakeFiles/ggml-metal.dir/__/__/__/autogenerated/ggml-metal-embed.s.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/src",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_BUILD -DLLAMA_SHARED -Dllama_EXPORTS -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama.dir/llama.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/llama.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/llama.cpp",
+  "output": "src/CMakeFiles/llama.dir/llama.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/src",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_BUILD -DLLAMA_SHARED -Dllama_EXPORTS -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama.dir/llama-adapter.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/llama-adapter.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/llama-adapter.cpp",
+  "output": "src/CMakeFiles/llama.dir/llama-adapter.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/src",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_BUILD -DLLAMA_SHARED -Dllama_EXPORTS -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama.dir/llama-arch.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/llama-arch.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/llama-arch.cpp",
+  "output": "src/CMakeFiles/llama.dir/llama-arch.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/src",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_BUILD -DLLAMA_SHARED -Dllama_EXPORTS -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama.dir/llama-batch.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/llama-batch.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/llama-batch.cpp",
+  "output": "src/CMakeFiles/llama.dir/llama-batch.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/src",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_BUILD -DLLAMA_SHARED -Dllama_EXPORTS -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama.dir/llama-chat.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/llama-chat.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/llama-chat.cpp",
+  "output": "src/CMakeFiles/llama.dir/llama-chat.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/src",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_BUILD -DLLAMA_SHARED -Dllama_EXPORTS -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama.dir/llama-context.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/llama-context.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/llama-context.cpp",
+  "output": "src/CMakeFiles/llama.dir/llama-context.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/src",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_BUILD -DLLAMA_SHARED -Dllama_EXPORTS -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama.dir/llama-grammar.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/llama-grammar.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/llama-grammar.cpp",
+  "output": "src/CMakeFiles/llama.dir/llama-grammar.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/src",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_BUILD -DLLAMA_SHARED -Dllama_EXPORTS -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama.dir/llama-graph.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/llama-graph.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/llama-graph.cpp",
+  "output": "src/CMakeFiles/llama.dir/llama-graph.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/src",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_BUILD -DLLAMA_SHARED -Dllama_EXPORTS -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama.dir/llama-hparams.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/llama-hparams.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/llama-hparams.cpp",
+  "output": "src/CMakeFiles/llama.dir/llama-hparams.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/src",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_BUILD -DLLAMA_SHARED -Dllama_EXPORTS -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama.dir/llama-impl.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/llama-impl.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/llama-impl.cpp",
+  "output": "src/CMakeFiles/llama.dir/llama-impl.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/src",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_BUILD -DLLAMA_SHARED -Dllama_EXPORTS -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama.dir/llama-io.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/llama-io.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/llama-io.cpp",
+  "output": "src/CMakeFiles/llama.dir/llama-io.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/src",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_BUILD -DLLAMA_SHARED -Dllama_EXPORTS -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama.dir/llama-kv-cache.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/llama-kv-cache.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/llama-kv-cache.cpp",
+  "output": "src/CMakeFiles/llama.dir/llama-kv-cache.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/src",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_BUILD -DLLAMA_SHARED -Dllama_EXPORTS -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama.dir/llama-memory.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/llama-memory.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/llama-memory.cpp",
+  "output": "src/CMakeFiles/llama.dir/llama-memory.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/src",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_BUILD -DLLAMA_SHARED -Dllama_EXPORTS -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama.dir/llama-mmap.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/llama-mmap.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/llama-mmap.cpp",
+  "output": "src/CMakeFiles/llama.dir/llama-mmap.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/src",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_BUILD -DLLAMA_SHARED -Dllama_EXPORTS -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama.dir/llama-model-loader.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/llama-model-loader.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/llama-model-loader.cpp",
+  "output": "src/CMakeFiles/llama.dir/llama-model-loader.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/src",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_BUILD -DLLAMA_SHARED -Dllama_EXPORTS -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama.dir/llama-model-saver.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/llama-model-saver.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/llama-model-saver.cpp",
+  "output": "src/CMakeFiles/llama.dir/llama-model-saver.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/src",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_BUILD -DLLAMA_SHARED -Dllama_EXPORTS -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama.dir/llama-model.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/llama-model.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/llama-model.cpp",
+  "output": "src/CMakeFiles/llama.dir/llama-model.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/src",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_BUILD -DLLAMA_SHARED -Dllama_EXPORTS -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama.dir/llama-quant.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/llama-quant.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/llama-quant.cpp",
+  "output": "src/CMakeFiles/llama.dir/llama-quant.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/src",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_BUILD -DLLAMA_SHARED -Dllama_EXPORTS -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama.dir/llama-sampling.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/llama-sampling.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/llama-sampling.cpp",
+  "output": "src/CMakeFiles/llama.dir/llama-sampling.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/src",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_BUILD -DLLAMA_SHARED -Dllama_EXPORTS -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama.dir/llama-vocab.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/llama-vocab.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/llama-vocab.cpp",
+  "output": "src/CMakeFiles/llama.dir/llama-vocab.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/src",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_BUILD -DLLAMA_SHARED -Dllama_EXPORTS -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama.dir/unicode-data.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/unicode-data.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/unicode-data.cpp",
+  "output": "src/CMakeFiles/llama.dir/unicode-data.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/src",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_BUILD -DLLAMA_SHARED -Dllama_EXPORTS -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama.dir/unicode.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/unicode.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/unicode.cpp",
+  "output": "src/CMakeFiles/llama.dir/unicode.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/common",
+  "command": "/usr/bin/c++   -O3 -DNDEBUG -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/build_info.dir/build-info.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/build-info.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/build-info.cpp",
+  "output": "common/CMakeFiles/build_info.dir/build-info.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/common",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/common.dir/arg.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/arg.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/arg.cpp",
+  "output": "common/CMakeFiles/common.dir/arg.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/common",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/common.dir/chat.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/chat.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/chat.cpp",
+  "output": "common/CMakeFiles/common.dir/chat.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/common",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/common.dir/common.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/common.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/common.cpp",
+  "output": "common/CMakeFiles/common.dir/common.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/common",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/common.dir/console.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/console.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/console.cpp",
+  "output": "common/CMakeFiles/common.dir/console.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/common",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/common.dir/json-schema-to-grammar.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/json-schema-to-grammar.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/json-schema-to-grammar.cpp",
+  "output": "common/CMakeFiles/common.dir/json-schema-to-grammar.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/common",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/common.dir/llguidance.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/llguidance.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/llguidance.cpp",
+  "output": "common/CMakeFiles/common.dir/llguidance.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/common",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/common.dir/log.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/log.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/log.cpp",
+  "output": "common/CMakeFiles/common.dir/log.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/common",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/common.dir/ngram-cache.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/ngram-cache.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/ngram-cache.cpp",
+  "output": "common/CMakeFiles/common.dir/ngram-cache.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/common",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/common.dir/sampling.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/sampling.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/sampling.cpp",
+  "output": "common/CMakeFiles/common.dir/sampling.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/common",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/common.dir/speculative.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/speculative.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/speculative.cpp",
+  "output": "common/CMakeFiles/common.dir/speculative.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tests",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/test-tokenizer-0.dir/test-tokenizer-0.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/test-tokenizer-0.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/test-tokenizer-0.cpp",
+  "output": "tests/CMakeFiles/test-tokenizer-0.dir/test-tokenizer-0.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tests",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/test-sampling.dir/test-sampling.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/test-sampling.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/test-sampling.cpp",
+  "output": "tests/CMakeFiles/test-sampling.dir/test-sampling.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tests",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/test-sampling.dir/get-model.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/get-model.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/get-model.cpp",
+  "output": "tests/CMakeFiles/test-sampling.dir/get-model.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tests",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/test-grammar-parser.dir/test-grammar-parser.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/test-grammar-parser.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/test-grammar-parser.cpp",
+  "output": "tests/CMakeFiles/test-grammar-parser.dir/test-grammar-parser.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tests",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/test-grammar-parser.dir/get-model.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/get-model.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/get-model.cpp",
+  "output": "tests/CMakeFiles/test-grammar-parser.dir/get-model.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tests",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/test-grammar-integration.dir/test-grammar-integration.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/test-grammar-integration.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/test-grammar-integration.cpp",
+  "output": "tests/CMakeFiles/test-grammar-integration.dir/test-grammar-integration.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tests",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/test-grammar-integration.dir/get-model.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/get-model.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/get-model.cpp",
+  "output": "tests/CMakeFiles/test-grammar-integration.dir/get-model.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tests",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/test-llama-grammar.dir/test-llama-grammar.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/test-llama-grammar.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/test-llama-grammar.cpp",
+  "output": "tests/CMakeFiles/test-llama-grammar.dir/test-llama-grammar.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tests",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/test-llama-grammar.dir/get-model.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/get-model.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/get-model.cpp",
+  "output": "tests/CMakeFiles/test-llama-grammar.dir/get-model.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tests",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/test-chat.dir/test-chat.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/test-chat.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/test-chat.cpp",
+  "output": "tests/CMakeFiles/test-chat.dir/test-chat.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tests",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/test-chat.dir/get-model.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/get-model.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/get-model.cpp",
+  "output": "tests/CMakeFiles/test-chat.dir/get-model.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tests",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/../tools/server -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/test-json-schema-to-grammar.dir/test-json-schema-to-grammar.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/test-json-schema-to-grammar.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/test-json-schema-to-grammar.cpp",
+  "output": "tests/CMakeFiles/test-json-schema-to-grammar.dir/test-json-schema-to-grammar.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tests",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/../tools/server -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/test-json-schema-to-grammar.dir/get-model.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/get-model.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/get-model.cpp",
+  "output": "tests/CMakeFiles/test-json-schema-to-grammar.dir/get-model.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tests",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/test-quantize-stats.dir/test-quantize-stats.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/test-quantize-stats.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/test-quantize-stats.cpp",
+  "output": "tests/CMakeFiles/test-quantize-stats.dir/test-quantize-stats.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tests",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/test-gbnf-validator.dir/test-gbnf-validator.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/test-gbnf-validator.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/test-gbnf-validator.cpp",
+  "output": "tests/CMakeFiles/test-gbnf-validator.dir/test-gbnf-validator.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tests",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/test-tokenizer-1-bpe.dir/test-tokenizer-1-bpe.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/test-tokenizer-1-bpe.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/test-tokenizer-1-bpe.cpp",
+  "output": "tests/CMakeFiles/test-tokenizer-1-bpe.dir/test-tokenizer-1-bpe.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tests",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/test-tokenizer-1-spm.dir/test-tokenizer-1-spm.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/test-tokenizer-1-spm.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/test-tokenizer-1-spm.cpp",
+  "output": "tests/CMakeFiles/test-tokenizer-1-spm.dir/test-tokenizer-1-spm.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tests",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/test-log.dir/test-log.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/test-log.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/test-log.cpp",
+  "output": "tests/CMakeFiles/test-log.dir/test-log.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tests",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/test-log.dir/get-model.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/get-model.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/get-model.cpp",
+  "output": "tests/CMakeFiles/test-log.dir/get-model.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tests",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/test-chat-template.dir/test-chat-template.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/test-chat-template.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/test-chat-template.cpp",
+  "output": "tests/CMakeFiles/test-chat-template.dir/test-chat-template.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tests",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/test-chat-template.dir/get-model.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/get-model.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/get-model.cpp",
+  "output": "tests/CMakeFiles/test-chat-template.dir/get-model.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tests",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/test-arg-parser.dir/test-arg-parser.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/test-arg-parser.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/test-arg-parser.cpp",
+  "output": "tests/CMakeFiles/test-arg-parser.dir/test-arg-parser.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tests",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/test-arg-parser.dir/get-model.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/get-model.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/get-model.cpp",
+  "output": "tests/CMakeFiles/test-arg-parser.dir/get-model.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tests",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/test-gguf.dir/test-gguf.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/test-gguf.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/test-gguf.cpp",
+  "output": "tests/CMakeFiles/test-gguf.dir/test-gguf.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tests",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/test-gguf.dir/get-model.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/get-model.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/get-model.cpp",
+  "output": "tests/CMakeFiles/test-gguf.dir/get-model.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tests",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/test-backend-ops.dir/test-backend-ops.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/test-backend-ops.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/test-backend-ops.cpp",
+  "output": "tests/CMakeFiles/test-backend-ops.dir/test-backend-ops.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tests",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/test-backend-ops.dir/get-model.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/get-model.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/get-model.cpp",
+  "output": "tests/CMakeFiles/test-backend-ops.dir/get-model.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tests",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/test-model-load-cancel.dir/test-model-load-cancel.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/test-model-load-cancel.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/test-model-load-cancel.cpp",
+  "output": "tests/CMakeFiles/test-model-load-cancel.dir/test-model-load-cancel.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tests",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/test-model-load-cancel.dir/get-model.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/get-model.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/get-model.cpp",
+  "output": "tests/CMakeFiles/test-model-load-cancel.dir/get-model.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tests",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/test-autorelease.dir/test-autorelease.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/test-autorelease.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/test-autorelease.cpp",
+  "output": "tests/CMakeFiles/test-autorelease.dir/test-autorelease.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tests",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/test-autorelease.dir/get-model.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/get-model.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/get-model.cpp",
+  "output": "tests/CMakeFiles/test-autorelease.dir/get-model.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tests",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/test-barrier.dir/test-barrier.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/test-barrier.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/test-barrier.cpp",
+  "output": "tests/CMakeFiles/test-barrier.dir/test-barrier.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tests",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/test-barrier.dir/get-model.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/get-model.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/get-model.cpp",
+  "output": "tests/CMakeFiles/test-barrier.dir/get-model.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tests",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/test-quantize-fns.dir/test-quantize-fns.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/test-quantize-fns.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/test-quantize-fns.cpp",
+  "output": "tests/CMakeFiles/test-quantize-fns.dir/test-quantize-fns.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tests",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/test-quantize-fns.dir/get-model.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/get-model.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/get-model.cpp",
+  "output": "tests/CMakeFiles/test-quantize-fns.dir/get-model.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tests",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/test-quantize-perf.dir/test-quantize-perf.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/test-quantize-perf.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/test-quantize-perf.cpp",
+  "output": "tests/CMakeFiles/test-quantize-perf.dir/test-quantize-perf.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tests",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/test-quantize-perf.dir/get-model.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/get-model.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/get-model.cpp",
+  "output": "tests/CMakeFiles/test-quantize-perf.dir/get-model.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tests",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/test-rope.dir/test-rope.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/test-rope.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/test-rope.cpp",
+  "output": "tests/CMakeFiles/test-rope.dir/test-rope.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tests",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/test-rope.dir/get-model.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/get-model.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/get-model.cpp",
+  "output": "tests/CMakeFiles/test-rope.dir/get-model.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tests",
+  "command": "/usr/bin/cc -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/mtmd/. -O3 -DNDEBUG -arch arm64 -Wshadow -Wstrict-prototypes -Wpointer-arith -Wmissing-prototypes -Werror=implicit-int -Werror=implicit-function-declaration -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wdouble-promotion -o CMakeFiles/test-mtmd-c-api.dir/test-mtmd-c-api.c.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/test-mtmd-c-api.c",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/test-mtmd-c-api.c",
+  "output": "tests/CMakeFiles/test-mtmd-c-api.dir/test-mtmd-c-api.c.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tests",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/mtmd/. -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/test-mtmd-c-api.dir/get-model.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/get-model.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/get-model.cpp",
+  "output": "tests/CMakeFiles/test-mtmd-c-api.dir/get-model.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tests",
+  "command": "/usr/bin/cc -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -arch arm64 -Wshadow -Wstrict-prototypes -Wpointer-arith -Wmissing-prototypes -Werror=implicit-int -Werror=implicit-function-declaration -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wdouble-promotion -o CMakeFiles/test-c.dir/test-c.c.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/test-c.c",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tests/test-c.c",
+  "output": "tests/CMakeFiles/test-c.dir/test-c.c.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/examples/batched",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama-batched.dir/batched.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/batched/batched.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/batched/batched.cpp",
+  "output": "examples/batched/CMakeFiles/llama-batched.dir/batched.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/examples/embedding",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama-embedding.dir/embedding.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/embedding/embedding.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/embedding/embedding.cpp",
+  "output": "examples/embedding/CMakeFiles/llama-embedding.dir/embedding.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/examples/eval-callback",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama-eval-callback.dir/eval-callback.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/eval-callback/eval-callback.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/eval-callback/eval-callback.cpp",
+  "output": "examples/eval-callback/CMakeFiles/llama-eval-callback.dir/eval-callback.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/examples/gguf-hash",
+  "command": "/usr/bin/cc  -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/gguf-hash/deps -O3 -DNDEBUG -arch arm64 -Wshadow -Wstrict-prototypes -Wpointer-arith -Wmissing-prototypes -Werror=implicit-int -Werror=implicit-function-declaration -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wdouble-promotion -o CMakeFiles/xxhash.dir/deps/xxhash/xxhash.c.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/gguf-hash/deps/xxhash/xxhash.c",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/gguf-hash/deps/xxhash/xxhash.c",
+  "output": "examples/gguf-hash/CMakeFiles/xxhash.dir/deps/xxhash/xxhash.c.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/examples/gguf-hash",
+  "command": "/usr/bin/cc  -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/gguf-hash/deps -O3 -DNDEBUG -arch arm64 -Wshadow -Wstrict-prototypes -Wpointer-arith -Wmissing-prototypes -Werror=implicit-int -Werror=implicit-function-declaration -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wdouble-promotion -w -o CMakeFiles/sha1.dir/deps/sha1/sha1.c.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/gguf-hash/deps/sha1/sha1.c",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/gguf-hash/deps/sha1/sha1.c",
+  "output": "examples/gguf-hash/CMakeFiles/sha1.dir/deps/sha1/sha1.c.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/examples/gguf-hash",
+  "command": "/usr/bin/cc  -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/gguf-hash/deps -O3 -DNDEBUG -arch arm64 -Wshadow -Wstrict-prototypes -Wpointer-arith -Wmissing-prototypes -Werror=implicit-int -Werror=implicit-function-declaration -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wdouble-promotion -o CMakeFiles/sha256.dir/deps/sha256/sha256.c.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/gguf-hash/deps/sha256/sha256.c",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/gguf-hash/deps/sha256/sha256.c",
+  "output": "examples/gguf-hash/CMakeFiles/sha256.dir/deps/sha256/sha256.c.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/examples/gguf-hash",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/gguf-hash/deps -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama-gguf-hash.dir/gguf-hash.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/gguf-hash/gguf-hash.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/gguf-hash/gguf-hash.cpp",
+  "output": "examples/gguf-hash/CMakeFiles/llama-gguf-hash.dir/gguf-hash.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/examples/gguf",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama-gguf.dir/gguf.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/gguf/gguf.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/gguf/gguf.cpp",
+  "output": "examples/gguf/CMakeFiles/llama-gguf.dir/gguf.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/examples/gritlm",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama-gritlm.dir/gritlm.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/gritlm/gritlm.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/gritlm/gritlm.cpp",
+  "output": "examples/gritlm/CMakeFiles/llama-gritlm.dir/gritlm.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/examples/lookahead",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama-lookahead.dir/lookahead.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/lookahead/lookahead.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/lookahead/lookahead.cpp",
+  "output": "examples/lookahead/CMakeFiles/llama-lookahead.dir/lookahead.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/examples/lookup",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama-lookup.dir/lookup.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/lookup/lookup.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/lookup/lookup.cpp",
+  "output": "examples/lookup/CMakeFiles/llama-lookup.dir/lookup.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/examples/lookup",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama-lookup-create.dir/lookup-create.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/lookup/lookup-create.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/lookup/lookup-create.cpp",
+  "output": "examples/lookup/CMakeFiles/llama-lookup-create.dir/lookup-create.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/examples/lookup",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama-lookup-merge.dir/lookup-merge.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/lookup/lookup-merge.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/lookup/lookup-merge.cpp",
+  "output": "examples/lookup/CMakeFiles/llama-lookup-merge.dir/lookup-merge.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/examples/lookup",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama-lookup-stats.dir/lookup-stats.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/lookup/lookup-stats.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/lookup/lookup-stats.cpp",
+  "output": "examples/lookup/CMakeFiles/llama-lookup-stats.dir/lookup-stats.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/examples/parallel",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama-parallel.dir/parallel.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/parallel/parallel.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/parallel/parallel.cpp",
+  "output": "examples/parallel/CMakeFiles/llama-parallel.dir/parallel.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/examples/passkey",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama-passkey.dir/passkey.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/passkey/passkey.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/passkey/passkey.cpp",
+  "output": "examples/passkey/CMakeFiles/llama-passkey.dir/passkey.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/examples/retrieval",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama-retrieval.dir/retrieval.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/retrieval/retrieval.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/retrieval/retrieval.cpp",
+  "output": "examples/retrieval/CMakeFiles/llama-retrieval.dir/retrieval.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/examples/save-load-state",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama-save-load-state.dir/save-load-state.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/save-load-state/save-load-state.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/save-load-state/save-load-state.cpp",
+  "output": "examples/save-load-state/CMakeFiles/llama-save-load-state.dir/save-load-state.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/examples/simple",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama-simple.dir/simple.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/simple/simple.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/simple/simple.cpp",
+  "output": "examples/simple/CMakeFiles/llama-simple.dir/simple.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/examples/simple-chat",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama-simple-chat.dir/simple-chat.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/simple-chat/simple-chat.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/simple-chat/simple-chat.cpp",
+  "output": "examples/simple-chat/CMakeFiles/llama-simple-chat.dir/simple-chat.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/examples/speculative",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama-speculative.dir/speculative.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/speculative/speculative.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/speculative/speculative.cpp",
+  "output": "examples/speculative/CMakeFiles/llama-speculative.dir/speculative.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/examples/speculative-simple",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama-speculative-simple.dir/speculative-simple.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/speculative-simple/speculative-simple.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/speculative-simple/speculative-simple.cpp",
+  "output": "examples/speculative-simple/CMakeFiles/llama-speculative-simple.dir/speculative-simple.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/examples/gen-docs",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama-gen-docs.dir/gen-docs.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/gen-docs/gen-docs.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/gen-docs/gen-docs.cpp",
+  "output": "examples/gen-docs/CMakeFiles/llama-gen-docs.dir/gen-docs.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/examples/training",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama-finetune.dir/finetune.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/training/finetune.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/training/finetune.cpp",
+  "output": "examples/training/CMakeFiles/llama-finetune.dir/finetune.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/examples/convert-llama2c-to-ggml",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama-convert-llama2c-to-ggml.dir/convert-llama2c-to-ggml.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/convert-llama2c-to-ggml/convert-llama2c-to-ggml.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/examples/convert-llama2c-to-ggml/convert-llama2c-to-ggml.cpp",
+  "output": "examples/convert-llama2c-to-ggml/CMakeFiles/llama-convert-llama2c-to-ggml.dir/convert-llama2c-to-ggml.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/pocs/vdot",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/pocs -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -o CMakeFiles/llama-vdot.dir/vdot.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/pocs/vdot/vdot.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/pocs/vdot/vdot.cpp",
+  "output": "pocs/vdot/CMakeFiles/llama-vdot.dir/vdot.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/pocs/vdot",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/pocs -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -o CMakeFiles/llama-q8dot.dir/q8dot.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/pocs/vdot/q8dot.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/pocs/vdot/q8dot.cpp",
+  "output": "pocs/vdot/CMakeFiles/llama-q8dot.dir/q8dot.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tools/batched-bench",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama-batched-bench.dir/batched-bench.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/batched-bench/batched-bench.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/batched-bench/batched-bench.cpp",
+  "output": "tools/batched-bench/CMakeFiles/llama-batched-bench.dir/batched-bench.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tools/gguf-split",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama-gguf-split.dir/gguf-split.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/gguf-split/gguf-split.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/gguf-split/gguf-split.cpp",
+  "output": "tools/gguf-split/CMakeFiles/llama-gguf-split.dir/gguf-split.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tools/imatrix",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama-imatrix.dir/imatrix.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/imatrix/imatrix.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/imatrix/imatrix.cpp",
+  "output": "tools/imatrix/CMakeFiles/llama-imatrix.dir/imatrix.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tools/llama-bench",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama-bench.dir/llama-bench.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/llama-bench/llama-bench.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/llama-bench/llama-bench.cpp",
+  "output": "tools/llama-bench/CMakeFiles/llama-bench.dir/llama-bench.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tools/main",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama-cli.dir/main.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/main/main.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/main/main.cpp",
+  "output": "tools/main/CMakeFiles/llama-cli.dir/main.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tools/perplexity",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama-perplexity.dir/perplexity.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/perplexity/perplexity.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/perplexity/perplexity.cpp",
+  "output": "tools/perplexity/CMakeFiles/llama-perplexity.dir/perplexity.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tools/quantize",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/quantize/../../common -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama-quantize.dir/quantize.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/quantize/quantize.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/quantize/quantize.cpp",
+  "output": "tools/quantize/CMakeFiles/llama-quantize.dir/quantize.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tools/server",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/server -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tools/server -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/server/../llava -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/rag_core -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/mtmd/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/rag_core -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/mtmd -isystem /opt/homebrew/include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama-server.dir/server.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/server/server.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/server/server.cpp",
+  "output": "tools/server/CMakeFiles/llama-server.dir/server.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tools/rag_core",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -DLLAMA_USE_POSTGRES -Drag_core_EXPORTS -I/opt/homebrew/Cellar/postgresql@14/14.18/include/postgresql@14 -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/rag_core -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/server -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/mtmd -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -isystem /opt/homebrew/include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/rag_core.dir/postgres_client.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/rag_core/postgres_client.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/rag_core/postgres_client.cpp",
+  "output": "tools/rag_core/CMakeFiles/rag_core.dir/postgres_client.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tools/rag_core",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -DLLAMA_USE_POSTGRES -Drag_core_EXPORTS -I/opt/homebrew/Cellar/postgresql@14/14.18/include/postgresql@14 -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/rag_core -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/server -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/mtmd -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -isystem /opt/homebrew/include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/rag_core.dir/crypto_utils.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/rag_core/crypto_utils.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/rag_core/crypto_utils.cpp",
+  "output": "tools/rag_core/CMakeFiles/rag_core.dir/crypto_utils.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tools/rag_core",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -DLLAMA_USE_POSTGRES -Drag_core_EXPORTS -I/opt/homebrew/Cellar/postgresql@14/14.18/include/postgresql@14 -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/rag_core -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/server -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/mtmd -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -isystem /opt/homebrew/include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/rag_core.dir/ecies_utils.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/rag_core/ecies_utils.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/rag_core/ecies_utils.cpp",
+  "output": "tools/rag_core/CMakeFiles/rag_core.dir/ecies_utils.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tools/rag_core_test",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/rag_core_test -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/rag_core -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/server -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/mtmd -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/mtmd/. -isystem /opt/homebrew/include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/rag_core_test.dir/test_rag_core.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/rag_core_test/test_rag_core.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/rag_core_test/test_rag_core.cpp",
+  "output": "tools/rag_core_test/CMakeFiles/rag_core_test.dir/test_rag_core.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tools/run",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama-run.dir/run.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/run/run.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/run/run.cpp",
+  "output": "tools/run/CMakeFiles/llama-run.dir/run.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tools/run",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama-run.dir/linenoise.cpp/linenoise.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/run/linenoise.cpp/linenoise.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/run/linenoise.cpp/linenoise.cpp",
+  "output": "tools/run/CMakeFiles/llama-run.dir/linenoise.cpp/linenoise.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tools/tokenize",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama-tokenize.dir/tokenize.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/tokenize/tokenize.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/tokenize/tokenize.cpp",
+  "output": "tools/tokenize/CMakeFiles/llama-tokenize.dir/tokenize.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tools/tts",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama-tts.dir/tts.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/tts/tts.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/tts/tts.cpp",
+  "output": "tools/tts/CMakeFiles/llama-tts.dir/tts.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tools/mtmd",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_BUILD -DLLAMA_SHARED -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/mtmd/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/mtmd/../.. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/mtmd/../../common -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -Wno-cast-qual -o CMakeFiles/mtmd.dir/mtmd.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/mtmd/mtmd.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/mtmd/mtmd.cpp",
+  "output": "tools/mtmd/CMakeFiles/mtmd.dir/mtmd.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tools/mtmd",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_BUILD -DLLAMA_SHARED -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/mtmd/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/mtmd/../.. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/mtmd/../../common -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -Wno-cast-qual -o CMakeFiles/mtmd.dir/mtmd-helper.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/mtmd/mtmd-helper.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/mtmd/mtmd-helper.cpp",
+  "output": "tools/mtmd/CMakeFiles/mtmd.dir/mtmd-helper.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tools/mtmd",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_BUILD -DLLAMA_SHARED -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/mtmd/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/mtmd/../.. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/mtmd/../../common -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -Wno-cast-qual -o CMakeFiles/mtmd.dir/clip.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/mtmd/clip.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/mtmd/clip.cpp",
+  "output": "tools/mtmd/CMakeFiles/mtmd.dir/clip.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tools/mtmd",
+  "command": "/usr/bin/c++   -O3 -DNDEBUG -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama-llava-cli.dir/deprecation-warning.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/mtmd/deprecation-warning.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/mtmd/deprecation-warning.cpp",
+  "output": "tools/mtmd/CMakeFiles/llama-llava-cli.dir/deprecation-warning.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tools/mtmd",
+  "command": "/usr/bin/c++   -O3 -DNDEBUG -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama-gemma3-cli.dir/deprecation-warning.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/mtmd/deprecation-warning.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/mtmd/deprecation-warning.cpp",
+  "output": "tools/mtmd/CMakeFiles/llama-gemma3-cli.dir/deprecation-warning.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tools/mtmd",
+  "command": "/usr/bin/c++   -O3 -DNDEBUG -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama-minicpmv-cli.dir/deprecation-warning.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/mtmd/deprecation-warning.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/mtmd/deprecation-warning.cpp",
+  "output": "tools/mtmd/CMakeFiles/llama-minicpmv-cli.dir/deprecation-warning.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tools/mtmd",
+  "command": "/usr/bin/c++   -O3 -DNDEBUG -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama-qwen2vl-cli.dir/deprecation-warning.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/mtmd/deprecation-warning.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/mtmd/deprecation-warning.cpp",
+  "output": "tools/mtmd/CMakeFiles/llama-qwen2vl-cli.dir/deprecation-warning.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tools/mtmd",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/mtmd/. -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama-mtmd-cli.dir/mtmd-cli.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/mtmd/mtmd-cli.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/mtmd/mtmd-cli.cpp",
+  "output": "tools/mtmd/CMakeFiles/llama-mtmd-cli.dir/mtmd-cli.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tools/cvector-generator",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama-cvector-generator.dir/cvector-generator.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/cvector-generator/cvector-generator.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/cvector-generator/cvector-generator.cpp",
+  "output": "tools/cvector-generator/CMakeFiles/llama-cvector-generator.dir/cvector-generator.cpp.o"
+},
+{
+  "directory": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/build/tools/export-lora",
+  "command": "/usr/bin/c++ -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_BLAS -DGGML_USE_CPU -DGGML_USE_METAL -DLLAMA_SHARED -DLLAMA_USE_CURL -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/common/. -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/src/../include -I/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/ggml/src/../include -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -o CMakeFiles/llama-export-lora.dir/export-lora.cpp.o -c /Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/export-lora/export-lora.cpp",
+  "file": "/Users/damiantziamtzis/Developer/sandbox/lama_server_with_rag/tools/export-lora/export-lora.cpp",
+  "output": "tools/export-lora/CMakeFiles/llama-export-lora.dir/export-lora.cpp.o"
+}
+]

@@ -40,9 +40,9 @@ public:
     std::string get_name() const override;
 
     // Schema management
-    bool hasSchema();
-    void createSchema(size_t embedding_size);
-    void destroySchema();
+    bool hasSchema() override;
+    void createSchema(size_t embedding_size) override;
+    void destroySchema() override;
 
     // Document management
     document_entry createOrRetrieveDocument(
@@ -50,16 +50,16 @@ public:
         const std::string& version,
         const std::string& content_type,
         const std::string& url,
-        int length);
+        int length) override;
 
-    void deleteDocument(const std::string& document_id);
+    void deleteDocument(const std::string& document_id) override;
 
     // RAG entry management
     void insertRagEntry(const std::string& document_id_hash,
                         const std::vector<float>& embedding,
                         const std::vector<uint8_t>& contents, // Changed to vector<uint8_t> for raw bytes
                         const ecc256_public_key& controller_public_key, // Changed to ecc256_public_key
-                        const ecc256_private_key& recipient_private_key); // Changed to ecc256_private_key for decryption
+                        const ecc256_private_key& recipient_private_key) override; // Changed to ecc256_private_key for decryption
 
     // Search
     // The tuple return type is updated to reflect the new column types and order,
@@ -69,7 +69,7 @@ public:
                            std::string, std::string, std::string, std::string, int, // Document metadata
                            std::vector<uint8_t>, aes_gcm_tag, aes_gcm_nonce, // encrypted_content, tag, nonce
                            ecc256_public_key //ephemereal_pk
-                           >> searchNearest(const std::vector<float>& query_embedding, int k, const additional_filtering_clause& filter_clause = nullptr, DistanceMetric distance_metric = DistanceMetric::COSINE );
+                           >> searchNearest(const std::vector<float>& query_embedding, int k, const additional_filtering_clause& filter_clause = nullptr, DistanceMetric distance_metric = DistanceMetric::COSINE ) override;
 
 
     // Crypto functions - now using CryptoUtils

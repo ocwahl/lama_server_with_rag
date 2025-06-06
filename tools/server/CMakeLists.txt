@@ -41,11 +41,11 @@ target_include_directories(${TARGET} PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(${TARGET} PRIVATE ${CMAKE_SOURCE_DIR}/rag_core)
 
 # Link the server executable to your new dynamic library
-target_link_libraries(${TARGET} PRIVATE common mtmd ${CMAKE_THREAD_LIBS_INIT} rag_core) # Link rag_core here
+# Since rag_core depends on OpenSSL, we need to link it here too
+find_package(OpenSSL REQUIRED)
+target_link_libraries(${TARGET} PRIVATE common mtmd ${CMAKE_THREAD_LIBS_INIT} rag_core OpenSSL::SSL OpenSSL::Crypto) # Link rag_core here
 
 if (LLAMA_SERVER_SSL)
-    find_package(OpenSSL REQUIRED)
-    target_link_libraries(${TARGET} PRIVATE OpenSSL::SSL OpenSSL::Crypto)
     target_compile_definitions(${TARGET} PRIVATE CPPHTTPLIB_OPENSSL_SUPPORT)
 endif()
 

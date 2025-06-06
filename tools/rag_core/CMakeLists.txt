@@ -42,6 +42,8 @@ target_include_directories(${TARGET_LIB} PUBLIC
 target_link_libraries(${TARGET_LIB} PRIVATE
     ${PostgreSQL_LIBRARIES}
     ${CMAKE_THREAD_LIBS_INIT}
+    common
+    build_info
 )
 
 # --- OpenSSL ---
