@@ -372,15 +372,8 @@ export default function SettingDialog({
 
     const currentSelectedConnectionName =
       newConfig.selected_rag_connection_name;
-    const currentRagDbDetails: RagConnection = {
-      connection_name: currentSelectedConnectionName,
-      host: 'localhost',
-      port: 5432,
-      name: '<name>',
-      user: '<user>',
-      password: '<password>',
-      id: '',
-    };
+    // FIX: Use getSelectedRagConnection instead of hardcoded values
+    const currentRagDbDetails = getSelectedRagConnection(localConfig);
 
     let foundExistingConnection = false;
     newConfig.rag_connections = newConfig.rag_connections.map((conn) => {

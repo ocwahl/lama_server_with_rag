@@ -79,6 +79,7 @@ export default defineConfig({
     proxy: {
       '/v1': 'http://localhost:8080',
       '/props': 'http://localhost:8080',
+      '/rag_db_admin': 'http://localhost:8080'
     },
     headers: {
       'Cross-Origin-Embedder-Policy': 'require-corp',
