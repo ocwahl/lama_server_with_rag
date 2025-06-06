@@ -250,7 +250,7 @@ export default function SettingDialog({
           key: 'rag_connections',
           component: () => (
             <RagConnectionManager
-              //localConfig={localConfig}
+              localConfig={localConfig}
               setLocalConfig={setLocalConfig}
             />
           ),
