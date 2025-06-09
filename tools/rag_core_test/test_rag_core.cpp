@@ -54,7 +54,7 @@ std::shared_ptr<rag_database> create_rag_database(const std::string& host_name, 
     return true;
 
 // Helper to print a vector of bytes
-void print_bytes(const std::string& label, const std::vector<unsigned char>& bytes) {
+static void print_bytes(const std::string& label, const std::vector<unsigned char>& bytes) {
     std::cout << label << ": [";
     for (size_t i = 0; i < bytes.size(); ++i) {
         std::cout << std::hex << std::setw(2) << std::setfill('0') << (int)bytes[i];
@@ -69,7 +69,7 @@ void print_bytes(const std::string& label, const std::vector<unsigned char>& byt
 // SHA256 Tests
 // =========================================================================
 
-bool test_computeSha256Bytes_zero_size() {
+static bool test_computeSha256Bytes_zero_size() {
     std::vector<unsigned char> data;
     sha256_hash hash = CryptoUtils::computeSha256Bytes(data);
     TEST_ASSERT(hash.size() == 32, "Hash of zero-size array must be 32 bytes.");
@@ -83,7 +83,7 @@ bool test_computeSha256Bytes_zero_size() {
     TEST_SUCCESS("computeSha256Bytes_zero_size");
 }
 
-bool test_computeSha256Bytes_determinism() {
+static bool test_computeSha256Bytes_determinism() {
     std::vector<unsigned char> data1 = {1, 2, 3, 4, 5};
     std::vector<unsigned char> data2 = {1, 2, 3, 4, 5};
     sha256_hash hash1 = CryptoUtils::computeSha256Bytes(data1);
@@ -96,7 +96,7 @@ bool test_computeSha256Bytes_determinism() {
     TEST_SUCCESS("computeSha256Bytes_determinism");
 }
 
-bool test_computeSha256Bytes_uniqueness() {
+static bool test_computeSha256Bytes_uniqueness() {
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> distrib(0, 255);
@@ -122,7 +122,7 @@ bool test_computeSha256Bytes_uniqueness() {
 // EC Utilities (secp256k1) Tests
 // =========================================================================
 
-bool test_generateKeys_and_consistency_with_scalarMultiply() {
+static bool test_generateKeys_and_consistency_with_scalarMultiply() {
     // Generate a private/public key pair
     ecc256_private_key private_key_a = CryptoUtils::generatePrivateKey();
     ecc256_public_key public_key_a = CryptoUtils::computePublicKey(private_key_a);
@@ -166,7 +166,7 @@ bool test_generateKeys_and_consistency_with_scalarMultiply() {
 }
 
 
-bool test_computeEcdhSharedSecretSha256_consistency() {
+static bool test_computeEcdhSharedSecretSha256_consistency() {
     ecc256_private_key sk1 = CryptoUtils::generatePrivateKey();
     ecc256_public_key pk1 = CryptoUtils::computePublicKey(sk1);
 
@@ -187,7 +187,7 @@ bool test_computeEcdhSharedSecretSha256_consistency() {
 // =========================================================================
 
 // Helper function to run a single AES-GCM consistency test
-bool run_aes_gcm_test_case(
+static bool run_aes_gcm_test_case(
     const std::vector<unsigned char>& original_data,
     const std::vector<unsigned char>& additional_authenticated_data,
     const std::string& test_case_name)
@@ -210,15 +210,15 @@ bool run_aes_gcm_test_case(
     CryptoUtils::aes256GcmEncrypt(
         original_data, aes_key, aes_nonce, additional_authenticated_data, ciphertext, tag);
 
-    TEST_ASSERT(tag.size() == 16, "GCM Tag size should be 16 bytes for " + test_case_name); // GCM tag is typically 16 bytes
+    TEST_ASSERT(tag.size() == 16, ("GCM Tag size should be 16 bytes for " + test_case_name).c_str()); // GCM tag is typically 16 bytes
 
     std::vector<unsigned char> decrypted_data;
     // Decrypt
     bool decrypt_ok = CryptoUtils::aes256GcmDecrypt(ciphertext,
         tag, aes_key, aes_nonce, additional_authenticated_data, decrypted_data);
 
-    TEST_ASSERT(decrypt_ok, "AES-256 GCM Decryption failed for " + test_case_name);
-    TEST_ASSERT(original_data == decrypted_data, "Decrypted data must match original data for " + test_case_name);
+    TEST_ASSERT(decrypt_ok, ("AES-256 GCM Decryption failed for " + test_case_name).c_str());
+    TEST_ASSERT(original_data == decrypted_data, ("Decrypted data must match original data for " + test_case_name).c_str());
 
     // --- Tampering tests ---
 
@@ -229,7 +229,7 @@ bool run_aes_gcm_test_case(
         std::vector<unsigned char> failed_decrypted_data;
         bool failed_decrypt = CryptoUtils::aes256GcmDecrypt(modified_ciphertext,
             tag, aes_key, aes_nonce, additional_authenticated_data, failed_decrypted_data);
-        TEST_ASSERT(!failed_decrypt, "Decryption should fail with modified ciphertext for " + test_case_name);
+        TEST_ASSERT(!failed_decrypt, ("Decryption should fail with modified ciphertext for " + test_case_name).c_str());
     }
 
     // Test with modified AAD (should fail decryption) - only if AAD is not empty
@@ -239,7 +239,7 @@ bool run_aes_gcm_test_case(
         std::vector<unsigned char> failed_decrypted_data;
         bool failed_decrypt = CryptoUtils::aes256GcmDecrypt(ciphertext,
             tag, aes_key, aes_nonce, modified_aad, failed_decrypted_data);
-        TEST_ASSERT(!failed_decrypt, "Decryption should fail with modified AAD for " + test_case_name);
+        TEST_ASSERT(!failed_decrypt, ("Decryption should fail with modified AAD for " + test_case_name).c_str());
     }
 
     // Test with modified tag (should fail decryption)
@@ -249,13 +249,13 @@ bool run_aes_gcm_test_case(
         std::vector<unsigned char> failed_decrypted_data;
         bool failed_decrypt = CryptoUtils::aes256GcmDecrypt(ciphertext,
             modified_tag, aes_key, aes_nonce, additional_authenticated_data, failed_decrypted_data);
-        TEST_ASSERT(!failed_decrypt, "Decryption should fail with modified tag for " + test_case_name);
+        TEST_ASSERT(!failed_decrypt, ("Decryption should fail with modified tag for " + test_case_name).c_str());
     }
 
     return true; // All checks for this test case passed
 }
 
-bool test_aes256GcmEncrypt_Decrypt_consistency() {
+static bool test_aes256GcmEncrypt_Decrypt_consistency() {
     // --- Test Data ---
     std::vector<unsigned char> sample_data = {
         0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08,
@@ -294,13 +294,13 @@ bool test_aes256GcmEncrypt_Decrypt_consistency() {
 // ECIES Tests
 // =========================================================================
 
-bool test_ecies_encrypt_decrypt_consistency() {
+static bool test_ecies_encrypt_decrypt_consistency() {
     std::string original_message_str = "This is a secret message to be encrypted using ECIES.";
     std::vector<unsigned char> original_message(original_message_str.begin(), original_message_str.end());
 
     // Generate sender's ephemeral key pair
     ecc256_private_key sender_ephemeral_sk = CryptoUtils::generatePrivateKey();
-    ecc256_public_key sender_ephemeral_pk = CryptoUtils::computePublicKey(sender_ephemeral_sk);
+    (void)sender_ephemeral_sk; // Suppress unused warning
 
     // Generate recipient's static key pair
     ecc256_private_key recipient_sk = CryptoUtils::generatePrivateKey();
@@ -379,7 +379,7 @@ const std::string PG_PASSWORD = "admin";
 const size_t EMBEDDING_SIZE = 4096; // Example embedding size
 
 // Helper to clean up the schema before a test
-void clean_db_schema(std::shared_ptr<rag_database>& db) {
+static void clean_db_schema(std::shared_ptr<rag_database>& db) {
     try {
         db->connect(PG_USER, PG_PASSWORD);
         if (db->hasSchema()) {
@@ -393,7 +393,7 @@ void clean_db_schema(std::shared_ptr<rag_database>& db) {
 }
 
 // Helper to ensure schema exists for tests that need it
-bool ensure_schema_exists(std::shared_ptr<rag_database>& db) {
+static bool ensure_schema_exists(std::shared_ptr<rag_database>& db) {
     try {
         db->connect(PG_USER, PG_PASSWORD);
         if (!db->hasSchema()) {
@@ -417,7 +417,7 @@ bool ensure_schema_exists(std::shared_ptr<rag_database>& db) {
 }
 
 // Helper to generate random bytes
-std::vector<uint8_t> generate_random_bytes(size_t size) {
+static std::vector<uint8_t> generate_random_bytes(size_t size) {
     std::vector<uint8_t> bytes(size);
     std::random_device rd;
     std::mt19937 gen(rd());
@@ -429,7 +429,7 @@ std::vector<uint8_t> generate_random_bytes(size_t size) {
 }
 
 // Helper to generate random embedding
-std::vector<float> generate_random_embedding(size_t size) {
+static std::vector<float> generate_random_embedding(size_t size) {
     std::vector<float> embedding(size);
     std::random_device rd;
     std::mt19937 gen(rd());
@@ -441,7 +441,7 @@ std::vector<float> generate_random_embedding(size_t size) {
 }
 
 // Helper to generate a random date string (YYYY-MM-DD)
-std::string generate_random_date() {
+static std::string generate_random_date() {
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> year_dist(2000, 2024);
@@ -460,7 +460,7 @@ std::string generate_random_date() {
 }
 
 // Helper to compare float vectors with a tolerance
-bool compare_float_vectors(const std::vector<float>& v1, const std::vector<float>& v2, float epsilon = std::numeric_limits<float>::epsilon() * 100) {
+static bool compare_float_vectors(const std::vector<float>& v1, const std::vector<float>& v2, float epsilon = std::numeric_limits<float>::epsilon() * 100) {
     if (v1.size() != v2.size()) return false;
     for (size_t i = 0; i < v1.size(); ++i) {
         if (std::abs(v1[i] - v2[i]) > epsilon) {
@@ -471,7 +471,7 @@ bool compare_float_vectors(const std::vector<float>& v1, const std::vector<float
 }
 
 
-bool test_db_connection_success_and_disconnect() {
+static bool test_db_connection_success_and_disconnect() {
     TEST_LOG_RAW("Testing DB: Connection success and disconnect...");
     std::shared_ptr<rag_database> db = create_rag_database("localhost",5432,"klave_rag");
     try {
@@ -480,12 +480,12 @@ bool test_db_connection_success_and_disconnect() {
         db->disconnect();
         TEST_ASSERT(!db->isConnected(), "Database should be disconnected.");
     } catch (const std::exception& e) {
-        TEST_ASSERT(false, "Exception during connection test: " + std::string(e.what()));
+        TEST_ASSERT(false, ("Exception during connection test: " + std::string(e.what())).c_str());
     }
     TEST_SUCCESS("DB: Connection success and disconnect");
 }
 
-bool test_db_connection_failure() {
+static bool test_db_connection_failure() {
     TEST_LOG_RAW("Testing DB: Connection failure with invalid credentials...");
     std::shared_ptr<rag_database> db = create_rag_database("localhost",5432,"klave_rag");
     try {
@@ -496,12 +496,12 @@ bool test_db_connection_failure() {
         TEST_LOG_RAW("Caught expected exception for connection failure: %s", e.what());
         TEST_ASSERT(!db->isConnected(), "Database should not be connected after failed attempt.");
     } catch (const std::exception& e) {
-        TEST_ASSERT(false, "Caught unexpected exception type for connection failure: " + std::string(e.what()));
+        TEST_ASSERT(false, ("Caught unexpected exception type for connection failure: " + std::string(e.what())).c_str());
     }
     TEST_SUCCESS("DB: Connection failure");
 }
 
-bool test_db_schema_management() {
+static bool test_db_schema_management() {
     TEST_LOG_RAW("Testing DB: Schema creation and destruction...");
     std::shared_ptr<rag_database> db = create_rag_database("localhost",5432,"klave_rag");
 
@@ -524,12 +524,12 @@ bool test_db_schema_management() {
 
         db->disconnect();
     } catch (const std::exception& e) {
-        TEST_ASSERT(false, "Exception during schema management test: " + std::string(e.what()));
+        TEST_ASSERT(false, ("Exception during schema management test: " + std::string(e.what())).c_str());
     }
     TEST_SUCCESS("DB: Schema management");
 }
 
-bool test_db_document_creation_and_retrieval() {
+static bool test_db_document_creation_and_retrieval() {
     TEST_LOG_RAW("Testing DB: Document creation and retrieval...");
     std::shared_ptr<rag_database> db = create_rag_database("localhost",5432,"klave_rag");
 
@@ -562,12 +562,12 @@ bool test_db_document_creation_and_retrieval() {
 
         db->disconnect();
     } catch (const std::exception& e) {
-        TEST_ASSERT(false, "Exception during document creation/retrieval test: " + std::string(e.what()));
+        TEST_ASSERT(false, ("Exception during document creation/retrieval test: " + std::string(e.what())).c_str());
     }
     TEST_SUCCESS("DB: Document creation and retrieval");
 }
 
-bool test_db_document_deletion() {
+static bool test_db_document_deletion() {
     TEST_LOG_RAW("Testing DB: Document deletion...");
     std::shared_ptr<rag_database> db = create_rag_database("localhost",5432,"klave_rag");
 
@@ -599,13 +599,13 @@ bool test_db_document_deletion() {
 
         db->disconnect();
     } catch (const std::exception& e) {
-        TEST_ASSERT(false, "Exception during document deletion test: " + std::string(e.what()));
+        TEST_ASSERT(false, ("Exception during document deletion test: " + std::string(e.what())).c_str());
     }
     TEST_SUCCESS("DB: Document deletion");
 }
 
 
-bool test_db_rag_entry_insertion_and_decryption() {
+static bool test_db_rag_entry_insertion_and_decryption() {
     TEST_LOG_RAW("Testing DB: RAG entry insertion and decryption consistency...");
     std::shared_ptr<rag_database> db = create_rag_database("localhost",5432,"klave_rag");
 
@@ -639,7 +639,7 @@ bool test_db_rag_entry_insertion_and_decryption() {
         // 4. Retrieve the entry using searchNearest (or any search that returns the full tuple)
         auto search_results = db->searchNearest(embedding, 1); // Search for the inserted embedding
 
-        TEST_ASSERT(search_results.size() == 1, "Expected 1 search result, got " + std::to_string(search_results.size()));
+        TEST_ASSERT(search_results.size() == 1, ("Expected 1 search result, got " + std::to_string(search_results.size())).c_str());
         
         // Extract retrieved data
         auto& result_tuple = search_results[0];
@@ -702,7 +702,13 @@ bool test_db_rag_entry_insertion_and_decryption() {
         // Let's update the test to reflect this.
 
         // Re-defining the tuple structure for clarity in test, assuming rag_database.h is updated
-        using SearchResultTuple = rag_database::nearest_result;
+        using SearchResultTuple = std::tuple<
+            std::string, std::vector<float>, std::string, int, int, // 0-4: doc_id, embedding, hash, offset, length
+            ecc256_public_key, ecc256_public_key, // 5-6: controller_pk, encryption_pk (recipient's)
+            std::string, std::string, std::string, std::string, int, // 7-11: doc_date, doc_version, doc_content_type, doc_url, doc_length
+            std::vector<uint8_t>, aes_gcm_tag, aes_gcm_nonce, // 12-14: encrypted_content, tag, nonce
+            ecc256_public_key // 15: ephemeral_public_key
+        >;
 
         // Re-cast the result_tuple to the expected full type
         const SearchResultTuple& full_result_tuple = reinterpret_cast<const SearchResultTuple&>(result_tuple);
@@ -722,7 +728,7 @@ bool test_db_rag_entry_insertion_and_decryption() {
 
         db->disconnect();
     } catch (const std::exception& e) {
-        TEST_ASSERT(false, "Exception during RAG entry insertion/decryption test: " + std::string(e.what()));
+        TEST_ASSERT(false, ("Exception during RAG entry insertion/decryption test: " + std::string(e.what())).c_str());
     }
     TEST_SUCCESS("DB: RAG entry insertion and decryption consistency");
 }
@@ -772,6 +778,7 @@ bool test_db_search_nearest() {
             ecc256_private_key recipient_sk = CryptoUtils::generatePrivateKey();
             recipient_sks.push_back(recipient_sk); // Store recipient SK for decryption
             ecc256_public_key recipient_pk = CryptoUtils::computePublicKey(recipient_sk);
+            (void)recipient_pk; // Suppress unused warning
 
             db->insertRagEntry(doc.document_id, emb, content, controller_pk, recipient_sk);
         }
@@ -784,7 +791,7 @@ bool test_db_search_nearest() {
         // --- Test Case 1: Default Cosine Distance (no filter) ---
         TEST_LOG_RAW("--- Test Case 1: Default Cosine Distance (no filter) ---");
         auto results_default = db->searchNearest(query_emb_close_to_zero, 1);
-        TEST_ASSERT(results_default.size() == 1, "TC1: Expected 1 nearest result, got " + std::to_string(results_default.size()));
+        TEST_ASSERT(results_default.size() == 1, ("TC1: Expected 1 nearest result, got " + std::to_string(results_default.size())).c_str());
         // Assuming embeddings[0] will be closest to {0,0,0} due to its construction
         TEST_ASSERT(std::get<0>(results_default[0]) == doc_ids[0], "TC1: Nearest result document ID mismatch.");
 
@@ -826,7 +833,7 @@ bool test_db_search_nearest() {
         TEST_LOG_RAW("--- Test Case 2: L2 Distance (no filter) ---");
         // For L2, {01,0,0} is also closest to embeddings[0] (1.0, 0.0, 0.0)
         auto results_l2 = db->searchNearest(query_emb_close_to_zero, 1, nullptr, DistanceMetric::L2);
-        TEST_ASSERT(results_l2.size() == 1, "TC2: Expected 1 nearest result for L2, got " + std::to_string(results_l2.size()));
+        TEST_ASSERT(results_l2.size() == 1, ("TC2: Expected 1 nearest result for L2, got " + std::to_string(results_l2.size())).c_str());
         TEST_ASSERT(std::get<0>(results_l2[0]) == doc_ids[0], "TC2: L2 nearest result document ID mismatch.");
 
         //TODO: commented out until further investigation can be done
@@ -844,7 +851,7 @@ bool test_db_search_nearest() {
         query_emb_ip_test[3] = 0.9f;
         query_emb_ip_test[4] = 1.0f;
         auto results_ip = db->searchNearest(query_emb_ip_test, 1, nullptr, DistanceMetric::IP);
-        TEST_ASSERT(results_ip.size() == 1, "TC3: Expected 1 nearest result for IP, got " + std::to_string(results_ip.size()));
+        TEST_ASSERT(results_ip.size() == 1, ("TC3: Expected 1 nearest result for IP, got " + std::to_string(results_ip.size())).c_str());
         // Note: With dummy data, without proper vector normalization/specific values, predicting IP nearest is hard.
         // For real vectors, embeddings[4] (0,0,0,0,1.0f) would have highest (1f) dot product with {.6f,.7f,.8f,.9f,1f}.
         // The mock `PQgetvalue` for embeddings doesn't actually produce normalized vectors
@@ -858,11 +865,12 @@ bool test_db_search_nearest() {
         TEST_LOG_RAW("--- Test Case 4: Cosine Distance with Filtering (content_type) ---");
         additional_filtering_clause contentTypeFilter =
             [](const std::string& r_alias, const std::string& d_alias, const std::string& ec_alias) {
+            (void)r_alias; (void)ec_alias; // Suppress unused warnings
             return d_alias + ".content_type = 'text/plain'";
         };
         // Query for {0,0,0} again. We expect doc_ids[0] (text/plain), doc_ids[2] (text/plain), doc_ids[4] (text/plain)
         auto results_filtered_type = db->searchNearest(query_emb_close_to_zero, 5, contentTypeFilter, DistanceMetric::COSINE);
-        TEST_ASSERT(results_filtered_type.size() == 3, "TC4: Expected 3 filtered results, got " + std::to_string(results_filtered_type.size()));
+        TEST_ASSERT(results_filtered_type.size() == 3, ("TC4: Expected 3 filtered results, got " + std::to_string(results_filtered_type.size())).c_str());
         for (const auto& res : results_filtered_type) {
             std::string retrieved_doc_id = std::get<0>(res);
             auto it = std::find(doc_ids.begin(), doc_ids.end(), retrieved_doc_id);
@@ -876,11 +884,12 @@ bool test_db_search_nearest() {
         TEST_LOG_RAW("--- Test Case 5: L2 Distance with Filtering (document date) ---");
         additional_filtering_clause dateFilter =
             [](const std::string& r_alias, const std::string& d_alias, const std::string& ec_alias) {
+            (void)r_alias; (void)ec_alias; // Suppress unused warnings
             // Filter for documents on or after '2024-05-22' (doc_ids[2], doc_ids[3], doc_ids[4])
             return d_alias + ".date >= '2024-05-22'";
         };
         auto results_filtered_date = db->searchNearest(query_emb_close_to_zero, 5, dateFilter, DistanceMetric::L2);
-        TEST_ASSERT(results_filtered_date.size() == 3, "TC5: Expected 3 filtered results, got " + std::to_string(results_filtered_date.size()));
+        TEST_ASSERT(results_filtered_date.size() == 3, ("TC5: Expected 3 filtered results, got " + std::to_string(results_filtered_date.size())).c_str());
         // Verify document IDs. With {0,0,0} query, and L2, doc_ids[2], doc_ids[3], doc_ids[4] are ordered by distance.
         std::vector<std::string> expected_doc_ids_after_date_filter = {doc_ids[2], doc_ids[3], doc_ids[4]};
         // Sort results by doc_id to ensure consistent comparison regardless of distance order
@@ -889,7 +898,7 @@ bool test_db_search_nearest() {
         std::sort(expected_doc_ids_after_date_filter.begin(), expected_doc_ids_after_date_filter.end());
         for (size_t i = 0; i < results_filtered_date.size(); ++i) {
             TEST_ASSERT(std::get<0>(results_filtered_date[i]) == expected_doc_ids_after_date_filter[i],
-                        "TC5: Filtered result " + std::to_string(i) + " document ID mismatch.");
+                        ("TC5: Filtered result " + std::to_string(i) + " document ID mismatch.").c_str());
         }
 
 
@@ -897,15 +906,16 @@ bool test_db_search_nearest() {
         TEST_LOG_RAW("--- Test Case 6: No results with filter ---");
         additional_filtering_clause noResultsFilter =
             [](const std::string& r_alias, const std::string& d_alias, const std::string& ec_alias) {
+            (void)r_alias; (void)ec_alias; // Suppress unused warnings
             return d_alias + ".content_type = 'non-existent-type'";
         };
         auto results_no_match = db->searchNearest(query_emb_close_to_zero, 5, noResultsFilter, DistanceMetric::COSINE);
-        TEST_ASSERT(results_no_match.empty(), "TC6: Expected 0 results with no-match filter, got " + std::to_string(results_no_match.size()));
+        TEST_ASSERT(results_no_match.empty(), ("TC6: Expected 0 results with no-match filter, got " + std::to_string(results_no_match.size())).c_str());
 
 
         db->disconnect();
     } catch (const std::exception& e) {
-        TEST_ASSERT(false, "Exception during searchNearest test: " + std::string(e.what()));
+        TEST_ASSERT(false, ("Exception during searchNearest test: " + std::string(e.what())).c_str());
     }
     TEST_SUCCESS("DB: searchNearest");
     return true;
