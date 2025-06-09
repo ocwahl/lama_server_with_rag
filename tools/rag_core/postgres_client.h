@@ -64,12 +64,7 @@ public:
     // Search
     // The tuple return type is updated to reflect the new column types and order,
     // especially for the crypto-related fields.
-    std::vector<std::tuple<std::string, std::vector<float>, std::string, int, int,
-                           ecc256_public_key, ecc256_public_key, // controller_public_key, encryption_public_key
-                           std::string, std::string, std::string, std::string, int, // Document metadata
-                           std::vector<uint8_t>, aes_gcm_tag, aes_gcm_nonce, // encrypted_content, tag, nonce
-                           ecc256_public_key //ephemereal_pk
-                           >> searchNearest(const std::vector<float>& query_embedding, int k, const additional_filtering_clause& filter_clause = nullptr, DistanceMetric distance_metric = DistanceMetric::COSINE );
+    std::vector<nearest_result> searchNearest(const std::vector<float>& query_embedding, int n_retrievals, const additional_filtering_clause& filter_clause = nullptr, DistanceMetric distance_metric = DistanceMetric::COSINE );
 
 
     // Crypto functions - now using CryptoUtils

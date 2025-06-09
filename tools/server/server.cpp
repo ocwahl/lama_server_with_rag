@@ -4472,12 +4472,14 @@ int main(int argc, char ** argv) {
             // create and queue the reranking task
             std::vector<std::string> documents;
             if (!nearest_chunks.empty()) {
+                int pg_rank = 1;
                 for (const auto& chunk : nearest_chunks) {
                     std::vector<uint8_t> retrieved_encrypted_content_default = std::get<12>(chunk);
                     aes_gcm_tag retrieved_tag_default = std::get<13>(chunk);
                     aes_gcm_nonce retrieved_nonce_default = std::get<14>(chunk);
                     ecc256_public_key retrieved_ephemeral_pk_default = std::get<15>(chunk);
                     ecc256_public_key retrieved_recipient_pk_default = std::get<6>(chunk);
+                    auto distance = std::get<16>(chunk);
                     if(retrieved_recipient_pk_default != recipient_pk)
                     {
                         std::cerr << "mismatching recipient pk" << std::endl;
@@ -4491,13 +4493,22 @@ int main(int argc, char ** argv) {
                         std::cerr << "rag entry is corrupted and does not decrypt" << std::endl;
                         continue;
                     }
-                    documents.push_back(std::string(std::begin(decrypted_content_default),std::end(decrypted_content_default)));
+                    std::string decrypted_chunk(std::begin(decrypted_content_default),std::end(decrypted_content_default));
+                    std::cerr << "chunk[" << pg_rank << "] at distance[" << distance << "] = \n"<< decrypted_chunk.c_str() << std::endl;
+                    documents.push_back(decrypted_chunk);
+                    pg_rank++;
                 }
+                for(int i=0;i<10;i++)
+                    std::cerr << "=======================================================================================" << std::endl;
             }
 
             std::cerr<<"within those " << nearest_chunks.size() << " potential chunks to use for augmnentation, "<< documents.size() <<" did decrypt" << std::endl; //TODO: remove
             if(!use_reranking)
-                std::cerr<<"will NOT rerank " << std::endl; //TODO: remove
+                {
+                    std::cerr<<"will NOT rerank " << std::endl; //TODO: remove
+                    if(num_max_augmentations < num_chunks_to_retrieve)
+                        documents.resize(num_max_augmentations);
+                }
             else
             {
                 std::cerr<<" using reranking"<<std::endl;
@@ -5140,13 +5151,14 @@ int main(int argc, char ** argv) {
         ecc256_private_key recipient_private_key_to_insert;
         std::shared_ptr<rag_database> rag_db;
 
-        if (body.count("rag_insertion_params")) {
-            perform_rag_insertion = true; // Flag to enable RAG insertion
-            const std::string db_user = json_value(body, "user", std::string("postgres"));
-            const std::string db_password = json_value(body, "password", std::string("admin"));
-            const std::string db_host = json_value(body, "host", std::string("localhost"));
-            int db_port = json_value(body, "port", (int)5432);
-            const std::string db_name = json_value(body, "name", std::string("klave_rag"));
+        if (body.count("rag_connection")) {
+            const auto & rag_connection = body.at("rag_connection");
+            const std::string db_user = json_value(rag_connection, "user", std::string("postgres"));
+            const std::string db_password = json_value(rag_connection, "password", std::string("admin"));
+            const std::string db_host = json_value(rag_connection, "host", std::string("localhost"));
+            int db_port = json_value(body, "rag_connection", (int)5432);
+            const std::string db_name = json_value(rag_connection, "name", std::string("klave_rag"));
+            std::cerr<<"rag_connection provided:" << rag_connection.dump(-1) << std::endl;
 
             rag_db = create_rag_database(db_host, db_port, db_name);
             try {
@@ -5156,9 +5168,12 @@ int main(int argc, char ** argv) {
                 error = true;
                 return; // Exit the lambda if connection fails
             }
+        }
             
 
 
+        if (body.count("rag_insertion_params")) {
+            perform_rag_insertion = true; // Flag to enable RAG insertion
             // 1. Handle document_id or document content
             const auto& rag_params = body.at("rag_insertion_params");
             if (rag_params.count("document_id") != 0) {

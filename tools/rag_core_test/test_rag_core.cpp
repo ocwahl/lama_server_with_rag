@@ -702,13 +702,7 @@ bool test_db_rag_entry_insertion_and_decryption() {
         // Let's update the test to reflect this.
 
         // Re-defining the tuple structure for clarity in test, assuming rag_database.h is updated
-        using SearchResultTuple = std::tuple<
-            std::string, std::vector<float>, std::string, int, int, // 0-4: doc_id, embedding, hash, offset, length
-            ecc256_public_key, ecc256_public_key, // 5-6: controller_pk, encryption_pk (recipient's)
-            std::string, std::string, std::string, std::string, int, // 7-11: doc_date, doc_version, doc_content_type, doc_url, doc_length
-            std::vector<uint8_t>, aes_gcm_tag, aes_gcm_nonce, // 12-14: encrypted_content, tag, nonce
-            ecc256_public_key // 15: ephemeral_public_key
-        >;
+        using SearchResultTuple = rag_database::nearest_result;
 
         // Re-cast the result_tuple to the expected full type
         const SearchResultTuple& full_result_tuple = reinterpret_cast<const SearchResultTuple&>(result_tuple);

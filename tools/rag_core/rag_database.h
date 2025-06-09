@@ -98,41 +98,27 @@ public:
     // (document_id, embedding, hash, offset, length, controller_public_key, encryption_public_key (recipient's),
     //  doc_date, doc_version, doc_content_type, doc_url, doc_length,
     //  encrypted_content, aes_gcm_tag, aes_gcm_nonce)
-    virtual std::vector<std::tuple<std::string, std::vector<float>, std::string, int, int,
-                                   ecc256_public_key, ecc256_public_key, // controller_public_key, encryption_public_key (recipient's)
-                                   std::string, std::string, std::string, std::string, int, // Document metadata
-                                   std::vector<uint8_t>, aes_gcm_tag, aes_gcm_nonce, // encrypted_content, tag, nonce
-                                   ecc256_public_key //ephemereal_pk
-                                   >>
-    searchNearest(const std::vector<float>& query_embedding, int k, const additional_filtering_clause& filter_clause = nullptr, DistanceMetric distance_metric = DistanceMetric::COSINE) = 0;
+    using nearest_result = std::tuple<std::string, std::vector<float>, std::string, int, int,
+                           ecc256_public_key, ecc256_public_key, // controller_public_key, encryption_public_key
+                           std::string, std::string, std::string, std::string, int, // Document metadata
+                           std::vector<uint8_t>, aes_gcm_tag, aes_gcm_nonce, // encrypted_content, tag, nonce
+                           ecc256_public_key, //ephemereal_pk
+                           float //distance
+                           >;
+    virtual std::vector<nearest_result>
+    searchNearest(const std::vector<float>& query_embedding, int n_retrievals, const additional_filtering_clause& filter_clause = nullptr, DistanceMetric distance_metric = DistanceMetric::COSINE) = 0;
 
     // // Search methods below also need their return types updated to match searchNearest
-    // virtual std::vector<std::tuple<std::string, std::vector<float>, std::string, int, int,
-    //                                ecc256_public_key, ecc256_public_key,
-    //                                std::string, std::string, std::string, std::string, int,
-    //                                std::vector<uint8_t>, aes_gcm_tag, aes_gcm_nonce
-    //                                >>
+    // virtual std::vector<nearest_result>
     // searchByControllerKey(const std::string& controller_key) = 0; // Parameter remains string (hex)
 
-    // virtual std::vector<std::tuple<std::string, std::vector<float>, std::string, int, int,
-    //                                ecc256_public_key, ecc256_public_key,
-    //                                std::string, std::string, std::string, std::string, int,
-    //                                std::vector<uint8_t>, aes_gcm_tag, aes_gcm_nonce
-    //                                >>
+    // virtual std::vector<nearest_result>
     // searchByEncryptionKey(const std::string& encryption_key) = 0; // Parameter remains string (hex)
 
-    // virtual std::vector<std::tuple<std::string, std::vector<float>, std::string, int, int,
-    //                                ecc256_public_key, ecc256_public_key,
-    //                                std::string, std::string, std::string, std::string, int,
-    //                                std::vector<uint8_t>, aes_gcm_tag, aes_gcm_nonce
-    //                                >>
+    // virtual std::vector<nearest_result>
     // searchByDocumentContentType(const std::string& content_type) = 0;
 
-    // virtual std::vector<std::tuple<std::string, std::vector<float>, std::string, int, int,
-    //                                ecc256_public_key, ecc256_public_key,
-    //                                std::string, std::string, std::string, std::string, int,
-    //                                std::vector<uint8_t>, aes_gcm_tag, aes_gcm_nonce
-    //                                >>
+    // virtual std::vector<nearest_result>
     // searchByControllerKeyAndDocumentDateRange(const std::string& controller_key, const std::string& start_date, const std::string& end_date) = 0;
 };
 

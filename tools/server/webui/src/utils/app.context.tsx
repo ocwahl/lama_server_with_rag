@@ -235,8 +235,8 @@ export const AppContextProvider = ({
         max_tokens: config.max_tokens,
         timings_per_token: !!config.showTokensPerSecond,
         useRERANKING: config.useRERANKING, //could have been used directly from config
-        num_chunks_to_retrieve: config.num_chunks_to_retrieve, //could have been used directly from config
-        num_max_augmentations: config.num_max_augmentations, //could have been used directly from config
+        n_rag_chunks: config.num_chunks_to_retrieve, //could have been used directly from config
+        n_max_augmentations: config.num_max_augmentations, //could have been used directly from config
         rag_connection: {
           searched_name: config.selected_rag_connection_name,
           connection_name: getSelectedRagConnection(config).connection_name,

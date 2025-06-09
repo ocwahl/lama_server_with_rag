@@ -574,13 +574,8 @@ void postgres_client::insertRagEntry(const std::string& document_id_hash,
     PQclear(resRag);
 }
 
-std::vector<std::tuple<std::string, std::vector<float>, std::string, int, int,
-                       ecc256_public_key, ecc256_public_key, // controller_public_key, encryption_public_key
-                       std::string, std::string, std::string, std::string, int, // Document metadata
-                       std::vector<uint8_t>, aes_gcm_tag, aes_gcm_nonce, // encrypted_content, tag, nonce
-                       ecc256_public_key //ephemereal_pk
-                       >>
-postgres_client::searchNearest(const std::vector<float>& query_embedding, int k, const additional_filtering_clause& filter_clause, DistanceMetric distance_metric ) {
+std::vector<rag_database::nearest_result>
+postgres_client::searchNearest(const std::vector<float>& query_embedding, int n_retrievals, const additional_filtering_clause& filter_clause, DistanceMetric distance_metric ) {
     if (!isConnected()) {
         throw std::runtime_error("Not connected to the database.");
     }
@@ -596,12 +591,13 @@ postgres_client::searchNearest(const std::vector<float>& query_embedding, int k,
         "       r.controller_public_key, r.encryption_public_key, " // encryption_public_key is recipient's public key
         "       d.date, d.version, d.content_type, d.url, d.length AS doc_length, "
         "       ec.encrypted_content, ec.tag, ec.nonce, ec.ephemeral_public_key " // Added ephemeral_public_key
+        "," + rag_embedding_column_ + " " + distance_operator + " '" + query_vector_str + "' as distance "
         "FROM " + rag_table_name_ + " r "
         "JOIN " + document_table_name_ + " d ON r.document_id = d.document_id "
         "JOIN " + encrypted_content_table_name_ + " ec ON r.hash = ec.hash "
         + where_clause +
         "ORDER BY r." + rag_embedding_column_ + " " + distance_operator + " '" + query_vector_str + "' "
-        "LIMIT " + std::to_string(k) + ";";
+        "LIMIT " + std::to_string(n_retrievals) + ";";
 
     PGresult* res = PQexec(conn_, query.c_str());
 
@@ -613,12 +609,7 @@ postgres_client::searchNearest(const std::vector<float>& query_embedding, int k,
     }
 
     int num_rows = PQntuples(res);
-    std::vector<std::tuple<std::string, std::vector<float>, std::string, int, int,
-                           ecc256_public_key, ecc256_public_key, // controller_public_key, encryption_public_key
-                           std::string, std::string, std::string, std::string, int, // Document metadata
-                           std::vector<uint8_t>, aes_gcm_tag, aes_gcm_nonce, // encrypted_content, tag, nonce
-                           ecc256_public_key //ephemereal_pk
-                           >> results;
+    std::vector<rag_database::nearest_result> results;
 
     for (int i = 0; i < num_rows; ++i) {
         std::string doc_id_retrieved = PQgetvalue(res, i, 0);
@@ -695,9 +686,10 @@ postgres_client::searchNearest(const std::vector<float>& query_embedding, int k,
         } else {
              std::cerr << "Warning: Mismatch in ephemeral_public_key size for row " << i << ". Expected " << ephemeral_pk_bytes.size() << ", got " << ephemeral_pk_vec.size() << std::endl;
         }
+        char* distance_str = PQgetvalue(res, i, 16);
+        float distance = std::atof(distance_str);
 
-
-        results.emplace_back(
+        rag_database::nearest_result result{
             doc_id_retrieved,
             retrieved_embedding,
             hash_retrieved,
@@ -709,8 +701,10 @@ postgres_client::searchNearest(const std::vector<float>& query_embedding, int k,
             encrypted_content,
             tag_bytes,
             nonce_bytes,
-            ephemeral_pk_bytes
-        );
+            ephemeral_pk_bytes,
+            distance
+        };
+        results.emplace_back(result);
     }
 
     PQclear(res);
