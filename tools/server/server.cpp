@@ -5107,8 +5107,6 @@ int main(int argc, char ** argv) {
             return;
         }
 
-        std::cerr << "about to tokenize prompt " << std::endl;
-
         // Store the original tokenized prompts. We will not modify this vector.
         auto original_tokenized_prompts = tokenize_input_prompts(ctx_server.vocab, prompt, true, true);
         
@@ -5119,7 +5117,6 @@ int main(int argc, char ** argv) {
                 return;
             }
         }
-        std::cerr << "tokenization of prompt .... done : " << original_tokenized_prompts[0].size() <<" tokens" << std::endl;
 
         // --- NEW CHUNKING AND TASK CREATION LOGIC ---
         // This will hold the actual token chunks that we send to the embedding model
@@ -5155,25 +5152,21 @@ int main(int argc, char ** argv) {
             {
                 current_embedding_chunks.push_back(llama_tokens(std::begin(current_prompt_tokens)+(last_chunk_pos-last_chunk_size),std::end(current_prompt_tokens)));
                 last_chunk_pos -= last_chunk_size;
-                std::cerr<<"last chunk sz : " << last_chunk_size << "now at pos:" << last_chunk_pos <<std::endl;
             }
             while(last_chunk_pos > ideal_stream_size)
             {
                 current_embedding_chunks.push_back(llama_tokens(std::begin(current_prompt_tokens)+(last_chunk_pos-step_size_for_brutal_chunking),std::begin(current_prompt_tokens)+last_chunk_pos));
                 last_chunk_pos -= step_size_for_brutal_chunking;
-                std::cerr<<"middle chunk sz : " << current_embedding_chunks.back().size() << "now at pos:" << last_chunk_pos <<std::endl;
             }
             if(last_chunk_pos)
             {
                 current_embedding_chunks.push_back(llama_tokens(std::begin(current_prompt_tokens),std::begin(current_prompt_tokens)+last_chunk_pos));
                 last_chunk_pos = 0;
-                std::cerr<<"first chunk sz : " << current_embedding_chunks.back().size() << "now at pos:" << last_chunk_pos <<std::endl;
             }
             std::reverse(current_embedding_chunks.begin(), current_embedding_chunks.end());
             for(auto & chunk : current_embedding_chunks)
                 embedding_chunks.push_back(std::move(chunk));
         }
-        std::cerr<< "tasks to be created" << std::endl;
         // Now, queue tasks based on the `embedding_chunks`
         std::unordered_set<int> task_ids_to_wait_for; // Use a new set for unique task IDs
         std::vector<server_task> tasks;
@@ -5187,19 +5180,14 @@ int main(int argc, char ** argv) {
             task.index         = i; // This index refers to the embedding_chunks vector
             task.prompt_tokens = server_tokens(embedding_chunks[i], ctx_server.mctx != nullptr);
             task.params.oaicompat = OAICOMPAT_TYPE_NONE;
-            std::cerr << "task#" << i << " created" << std::endl;
-            if(i>0)
-                task.params.n_discard = embedding_chunks[i].size();
 
             task_ids_to_wait_for.insert(task.id); // Add the new unique ID
             // task_id_to_chunk_info[task.id] = {original_prompt_indices[i], embedding_chunks[i]}; // Store mapping
             tasks.push_back(std::move(task));
         }
-        std::cerr<< "tasks created" << std::endl;
 
         ctx_server.queue_results.add_waiting_tasks(tasks);
         ctx_server.queue_tasks.post(std::move(tasks));
-        std::cerr<< "tasks dispatched" << std::endl;
         // --- END NEW CHUNKING AND TASK CREATION LOGIC ---
 
 
