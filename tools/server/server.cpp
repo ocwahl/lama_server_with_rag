@@ -2738,6 +2738,41 @@ struct server_context {
         result_handler(results);
     }
 
+    // receive the results from task(s)
+    void receive_streamed_results(
+            const std::unordered_set<int> & id_tasks,
+            const std::function<void(server_task_result_ptr&)> & result_handler,
+            const std::function<void(json)> & error_handler,
+            const std::function<bool()> & is_connection_closed) {
+        for (int i = 0; i < (int)id_tasks.size(); i++) {
+            server_task_result_ptr result = queue_results.recv_with_timeout(id_tasks, HTTP_POLLING_SECONDS);
+
+            if (is_connection_closed()) {
+                cancel_tasks(id_tasks);
+                return;
+            }
+
+            if (result == nullptr) {
+                i--; // retry
+                continue;
+            }
+
+            if (result->is_error()) {
+                error_handler(result->to_json());
+                cancel_tasks(id_tasks);
+                return;
+            }
+
+            GGML_ASSERT(
+                dynamic_cast<server_task_result_cmpl_final*>(result.get()) != nullptr
+                || dynamic_cast<server_task_result_embd*>(result.get()) != nullptr
+                || dynamic_cast<server_task_result_rerank*>(result.get()) != nullptr
+            );
+            const size_t idx = result->get_index();
+            result_handler(result);
+        }
+    }
+
     // receive the results from task(s), in stream mode
     void receive_cmpl_results_stream(
             const std::unordered_set<int> & id_tasks,
@@ -5284,76 +5319,74 @@ int main(int argc, char ** argv) {
         std::cerr<< "about to receive tasks dispatched" << std::endl;
 
         // --- MODIFIED RECEIVE_MULTI_RESULTS LAMBDA ---
-        ctx_server.receive_multi_results(task_ids_to_wait_for, [&](std::vector<server_task_result_ptr> & results) {
-            std::cerr<< "receiving task results" << std::endl;
+        int task_n = 0;
+        auto all_prompt = original_tokenized_prompts[0];
+        std::vector<std::vector<float>> all_embedding;
+        int position = 0;
+        bool is_last_block = false;
+        ctx_server.receive_streamed_results(task_ids_to_wait_for, [&](server_task_result_ptr & result) {
+            std::cerr<< "receiving task#" << task_n << " results" << std::endl;
             if (error) {
                 std::cerr<<"previous error, returning" <<std::endl;
-                return; // Exit the lambda if a pre-existing error occurred
+                return false; // Exit the lambda if a pre-existing error occurred
             }
 
             // The results vector is not necessarily ordered by task.index or original prompt order.
             // You should iterate through results and use their task IDs to retrieve original chunk info.
-            std::vector<std::vector<float>> all_embedding;
-            auto all_prompt = original_tokenized_prompts[0];
-            int position = 0;
-            bool is_last_block = false;
-            for(int task_n = 0; task_n < results.size(); task_n++) {
-                auto & res_ptr = results[task_n];
-                if (error)
-                    break;
+            if (error)
+                return false;
 
-                auto p_embeddings = dynamic_cast<server_task_result_embd*>(res_ptr.get());
-                GGML_ASSERT(p_embeddings != nullptr);
-                all_embedding.insert(all_embedding.end(),std::begin(p_embeddings->embedding),std::end(p_embeddings->embedding));
-                if(all_embedding.size() > all_prompt.size())
-                    {
-                        //std::cerr<<"all_embedding(" << all_embedding.size() << ")/all_prompts(" << all_prompt.size() << ") size mismatch!" <<std::endl;
-                        break;
-                    }
-                auto embeddinz_sz = all_embedding[0].size();
-                while(true)
+            auto p_embeddings = dynamic_cast<server_task_result_embd*>(result.get());
+            GGML_ASSERT(p_embeddings != nullptr);
+            all_embedding.insert(all_embedding.end(),std::begin(p_embeddings->embedding),std::end(p_embeddings->embedding));
+            if(all_embedding.size() > all_prompt.size())
                 {
-                    int chunk_sz = 0;
-                    if (all_embedding.size() >= internal_rag_chunk_size)
-                        chunk_sz = internal_rag_chunk_size;
-                    else if ((task_n+1) == results.size())
-                        {
-                            chunk_sz = all_embedding.size();
-                            is_last_block = true;
-                        }
-                    else
-                        break;
-                    std::vector<float> chunk_vector(embeddinz_sz);
-                    for (int32_t j = 0; j < chunk_sz; ++j)
-                        for(uint32_t dim = 0; dim < embeddinz_sz; ++dim)
-                            chunk_vector[dim] += all_embedding[j][dim];
-                    for(uint32_t dim = 0; dim < embeddinz_sz; ++dim)
-                        chunk_vector[dim] /= (float)chunk_sz;
-                    auto contents = common_detokenize(ctx_server.ctx,llama_tokens{std::begin(all_prompt),std::begin(all_prompt)+chunk_sz},false);
-
-                    std::vector<uint8_t> chunk_contents_bytes(std::begin(contents),std::end(contents));
-                    try {
-                        LOG_INF("Attempting insertion of chunk with vector.sz = %d for documentId: [%i->%i]@%s\n", (int)chunk_vector.size(), position, position+chunk_sz,documentId.c_str());
-                        rag_db->insertRagEntry(
-                            documentId,
-                            chunk_vector,
-                            chunk_contents_bytes,
-                            controller_public_key_to_insert,
-                            recipient_private_key_to_insert
-                        );
-                    } catch (const std::exception& e) {
-                        std::cerr << "Database insertion failed for documentId " << documentId << ": " << e.what() << std::endl;
-                        res_error(res, format_error_response(std::string("Database insertion error: ") + e.what(), ERROR_TYPE_SERVER));
-                        error = true;
-                        break;
-                    }
-                    responses.push_back(json {{"index", position},{"tokens_evaluated", chunk_sz}});
-                    if(is_last_block)
-                        break;
-                    position += step_size_for_brutal_chunking;
-                    all_embedding.erase(std::begin(all_embedding),std::begin(all_embedding)+step_size_for_brutal_chunking);
-                    all_prompt.erase(std::begin(all_prompt),std::begin(all_prompt)+step_size_for_brutal_chunking);
+                    //std::cerr<<"all_embedding(" << all_embedding.size() << ")/all_prompts(" << all_prompt.size() << ") size mismatch!" <<std::endl;
+                    return false;
                 }
+            auto embeddinz_sz = all_embedding[0].size();
+            while(true)
+            {
+                int chunk_sz = 0;
+                if (all_embedding.size() >= internal_rag_chunk_size)
+                    chunk_sz = internal_rag_chunk_size;
+                else if ((task_n+1) == embedding_chunks.size())
+                    {
+                        chunk_sz = all_embedding.size();
+                        is_last_block = true;
+                    }
+                else
+                    return false;
+                std::vector<float> chunk_vector(embeddinz_sz);
+                for (int32_t j = 0; j < chunk_sz; ++j)
+                    for(uint32_t dim = 0; dim < embeddinz_sz; ++dim)
+                        chunk_vector[dim] += all_embedding[j][dim];
+                for(uint32_t dim = 0; dim < embeddinz_sz; ++dim)
+                    chunk_vector[dim] /= (float)chunk_sz;
+                auto contents = common_detokenize(ctx_server.ctx,llama_tokens{std::begin(all_prompt),std::begin(all_prompt)+chunk_sz},false);
+
+                std::vector<uint8_t> chunk_contents_bytes(std::begin(contents),std::end(contents));
+                try {
+                    LOG_INF("Attempting insertion of chunk with vector.sz = %d for documentId: [%i->%i]@%s\n", (int)chunk_vector.size(), position, position+chunk_sz,documentId.c_str());
+                    rag_db->insertRagEntry(
+                        documentId,
+                        chunk_vector,
+                        chunk_contents_bytes,
+                        controller_public_key_to_insert,
+                        recipient_private_key_to_insert
+                    );
+                } catch (const std::exception& e) {
+                    std::cerr << "Database insertion failed for documentId " << documentId << ": " << e.what() << std::endl;
+                    res_error(res, format_error_response(std::string("Database insertion error: ") + e.what(), ERROR_TYPE_SERVER));
+                    error = true;
+                    return false;
+                }
+                responses.push_back(json {{"index", position},{"tokens_evaluated", chunk_sz}});
+                if(is_last_block)
+                    return  true;
+                position += step_size_for_brutal_chunking;
+                all_embedding.erase(std::begin(all_embedding),std::begin(all_embedding)+step_size_for_brutal_chunking);
+                all_prompt.erase(std::begin(all_prompt),std::begin(all_prompt)+step_size_for_brutal_chunking);
             }
         if (rag_db) {
                 try {
