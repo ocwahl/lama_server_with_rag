@@ -5107,98 +5107,8 @@ int main(int argc, char ** argv) {
             return;
         }
 
-        // Store the original tokenized prompts. We will not modify this vector.
-        auto original_tokenized_prompts = tokenize_input_prompts(ctx_server.vocab, prompt, true, true);
-        
-        for (const auto & tokens : original_tokenized_prompts) {
-            if (tokens.empty()) {
-                std::string err_message = format_error_response("Input content cannot be empty", ERROR_TYPE_INVALID_REQUEST);
-                res_error(res, err_message);
-                return;
-            }
-        }
-
-        // --- NEW CHUNKING AND TASK CREATION LOGIC ---
-        // This will hold the actual token chunks that we send to the embedding model
-        std::vector<llama_tokens> embedding_chunks;
-        std::vector<size_t> original_prompt_indices; // To map embedding_chunks back to original_tokenized_prompts
-                                                     // This is if `get_brutal_chunking` still needs the full prompt.
-                                                     // If each `embedding_chunk` is now the actual content you want to embed,
-                                                     // then you might just need the original string representation of `embedding_chunk`.
-
-        // We will store the original text content for each chunk if needed later for RAG insertion
-        // since `get_brutal_chunking` needs `chunk->contents`.
-        std::vector<std::string> original_chunk_texts;
-
-        // Define the chunking parameters that will be passed to the server
-        const size_t ideal_stream_size = 2048; // Max tokens for one embedding pass (max size of input to llama_decode within the custom task)
-        const size_t internal_rag_chunk_size = 300;   // Desired size of final RAG chunks (from get_brutal_chunking)
-        const size_t overlap_for_brutal_chunking = internal_rag_chunk_size / 3; // Overlap for get_brutal_chunking
-        const size_t step_size_for_brutal_chunking = internal_rag_chunk_size - overlap_for_brutal_chunking; // This is the 'n' in your formula
-
-
-        for (size_t i = 0; i < original_tokenized_prompts.size(); ++i) {
-            const llama_tokens& current_prompt_tokens = original_tokenized_prompts[i];
-            if(current_prompt_tokens.size() <= ideal_stream_size)
-            {
-                embedding_chunks.push_back(current_prompt_tokens);
-                continue;
-            }
-
-            std::vector<llama_tokens> current_embedding_chunks;
-            size_t last_chunk_pos = current_prompt_tokens.size();
-            const size_t last_chunk_size = (last_chunk_pos -internal_rag_chunk_size)%overlap_for_brutal_chunking;
-            if(last_chunk_size)
-            {
-                current_embedding_chunks.push_back(llama_tokens(std::begin(current_prompt_tokens)+(last_chunk_pos-last_chunk_size),std::end(current_prompt_tokens)));
-                last_chunk_pos -= last_chunk_size;
-            }
-            while(last_chunk_pos > ideal_stream_size)
-            {
-                current_embedding_chunks.push_back(llama_tokens(std::begin(current_prompt_tokens)+(last_chunk_pos-step_size_for_brutal_chunking),std::begin(current_prompt_tokens)+last_chunk_pos));
-                last_chunk_pos -= step_size_for_brutal_chunking;
-            }
-            if(last_chunk_pos)
-            {
-                current_embedding_chunks.push_back(llama_tokens(std::begin(current_prompt_tokens),std::begin(current_prompt_tokens)+last_chunk_pos));
-                last_chunk_pos = 0;
-            }
-            std::reverse(current_embedding_chunks.begin(), current_embedding_chunks.end());
-            for(auto & chunk : current_embedding_chunks)
-                embedding_chunks.push_back(std::move(chunk));
-        }
-        // Now, queue tasks based on the `embedding_chunks`
-        std::unordered_set<int> task_ids_to_wait_for; // Use a new set for unique task IDs
-        std::vector<server_task> tasks;
-        
-        // Map from task_id to its corresponding original_prompt_index and the actual chunked_token
-        //std::map<int, std::pair<size_t, llama_tokens>> task_id_to_chunk_info; 
-
-        for (size_t i = 0; i < embedding_chunks.size(); ++i) {
-            server_task task = server_task(SERVER_TASK_TYPE_EMBEDDING);
-            task.id            = ctx_server.queue_tasks.get_new_id(); // Each task gets a UNIQUE ID
-            task.index         = i; // This index refers to the embedding_chunks vector
-            task.prompt_tokens = server_tokens(embedding_chunks[i], ctx_server.mctx != nullptr);
-            task.params.oaicompat = OAICOMPAT_TYPE_NONE;
-
-            task_ids_to_wait_for.insert(task.id); // Add the new unique ID
-            // task_id_to_chunk_info[task.id] = {original_prompt_indices[i], embedding_chunks[i]}; // Store mapping
-            tasks.push_back(std::move(task));
-        }
-
-        ctx_server.queue_results.add_waiting_tasks(tasks);
-        ctx_server.queue_tasks.post(std::move(tasks));
-        // --- END NEW CHUNKING AND TASK CREATION LOGIC ---
-
-
-        // get the result
-        json responses = json::array();
-        bool error = false;
-        // current_prompt_index is no longer directly used for indexing `tokenized_prompts`
-        // as `results` will correspond to `embedding_chunks`.
-        // We'll use the mapping from `task_id_to_chunk_info`
-
         // Parameters for RAG insertion, potentially parsed from the request body
+        bool error = false;
         bool perform_rag_insertion = false;
         std::string documentId;
         ecc256_public_key controller_public_key_to_insert;
@@ -5282,6 +5192,95 @@ int main(int argc, char ** argv) {
             }
         }
 
+        // Store the original tokenized prompts. We will not modify this vector.
+        auto original_tokenized_prompts = tokenize_input_prompts(ctx_server.vocab, prompt, true, true);
+        
+        for (const auto & tokens : original_tokenized_prompts) {
+            if (tokens.empty()) {
+                std::string err_message = format_error_response("Input content cannot be empty", ERROR_TYPE_INVALID_REQUEST);
+                res_error(res, err_message);
+                return;
+            }
+        }
+
+        // --- NEW CHUNKING AND TASK CREATION LOGIC ---
+        // This will hold the actual token chunks that we send to the embedding model
+        std::vector<llama_tokens> embedding_chunks;
+        std::vector<size_t> original_prompt_indices; // To map embedding_chunks back to original_tokenized_prompts
+                                                     // This is if `get_brutal_chunking` still needs the full prompt.
+                                                     // If each `embedding_chunk` is now the actual content you want to embed,
+                                                     // then you might just need the original string representation of `embedding_chunk`.
+
+        // We will store the original text content for each chunk if needed later for RAG insertion
+        // since `get_brutal_chunking` needs `chunk->contents`.
+        std::vector<std::string> original_chunk_texts;
+
+        // Define the chunking parameters that will be passed to the server
+        const size_t ideal_stream_size = 2048; // Max tokens for one embedding pass (max size of input to llama_decode within the custom task)
+        const size_t internal_rag_chunk_size = 300;   // Desired size of final RAG chunks (from get_brutal_chunking)
+        const size_t overlap_for_brutal_chunking = internal_rag_chunk_size / 3; // Overlap for get_brutal_chunking
+        const size_t step_size_for_brutal_chunking = internal_rag_chunk_size - overlap_for_brutal_chunking; // This is the 'n' in your formula
+
+
+        for (size_t i = 0; i < original_tokenized_prompts.size(); ++i) {
+            const llama_tokens& current_prompt_tokens = original_tokenized_prompts[i];
+            if(current_prompt_tokens.size() <= ideal_stream_size)
+            {
+                embedding_chunks.push_back(current_prompt_tokens);
+                continue;
+            }
+
+            std::vector<llama_tokens> current_embedding_chunks;
+            size_t last_chunk_pos = current_prompt_tokens.size();
+            const size_t last_chunk_size = (last_chunk_pos -internal_rag_chunk_size)%overlap_for_brutal_chunking;
+            if(last_chunk_size)
+            {
+                current_embedding_chunks.push_back(llama_tokens(std::begin(current_prompt_tokens)+(last_chunk_pos-last_chunk_size),std::end(current_prompt_tokens)));
+                last_chunk_pos -= last_chunk_size;
+            }
+            while(last_chunk_pos > ideal_stream_size)
+            {
+                current_embedding_chunks.push_back(llama_tokens(std::begin(current_prompt_tokens)+(last_chunk_pos-step_size_for_brutal_chunking),std::begin(current_prompt_tokens)+last_chunk_pos));
+                last_chunk_pos -= step_size_for_brutal_chunking;
+            }
+            if(last_chunk_pos)
+            {
+                current_embedding_chunks.push_back(llama_tokens(std::begin(current_prompt_tokens),std::begin(current_prompt_tokens)+last_chunk_pos));
+                last_chunk_pos = 0;
+            }
+            std::reverse(current_embedding_chunks.begin(), current_embedding_chunks.end());
+            for(auto & chunk : current_embedding_chunks)
+                embedding_chunks.push_back(std::move(chunk));
+        }
+        // Now, queue tasks based on the `embedding_chunks`
+        std::unordered_set<int> task_ids_to_wait_for; // Use a new set for unique task IDs
+        std::vector<server_task> tasks;
+        
+
+        for (size_t i = 0; i < embedding_chunks.size(); ++i) {
+            server_task task = server_task(SERVER_TASK_TYPE_EMBEDDING);
+            task.id            = ctx_server.queue_tasks.get_new_id(); // Each task gets a UNIQUE ID
+            task.index         = i; // This index refers to the embedding_chunks vector
+            task.prompt_tokens = server_tokens(embedding_chunks[i], ctx_server.mctx != nullptr);
+            task.params.oaicompat = OAICOMPAT_TYPE_NONE;
+
+            task_ids_to_wait_for.insert(task.id); // Add the new unique ID
+            tasks.push_back(std::move(task));
+        }
+
+        ctx_server.queue_results.add_waiting_tasks(tasks);
+        ctx_server.queue_tasks.post(std::move(tasks));
+        // --- END NEW CHUNKING AND TASK CREATION LOGIC ---
+
+
+        // get the result
+        json responses = json::array();
+        // current_prompt_index is no longer directly used for indexing `tokenized_prompts`
+        // as `results` will correspond to `embedding_chunks`.
+        // We'll use the mapping from `task_id_to_chunk_info`
+
+
+
         std::cerr<< "about to receive tasks dispatched" << std::endl;
 
         // --- MODIFIED RECEIVE_MULTI_RESULTS LAMBDA ---
@@ -5294,38 +5293,50 @@ int main(int argc, char ** argv) {
 
             // The results vector is not necessarily ordered by task.index or original prompt order.
             // You should iterate through results and use their task IDs to retrieve original chunk info.
-            std::vector<server_task_result_embd*> all_embeddings_result;
-            all_embeddings_result.reserve(results.size());
-            for (auto & res_ptr : results) {
-                if (error) break;
+            std::vector<std::vector<float>> all_embedding;
+            auto all_prompt = original_tokenized_prompts[0];
+            int position = 0;
+            bool is_last_block = false;
+            for(int task_n = 0; task_n < results.size(); task_n++) {
+                auto & res_ptr = results[task_n];
+                if (error)
+                    break;
 
                 auto p_embeddings = dynamic_cast<server_task_result_embd*>(res_ptr.get());
                 GGML_ASSERT(p_embeddings != nullptr);
-                all_embeddings_result.push_back(p_embeddings);
-            }
+                all_embedding.insert(all_embedding.end(),std::begin(p_embeddings->embedding),std::end(p_embeddings->embedding));
+                if(all_embedding.size() > all_prompt.size())
+                    {
+                        //std::cerr<<"all_embedding(" << all_embedding.size() << ")/all_prompts(" << all_prompt.size() << ") size mismatch!" <<std::endl;
+                        break;
+                    }
+                auto embeddinz_sz = all_embedding[0].size();
+                while(true)
+                {
+                    int chunk_sz = 0;
+                    if (all_embedding.size() >= internal_rag_chunk_size)
+                        chunk_sz = internal_rag_chunk_size;
+                    else if ((task_n+1) == results.size())
+                        {
+                            chunk_sz = all_embedding.size();
+                            is_last_block = true;
+                        }
+                    else
+                        break;
+                    std::vector<float> chunk_vector(embeddinz_sz);
+                    for (int32_t j = 0; j < chunk_sz; ++j)
+                        for(uint32_t dim = 0; dim < embeddinz_sz; ++dim)
+                            chunk_vector[dim] += all_embedding[j][dim];
+                    for(uint32_t dim = 0; dim < embeddinz_sz; ++dim)
+                        chunk_vector[dim] /= (float)chunk_sz;
+                    auto contents = common_detokenize(ctx_server.ctx,llama_tokens{std::begin(all_prompt),std::begin(all_prompt)+chunk_sz},false);
 
-            auto chunks = server_task_result_chunking::get_brutal_chunking(
-                    ctx_server.ctx,
-                    all_embeddings_result,
-                    original_tokenized_prompts[0],
-                    internal_rag_chunk_size,
-                    overlap_for_brutal_chunking
-                );
-            for (auto & chunk : chunks) {
-                responses.push_back(chunk->to_json_simple());
-
-                if (perform_rag_insertion) {
-                    LOG_INF("Attempting insertion of chunk with vector.sz = %d for documentId: [%i->%i]@%s\n", (int)chunk->embedding.size(), chunk->index, chunk->index+chunk->n_tokens,documentId.c_str());
-
-                    std::vector<uint8_t> chunk_contents_bytes(
-                        reinterpret_cast<const uint8_t*>(chunk->contents.data()),
-                        reinterpret_cast<const uint8_t*>(chunk->contents.data() + chunk->contents.size())
-                    );
-
+                    std::vector<uint8_t> chunk_contents_bytes(std::begin(contents),std::end(contents));
                     try {
+                        LOG_INF("Attempting insertion of chunk with vector.sz = %d for documentId: [%i->%i]@%s\n", (int)chunk_vector.size(), position, position+chunk_sz,documentId.c_str());
                         rag_db->insertRagEntry(
                             documentId,
-                            chunk->embedding,
+                            chunk_vector,
                             chunk_contents_bytes,
                             controller_public_key_to_insert,
                             recipient_private_key_to_insert
@@ -5336,9 +5347,15 @@ int main(int argc, char ** argv) {
                         error = true;
                         break;
                     }
+                    responses.push_back(json {{"index", position},{"tokens_evaluated", chunk_sz}});
+                    if(is_last_block)
+                        break;
+                    position += step_size_for_brutal_chunking;
+                    all_embedding.erase(std::begin(all_embedding),std::begin(all_embedding)+step_size_for_brutal_chunking);
+                    all_prompt.erase(std::begin(all_prompt),std::begin(all_prompt)+step_size_for_brutal_chunking);
                 }
             }
-            if (perform_rag_insertion && rag_db) {
+        if (rag_db) {
                 try {
                     rag_db->disconnect();
                 } catch (const std::exception& e) {
