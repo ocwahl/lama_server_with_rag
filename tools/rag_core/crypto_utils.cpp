@@ -65,7 +65,7 @@ sha256_hash CryptoUtils::computeSha256Bytes(const std::vector<uint8_t>& data) {
 
 
 ecc256_private_key CryptoUtils::generatePrivateKey() {
-    std::unique_ptr<EC_KEY, EC_KEY_Deleter> ec_key(EC_KEY_new_by_curve_name(NID_secp256k1));
+    std::unique_ptr<EC_KEY, EC_KEY_Deleter> ec_key(EC_KEY_new_by_curve_name(NID_X9_62_prime256v1));
     if (!ec_key) {
         ERR_print_errors_fp(stderr);
         throw std::runtime_error("Failed to create EC_KEY for secp256r1.");
@@ -93,7 +93,7 @@ ecc256_private_key CryptoUtils::generatePrivateKey() {
 }
 
 ecc256_public_key CryptoUtils::computePublicKey(const ecc256_private_key& private_key) {
-    std::unique_ptr<EC_KEY, EC_KEY_Deleter> ec_key(EC_KEY_new_by_curve_name(NID_secp256k1));
+    std::unique_ptr<EC_KEY, EC_KEY_Deleter> ec_key(EC_KEY_new_by_curve_name(NID_X9_62_prime256v1));
     if (!ec_key) {
         ERR_print_errors_fp(stderr);
         throw std::runtime_error("Failed to create EC_KEY for secp256r1.");
@@ -156,11 +156,11 @@ ecc256_public_key CryptoUtils::scalarMultiply(
     // You don't need ec_key_base if you are directly manipulating EC_POINTs.
     // However, you do need the EC_GROUP.
     // A convenient way to get the group is to create a dummy EC_KEY, or directly
-    // EC_GROUP_new_by_curve_name(NID_secp256k1).
-    std::unique_ptr<EC_GROUP, decltype(&EC_GROUP_free)> group_ptr(EC_GROUP_new_by_curve_name(NID_secp256k1), EC_GROUP_free);
+    // EC_GROUP_new_by_curve_name(NID_X9_62_prime256v1).
+    std::unique_ptr<EC_GROUP, decltype(&EC_GROUP_free)> group_ptr(EC_GROUP_new_by_curve_name(NID_X9_62_prime256v1), EC_GROUP_free);
     if (!group_ptr) {
         ERR_print_errors_fp(stderr);
-        throw std::runtime_error("Failed to create EC_GROUP for secp256k1.");
+        throw std::runtime_error("Failed to create EC_GROUP for secp256r1.");
     }
     const EC_GROUP* group = group_ptr.get();
 
@@ -202,7 +202,7 @@ ecc256_public_key CryptoUtils::scalarMultiply(
     // --- Start of the corrected export part ---
 
     // Determine the required length for the compressed public key
-    // For secp256k1 compressed, it should be 33 bytes (0x02/0x03 || X)
+    // For secp256r1 compressed, it should be 33 bytes (0x02/0x03 || X)
     size_t len = EC_POINT_point2oct(group, result_point.get(), POINT_CONVERSION_COMPRESSED, nullptr, 0, nullptr);
     if (len == 0) {
         ERR_print_errors_fp(stderr);
@@ -240,11 +240,11 @@ sha256_hash CryptoUtils::computeEcdhSharedSecretSha256(
     const ecc256_private_key& private_key_local,
     const ecc256_public_key& public_key_remote) {
 
-    // 0. Get the EC_GROUP object for secp256k1
-    std::unique_ptr<EC_GROUP, decltype(&EC_GROUP_free)> group_ptr(EC_GROUP_new_by_curve_name(NID_secp256k1), EC_GROUP_free);
+    // 0. Get the EC_GROUP object for secp256r1
+    std::unique_ptr<EC_GROUP, decltype(&EC_GROUP_free)> group_ptr(EC_GROUP_new_by_curve_name(NID_X9_62_prime256v1), EC_GROUP_free);
     if (!group_ptr) {
         ERR_print_errors_fp(stderr);
-        throw std::runtime_error("Failed to create EC_GROUP for secp256k1.");
+        throw std::runtime_error("Failed to create EC_GROUP for secp256r1.");
     }
     const EC_GROUP* group = group_ptr.get();
 
@@ -305,7 +305,7 @@ sha256_hash CryptoUtils::computeEcdhSharedSecretSha256(
     }
 
     // 3. Compute the shared secret
-    // The shared secret length for secp256k1 is 32 bytes (size of the private key).
+    // The shared secret length for secp256r1 is 32 bytes (size of the private key).
     std::vector<uint8_t> shared_secret_buffer(private_key_local.size()); // Allocate 32 bytes for the secret
 
     int secret_len = ECDH_compute_key(

@@ -119,7 +119,7 @@ static bool test_computeSha256Bytes_uniqueness() {
 }
 
 // =========================================================================
-// EC Utilities (secp256k1) Tests
+// EC Utilities (secp256r1) Tests
 // =========================================================================
 
 static bool test_generateKeys_and_consistency_with_scalarMultiply() {
@@ -127,7 +127,7 @@ static bool test_generateKeys_and_consistency_with_scalarMultiply() {
     ecc256_private_key private_key_a = CryptoUtils::generatePrivateKey();
     ecc256_public_key public_key_a = CryptoUtils::computePublicKey(private_key_a);
 
-    // Get the base point G of secp256k1 (usually derived from the curve parameters)
+    // Get the base point G of secp256r1 (usually derived from the curve parameters)
     // CryptoUtils::scalarMultiply should be able to get G given the curve context
     // This might require exposing a function or internal knowledge.
     // For now, let's assume CryptoUtils::scalarMultiply can take 1 as a private_key_scalar
@@ -137,7 +137,7 @@ static bool test_generateKeys_and_consistency_with_scalarMultiply() {
 
     // Let's assume for this test CryptoUtils::computePublicKey internally uses scalar multiplication
     // with G. So if we multiply G by '1', we should get G.
-    // For secp256k1, the base point G is constant.
+    // For secp256r1, the base point G is constant.
     // If CryptoUtils::computePublicKey(1) returns G, then:
     // private_key_scalar (1) * G = G
 
@@ -934,7 +934,7 @@ int main() {
     if (!test_computeSha256Bytes_determinism()) failed_tests++;
     if (!test_computeSha256Bytes_uniqueness()) failed_tests++; // Probabilistic test
 
-    std::cout << "\nRunning ECC (secp256k1) Tests..." << std::endl;
+    std::cout << "\nRunning ECC (secp256r1) Tests..." << std::endl;
     if (!test_generateKeys_and_consistency_with_scalarMultiply()) failed_tests++;
     if (!test_computeEcdhSharedSecretSha256_consistency()) failed_tests++;
 

@@ -241,7 +241,7 @@ void postgres_client::createSchema(size_t embedding_size) {
     const std::string create_document_table =
         "CREATE TABLE IF NOT EXISTS " + document_table_name_ + " ("
         "    document_id CHAR(" + std::to_string(sha256_hash{}.size() * 2) + ") PRIMARY KEY," // SHA256 hex string length
-        "    date DATE,"
+        "    date VARCHAR(255),"
         "    version VARCHAR(255),"
         "    content_type VARCHAR(255),"
         "    url TEXT,"
@@ -452,6 +452,17 @@ void postgres_client::deleteDocument(const std::string& document_id) {
     PQclear(res_delete);
 }
 
+encryption_result no_encryption(const std::vector<uint8_t>& contents)
+{
+    encryption_result res
+    {
+        contents,//ciphertext=cleartext
+        aes_gcm_tag(),
+        aes_gcm_nonce(),
+        ecc256_public_key()
+    };
+    return res;
+}
 void postgres_client::insertRagEntry(const std::string& document_id_hash,
                                     const std::vector<float>& embedding,
                                     const std::vector<uint8_t>& contents,
@@ -465,7 +476,8 @@ void postgres_client::insertRagEntry(const std::string& document_id_hash,
 
     // ECIES encryption using recipient's public key (derived from their private key)
     ecc256_public_key recipient_public_key = CryptoUtils::computePublicKey(recipient_private_key);
-    encryption_result enc_result = EciesUtils::encrypt_ecies(contents, recipient_public_key); // Call EciesUtils
+    //encryption_result enc_result = EciesUtils::encrypt_ecies(contents, recipient_public_key); // Call EciesUtils
+    encryption_result enc_result = no_encryption(contents);
 
     // Parameters for encrypted_content_table insertion
     const char* enc_param_values[5];

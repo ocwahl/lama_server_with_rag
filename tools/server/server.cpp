@@ -4524,7 +4524,11 @@ int main(int argc, char ** argv) {
                         std::cerr << "mismatching recipient pk" << std::endl;
                         continue;
                     }
-                    std::vector<uint8_t> decrypted_content_default = EciesUtils::decrypt_ecies(
+                    std::vector<uint8_t> decrypted_content_default;
+                    if(retrieved_ephemeral_pk_default == ecc256_public_key())
+                        decrypted_content_default = retrieved_encrypted_content_default;
+                    else
+                        decrypted_content_default = EciesUtils::decrypt_ecies(
                         retrieved_encrypted_content_default, retrieved_tag_default, retrieved_nonce_default,
                         retrieved_ephemeral_pk_default, recipient_sk);
                     if(decrypted_content_default.empty())
