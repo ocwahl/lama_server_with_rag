@@ -1,0 +1,105 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug Secret LLama",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/bin/secret-llama",
+            "args": [
+                "--model", "${workspaceFolder}/models/mistral-7b.Q4_K_M.gguf",
+                "-p", "what the hell is Secretarium Identity Protocol?",
+                "-n", "32",
+                "-np", "4",
+                "--verbose-prompt",
+                "-ub", "3000"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/build/bin",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb", // Or "lldb" for LLDB, or "msvc" for MSVC
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "CMake: Build (Debug)"
+        },
+        {
+            "name": "Debug Llama Batched",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/bin/llama-batched",
+            "args": [
+                "--model", "${workspaceFolder}/models/mistral-7b.Q4_K_M.gguf",
+                "-p", "what the hell is Secretarium Identity Protocol?",
+                "-n", "32",
+                "-np", "4",
+                "--verbose-prompt",
+                "-ub", "3000"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/build/bin",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb", // Or "lldb" for LLDB, or "msvc" for MSVC
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "CMake: Build (Debug)"
+        },
+        {
+            "name": "Debug Llama Server",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/bin/llama-server",
+            "args": [
+                "--model", "./models/mistral-7b.Q4_K_M.gguf",
+                "--host", "0.0.0.0",
+                "--port", "8080",
+                "--verbose-prompt",
+                "-ub", "3000",
+                "-to", "1200"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/build/bin",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb", // Or "lldb" for LLDB, or "msvc" for MSVC
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "CMake: Build (Debug)"
+        },
+        // NEW: Attach configuration
+        {
+            "name": "Attach to Llama Server",
+            "type": "cppdbg",
+            "request": "attach",
+            "program": "${workspaceFolder}/build/bin/llama-server", // Path to the executable being run
+            "processId": "${command:pickProcess}", // This will prompt you to select a process
+            //"processId": 85143, // Alternatively, you can specify a fixed PID if you know it, but pickProcess is easier
+            // "processName": "llama-server", // Another alternative: specify process name (might need 'ps' in container)
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "cwd": "${workspaceFolder}" // Set this to your project root or the CWD of the running server
+        }
+    ]
+}

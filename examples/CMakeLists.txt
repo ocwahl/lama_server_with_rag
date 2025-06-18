@@ -16,6 +16,7 @@ if (EMSCRIPTEN)
 else()
     add_subdirectory(batched)
     add_subdirectory(embedding)
+    add_subdirectory(secret_llama)
     add_subdirectory(eval-callback)
 
     add_subdirectory(gguf-hash)
