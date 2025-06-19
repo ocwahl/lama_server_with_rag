@@ -21,6 +21,23 @@
             "detail": "Configures the CMake project for Debug build type."
         },
         {
+            "label": "CMake: Configure (Debug with SSL)",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "-S", "${workspaceFolder}", // Source directory
+                "-B", "${workspaceFolder}/build", // Build directory
+                "-DCMAKE_BUILD_TYPE=Debug", // Set build type for configuration
+                "-DLLAMA_SERVER_SSL=ON" // Set the SSL flag here
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": "build",
+            "problemMatcher": [],
+            "detail": "Configures the project for Debug build with SSL enabled for llama.cpp server."
+        },
+        {
             "label": "CMake: Build (Debug)",
             "type": "shell",
             "command": "cmake",

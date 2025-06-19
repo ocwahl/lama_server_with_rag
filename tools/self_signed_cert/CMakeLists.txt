@@ -1,16 +1,16 @@
 # Define the target name for your new dynamic library
-set(TARGET_LIB self_signed)
+set(TARGET_LIB self_signed_cert)
 
 # Define the source files for the library
 set(LIB_SRCS
     self_signed.h
     self_signed.cpp
-    main.cpp
+    # main.cpp
 )
 
 # Add the dynamic library
-#add_library(${TARGET_LIB} SHARED ${LIB_SRCS})
-add_executable(${TARGET_LIB} ${LIB_SRCS})
+add_library(${TARGET_LIB} SHARED ${LIB_SRCS})
+# add_executable(${TARGET_LIB} ${LIB_SRCS})
 
 
 # --- OpenSSL ---

@@ -20,7 +20,7 @@ void self_signed::handleOpenSSLError(const std::string& message) {
 // Function to generate an ECC key pair and save it to a PEM file
 // Modified to return the generated EC_KEY*
 EC_KEY* self_signed::generateECCKeyPair(const std::string& privateKeyPath, const std::string& publicKeyPath) {
-    std::cout << "Generating ECC key pair (secp256r1)..." << std::endl;
+    std::cout << "Self-Certificate Generation: Generating ECC key pair (secp256r1)..." << std::endl;
 
     EC_KEY* ec_key = EC_KEY_new();
     if (!ec_key) {
@@ -48,45 +48,56 @@ EC_KEY* self_signed::generateECCKeyPair(const std::string& privateKeyPath, const
         handleOpenSSLError("Failed to generate EC key pair.");
         return nullptr;
     }
-    std::cout << "ECC key pair generated successfully." << std::endl;
+    std::cout << "Self-Certificate Generation: ECC key pair generated successfully." << std::endl;
 
-    // Write the private key to a PEM file
-    BIO* private_key_bio = BIO_new_file(privateKeyPath.c_str(), "w");
-    if (!private_key_bio) {
-        EC_KEY_free(ec_key);
-        EC_GROUP_free(ec_group); // Free the group here before exiting
-        handleOpenSSLError("Failed to create BIO for private key file.");
-        return nullptr;
-    }
+    if(privateKeyPath != "") {
+        // Write the private key to a PEM file
+        BIO* private_key_bio = BIO_new_file(privateKeyPath.c_str(), "w");
+        if (!private_key_bio) {
+            EC_KEY_free(ec_key);
+            EC_GROUP_free(ec_group); // Free the group here before exiting
+            handleOpenSSLError("Failed to create BIO for private key file.");
+            return nullptr;
+        }
 
-    if (PEM_write_bio_ECPrivateKey(private_key_bio, ec_key, NULL, NULL, 0, NULL, NULL) != 1) {
+        if (PEM_write_bio_ECPrivateKey(private_key_bio, ec_key, NULL, NULL, 0, NULL, NULL) != 1) {
+            BIO_free_all(private_key_bio);
+            EC_KEY_free(ec_key);
+            EC_GROUP_free(ec_group); // Free the group here before exiting
+            handleOpenSSLError("Failed to write private key to PEM file.");
+            return nullptr;
+        }
         BIO_free_all(private_key_bio);
-        EC_KEY_free(ec_key);
-        EC_GROUP_free(ec_group); // Free the group here before exiting
-        handleOpenSSLError("Failed to write private key to PEM file.");
-        return nullptr;
+        std::cout << "Self-Certificate Generation: Private key saved to: " << privateKeyPath << std::endl;
     }
-    BIO_free_all(private_key_bio);
-    std::cout << "Private key saved to: " << privateKeyPath << std::endl;
-
-    // Write the public key to a PEM file (optional, but often useful)
-    BIO* public_key_bio = BIO_new_file(publicKeyPath.c_str(), "w");
-    if (!public_key_bio) {
-        EC_KEY_free(ec_key);
-        EC_GROUP_free(ec_group); // Free the group here before exiting
-        handleOpenSSLError("Failed to create BIO for public key file.");
-        return nullptr;
+    else {
+        std::cout << "Self-Certificate Generation: Private key not saved (path is empty)" << std::endl;
     }
 
-    if (PEM_write_bio_EC_PUBKEY(public_key_bio, ec_key) != 1) {
+    if(publicKeyPath != "") {
+
+        // Write the public key to a PEM file (optional, but often useful)
+        BIO* public_key_bio = BIO_new_file(publicKeyPath.c_str(), "w");
+        if (!public_key_bio) {
+            EC_KEY_free(ec_key);
+            EC_GROUP_free(ec_group); // Free the group here before exiting
+            handleOpenSSLError("Self-Certificate Generation: Failed to create BIO for public key file.");
+            return nullptr;
+        }
+
+        if (PEM_write_bio_EC_PUBKEY(public_key_bio, ec_key) != 1) {
+            BIO_free_all(public_key_bio);
+            EC_KEY_free(ec_key);
+            EC_GROUP_free(ec_group); // Free the group here before exiting
+            handleOpenSSLError("Self-Certificate Generation: Failed to write public key to PEM file.");
+            return nullptr;
+        }
         BIO_free_all(public_key_bio);
-        EC_KEY_free(ec_key);
-        EC_GROUP_free(ec_group); // Free the group here before exiting
-        handleOpenSSLError("Failed to write public key to PEM file.");
-        return nullptr;
+        std::cout << "Self-Certificate Generation: Public key saved to: " << publicKeyPath << std::endl;
     }
-    BIO_free_all(public_key_bio);
-    std::cout << "Public key saved to: " << publicKeyPath << std::endl;
+    else {
+        std::cout << "Self-Certificate Generation: Public key not saved (path not provided) " << std::endl;
+    }
 
     // The EC_GROUP is now owned by EC_KEY, so don't free it separately here.
     // EC_KEY_free will free the associated group.
@@ -101,11 +112,11 @@ EC_KEY* self_signed::generateECCKeyPair(const std::string& privateKeyPath, const
 // Function to create a self-signed certificate
 bool self_signed::createSelfSignedCertificate(EC_KEY* ec_key, const std::string& certPath, const std::string& commonName) {
     if (!ec_key) {
-        std::cerr << "Error: EC_KEY is null, cannot create certificate." << std::endl;
+        std::cerr << "Self-Certificate Generation: Error: EC_KEY is null, cannot create certificate." << std::endl;
         return false;
     }
 
-    std::cout << "Creating self-signed certificate..." << std::endl;
+    std::cout << "Self-Certificate Generation: Creating self-signed certificate..." << std::endl;
 
     X509* x509 = X509_new();
     if (!x509) {
@@ -258,11 +269,42 @@ bool self_signed::createSelfSignedCertificate(EC_KEY* ec_key, const std::string&
         return false;
     }
     BIO_free_all(cert_bio);
-    std::cout << "Self-signed certificate saved to: " << certPath << std::endl;
+    std::cout << "Self-Certificate Generation: Self-signed certificate saved to: " << certPath << std::endl;
 
     // Clean up
     X509_free(x509);
 
     return true;
 }
+
+bool self_signed::createKeyAndSelfSignedCertificate(const std::string& privateKeyPath, const std::string& publicKeyPath, const std::string& certPath, const std::string& commonName)
+{
+    // Initialize OpenSSL error handling
+    ERR_load_crypto_strings();
+    OpenSSL_add_all_algorithms(); // Loads all algorithms, including EC and SHA256
+    bool success = false;
+
+
+    EC_KEY* ec_key = self_signed::generateECCKeyPair(privateKeyPath, publicKeyPath);
+
+    if (ec_key) {
+        if (self_signed::createSelfSignedCertificate(ec_key, certPath, commonName)) {
+            std::cout << "Self-signed certificate creation complete." << std::endl;
+            success = true;
+        } else {
+            std::cerr << "Self-signed certificate creation failed." << std::endl;
+        }
+        EC_KEY_free(ec_key); // Free the EC_KEY returned by generateECCKeyPair
+    } else {
+        std::cerr << "Self-Certificate Generation: Key pair generation failed, cannot create certificate." << std::endl;
+    }
+
+
+    // Clean up OpenSSL
+    EVP_cleanup();
+    ERR_free_strings();
+
+    return success;
+}
+
 

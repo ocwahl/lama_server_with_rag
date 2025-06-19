@@ -2,6 +2,26 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Debug self sign",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/bin/self_signed_cert",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/build/bin",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb", // Or "lldb" for LLDB, or "msvc" for MSVC
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "CMake: Build (Debug)"
+        },
+        {
             "name": "Debug Secret LLama",
             "type": "cppdbg",
             "request": "launch",
@@ -61,12 +81,15 @@
             "request": "launch",
             "program": "${workspaceFolder}/build/bin/llama-server",
             "args": [
-                "--model", "./models/mistral-7b.Q4_K_M.gguf",
+                "--model", "${workspaceFolder}/models/mistral-7b.Q4_K_M.gguf",
                 "--host", "0.0.0.0",
                 "--port", "8080",
                 "--verbose-prompt",
                 "-ub", "3000",
-                "-to", "1200"
+                "-to", "1200",
+                "--ssl-self-certify", "localhost",
+                "--ssl-key-file", "private_key.pem",
+                "--ssl-cert-file", "self_certificate.pem",
             ],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}/build/bin",

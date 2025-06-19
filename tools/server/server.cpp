@@ -34,6 +34,7 @@
 
 #include "rag_database.h"
 #include "postgres_client.h"
+#include "self_signed.h"
 
 std::shared_ptr<postgres_client> rag_db_ = nullptr;
 std::shared_ptr<rag_database> create_rag_database(const std::string & host_name, int port, const std::string & db_name)
@@ -3730,6 +3731,15 @@ int main(int argc, char ** argv) {
     std::unique_ptr<httplib::Server> svr;
 #ifdef CPPHTTPLIB_OPENSSL_SUPPORT
     if (params.ssl_file_key != "" && params.ssl_file_cert != "") {
+        if(params.ssl_self_cert_common != "")
+        {
+            if(!self_signed::createKeyAndSelfSignedCertificate(params.ssl_file_key,"",params.ssl_file_cert,params.ssl_self_cert_common)) {
+                    LOG_INF("Self-certification failed\n");
+                } else {
+                    LOG_INF("Self-certification successful\n");
+                }
+
+        }
         LOG_INF("Running with SSL: key = %s, cert = %s\n", params.ssl_file_key.c_str(), params.ssl_file_cert.c_str());
         svr.reset(
             new httplib::SSLServer(params.ssl_file_cert.c_str(), params.ssl_file_key.c_str())

@@ -1,6 +1,6 @@
 set(TARGET llama-server)
 
-option(LLAMA_SERVER_SSL "Build SSL support for the server" OFF)
+# option(LLAMA_SERVER_SSL "Build SSL support for the server" OFF)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR})
 
@@ -38,10 +38,10 @@ target_include_directories(${TARGET} PRIVATE ../llava)
 target_include_directories(${TARGET} PRIVATE ${CMAKE_SOURCE_DIR})
 
 # Link to the rag_core library
-target_include_directories(${TARGET} PRIVATE ${CMAKE_SOURCE_DIR}/rag_core)
+target_include_directories(${TARGET} PRIVATE ${CMAKE_SOURCE_DIR}/rag_core ${CMAKE_SOURCE_DIR}/tools/self_signed_cert)
 
 # Link the server executable to your new dynamic library
-target_link_libraries(${TARGET} PRIVATE common mtmd ${CMAKE_THREAD_LIBS_INIT} rag_core) # Link rag_core here
+target_link_libraries(${TARGET} PRIVATE common mtmd ${CMAKE_THREAD_LIBS_INIT} rag_core self_signed_cert) # Link rag_core here
 
 if (LLAMA_SERVER_SSL)
     find_package(OpenSSL REQUIRED)
