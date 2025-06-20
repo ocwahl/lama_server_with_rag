@@ -50,14 +50,26 @@ target_include_directories(${TARGET_LIB} PUBLIC
     # ${CMAKE_SOURCE_DIR}/tools/mtmd
 )
 
+# --- SGX Integration Starts Here ---
+# You need to define the path to your Intel SGX SDK installation.
+# The default path on Linux is often /opt/intel/sgxsdk
+# You might need to adjust this based on your actual installation location.
+set(SGX_SDK_PATH "/opt/intel/sgxsdk" CACHE PATH "Path to Intel SGX SDK installation")
+set(TDX_ATTEST_PATH "/usr/lib/x86_64-linux-gnu" CACHE PATH "Path to Intel TDX attest installation")
 
-# rag_core/CMakeLists.txt
-# Link libraries that rag_core depends on
-#target_link_libraries(${TARGET_LIB} PRIVATE
-#    ${PostgreSQL_LIBRARIES}
-#    ${CMAKE_THREAD_LIBS_INIT}
-#)
+if (EXISTS "${SGX_SDK_PATH}/include/sgx_urts.h") # Check if SDK path seems valid
+    message(STATUS "Intel SGX SDK found at: ${SGX_SDK_PATH}")
 
+    # Add SGX SDK include directories
+    target_include_directories(${TARGET_LIB} PRIVATE
+        ${SGX_SDK_PATH}/include
+        # ${SGX_SDK_PATH}/include/tlibc #OWL WAS HERE
+        # ${SGX_SDK_PATH}/include/libcxx #OWL WAS HERE
+    )
+else()
+    message(WARNING "Intel SGX SDK not found at ${SGX_SDK_PATH}. SGX features will not compile.")
+endif()
+# --- SGX Integration Ends Here ---
 
 
 target_compile_features(${TARGET_LIB} PRIVATE cxx_std_17)

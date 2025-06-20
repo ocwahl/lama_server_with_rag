@@ -9,6 +9,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "sgx_ttls.h"
 
 // Function to handle OpenSSL errors
 void self_signed::handleOpenSSLError(const std::string& message) {
@@ -16,6 +17,14 @@ void self_signed::handleOpenSSLError(const std::string& message) {
     ERR_print_errors_fp(stderr);
     exit(EXIT_FAILURE);
 }
+
+// std::unique_ptr<BIO,decltype(BIO_free_all)*> new_file(const std::string& fname, const std::string& rwmode="w")
+// {
+//     return std::unique_ptr<BIO,decltype(BIO_free_all)*>(BIO_new_file(fname.c_str(), rwmode.c_str()));
+// }
+
+
+
 
 // Function to generate an ECC key pair and save it to a PEM file
 // Modified to return the generated EC_KEY*
@@ -108,6 +117,16 @@ EC_KEY* self_signed::generateECCKeyPair(const std::string& privateKeyPath, const
     return ec_key; // Return the key for self-signed cert creation
 }
 
+std::vector<uint8_t> to_vector(BIO* bio)
+{
+    std::vector<uint8_t> result;
+    BUF_MEM* pub_mem = NULL;
+    BIO_get_mem_ptr(bio, &pub_mem);
+    if (!pub_mem || pub_mem->length == 0)
+        return result;
+    result.assign(reinterpret_cast<uint8_t*>(pub_mem->data), reinterpret_cast<uint8_t*>(pub_mem->data + pub_mem->length));
+    return result;
+}
 
 // Function to create a self-signed certificate
 bool self_signed::createSelfSignedCertificate(EC_KEY* ec_key, const std::string& certPath, const std::string& commonName) {
@@ -276,6 +295,79 @@ bool self_signed::createSelfSignedCertificate(EC_KEY* ec_key, const std::string&
 
     return true;
 }
+bool self_signed::createSelfSignedTdxCertificate(EC_KEY* ec_key, const std::string& certPath)
+{
+    // Convert the generated EC_KEY to EVP_PKEY
+    std::unique_ptr<EVP_PKEY, decltype(EVP_PKEY_free)*> pkey(EVP_PKEY_new(), EVP_PKEY_free);
+    if (!pkey || EVP_PKEY_set1_EC_KEY(pkey.get(), ec_key) != 1)
+        return false;
+
+    // Extract Public Key (DER format) to public_key_buffer
+    std::unique_ptr<BIO, decltype(BIO_free_all)*> pub_bio(BIO_new(BIO_s_mem()), BIO_free_all);
+    if (!pub_bio)
+        return false;
+    if (i2d_PUBKEY_bio(pub_bio.get(), pkey.get()) <= 0)
+        return false;
+    auto public_key_buffer = to_vector(pub_bio.get());
+
+    std::unique_ptr<BIO, decltype(BIO_free_all)*> priv_bio(BIO_new(BIO_s_mem()), BIO_free_all);
+    if (!priv_bio)
+        return false;
+    if (i2d_PrivateKey_bio(priv_bio.get(), pkey.get()) <= 0)
+        return false;
+    auto private_key_buffer = to_vector(priv_bio.get());
+
+
+
+    // Now call the TEE function with the generated public key
+    uint8_t* output_certificate = NULL;
+    size_t output_certificate_size = 0;
+    const unsigned char certificate_subject_name[] = "CN=Secretarium Enclave, O=Secretarium Ltd,C=GB";
+    const quote3_error_t qresult = tee_get_certificate_with_evidence(
+        certificate_subject_name,
+        private_key_buffer.data(), // If tee_get_certificate_with_evidence uses this as an output, it needs to be sized properly beforehand or reallocated internally.
+        private_key_buffer.size(), // If this is an input buffer, it will be 0, which is what led to your problem.
+        public_key_buffer.data(),  // This is the generated public key
+        public_key_buffer.size(),
+        &output_certificate,
+        &output_certificate_size);
+
+
+        if (qresult != SGX_QL_SUCCESS || output_certificate == nullptr)
+            return false;
+
+        // temporary buffer required as if d2i_x509 call is successful
+        // certificate_buffer_ptr is incremented to the byte following the parsed
+        // data. sending certificate_buffer_ptr as argument will keep
+        // output_certificate pointer undisturbed.
+        const uint8_t* certificate_buffer_ptr = output_certificate;
+        std::unique_ptr<X509, decltype(X509_free)*> x509_cert(d2i_X509(nullptr, &certificate_buffer_ptr, (long)output_certificate_size), X509_free);
+        if (x509_cert == nullptr){
+            tee_free_certificate(output_certificate);
+            return false;
+        }
+        tee_free_certificate(output_certificate);
+    std::cout << "Self-signed certificate created successfully." << std::endl;
+
+    // Write the certificate to a PEM file
+    BIO* cert_bio = BIO_new_file(certPath.c_str(), "w");
+    if (!cert_bio) {
+        handleOpenSSLError("Failed to create BIO for certificate file.");
+        return false;
+    }
+
+    if (PEM_write_bio_X509(cert_bio, x509_cert.get()) != 1) {
+        BIO_free_all(cert_bio);
+        handleOpenSSLError("Failed to write certificate to PEM file.");
+        return false;
+    }
+    BIO_free_all(cert_bio);
+    std::cout << "Self-Certificate Generation: Self-signed certificate saved to: " << certPath << std::endl;
+
+    // Clean up
+    return true;
+}
+
 
 bool self_signed::createKeyAndSelfSignedCertificate(const std::string& privateKeyPath, const std::string& publicKeyPath, const std::string& certPath, const std::string& commonName)
 {
@@ -283,24 +375,36 @@ bool self_signed::createKeyAndSelfSignedCertificate(const std::string& privateKe
     ERR_load_crypto_strings();
     OpenSSL_add_all_algorithms(); // Loads all algorithms, including EC and SHA256
     bool success = false;
+    EC_KEY* ec_key = nullptr;
 
-
-    EC_KEY* ec_key = self_signed::generateECCKeyPair(privateKeyPath, publicKeyPath);
-
-    if (ec_key) {
-        if (self_signed::createSelfSignedCertificate(ec_key, certPath, commonName)) {
-            std::cout << "Self-signed certificate creation complete." << std::endl;
-            success = true;
-        } else {
-            std::cerr << "Self-signed certificate creation failed." << std::endl;
+    while(true)
+    {
+        ec_key = self_signed::generateECCKeyPair(privateKeyPath, publicKeyPath);
+        if(!ec_key) {
+            std::cerr << "Self-Certificate Generation: Key pair generation failed, cannot create certificate." << std::endl;
+            break;
+            }
+        if(commonName == "TDX"){
+            if (self_signed::createSelfSignedTdxCertificate(ec_key, certPath)) {
+                std::cout << "Self-signed TDX certificate creation complete." << std::endl;
+                success = true;
+                break;
+                } 
+            std::cerr << "Self-signed TDX certificate creation failed." << std::endl;
+            break;
         }
-        EC_KEY_free(ec_key); // Free the EC_KEY returned by generateECCKeyPair
-    } else {
-        std::cerr << "Self-Certificate Generation: Key pair generation failed, cannot create certificate." << std::endl;
+
+        if (self_signed::createSelfSignedCertificate(ec_key, certPath, commonName)) {
+                std::cout << "Self-signed certificate creation complete." << std::endl;
+                success = true;
+                break;
+                }
+        std::cerr << "Self-signed certificate creation failed." << std::endl;
+        break;
     }
-
-
     // Clean up OpenSSL
+    if(ec_key)
+        EC_KEY_free(ec_key);
     EVP_cleanup();
     ERR_free_strings();
 
