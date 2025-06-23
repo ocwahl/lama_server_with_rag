@@ -19,6 +19,9 @@
 #include "index.html.gz.hpp"
 #include "loading.html.hpp"
 
+#include <unistd.h> // Required for getpid()
+#include <iostream>
+#include <fstream> // For reading files
 #include <atomic>
 #include <chrono>
 #include <condition_variable>
@@ -35,6 +38,7 @@
 #include "rag_database.h"
 #include "postgres_client.h"
 #include "self_signed.h"
+#include "sgx_ttls.h"
 
 std::shared_ptr<postgres_client> rag_db_ = nullptr;
 std::shared_ptr<rag_database> create_rag_database(const std::string & host_name, int port, const std::string & db_name)
@@ -3723,7 +3727,7 @@ int main(int argc, char ** argv) {
     llama_backend_init();
     llama_numa_init(params.numa);
 
-    LOG_INF("system info: n_threads = %d, n_threads_batch = %d, total_threads = %d\n", params.cpuparams.n_threads, params.cpuparams_batch.n_threads, std::thread::hardware_concurrency());
+    LOG_INF("server PID = %d, system info: n_threads = %d, n_threads_batch = %d, total_threads = %d\n", getpid(), params.cpuparams.n_threads, params.cpuparams_batch.n_threads, std::thread::hardware_concurrency());
     LOG_INF("\n");
     LOG_INF("%s\n", common_params_get_system_info(params).c_str());
     LOG_INF("\n");
@@ -5529,6 +5533,50 @@ const auto handle_rag_db_admin = [&ctx_server, &res_error, &res_ok](const httpli
         res_error(res, format_error_response(std::string("Database error: ") + e.what(), ERROR_TYPE_INTERNAL_SERVER_ERROR));
     }
 };
+
+const auto provide_quote = [&ctx_server, &params, &res_error, &res_ok](const httplib::Request& req, httplib::Response& res) {
+    try {
+        // Define the path to the pre-generated certificate file
+        // IMPORTANT: REPLACE THIS WITH YOUR ACTUAL CERTIFICATE FILE PATH
+        const std::string certFilePath = params.ssl_file_cert;
+
+        // 1. Read the certificate file content into a string or vector<char>
+        std::ifstream cert_file(certFilePath, std::ios::binary);
+        if (!cert_file.is_open()) {
+            res_error(res, format_error_response("Failed to open certificate file: " + certFilePath, ERROR_TYPE_INTERNAL_SERVER_ERROR));
+            return;
+        }
+
+        // Read the entire file into a string
+        std::string cert_content((std::istreambuf_iterator<char>(cert_file)), std::istreambuf_iterator<char>());
+        cert_file.close();
+
+        if (cert_content.empty()) {
+            res_error(res, format_error_response("Certificate file is empty: " + certFilePath, ERROR_TYPE_INTERNAL_SERVER_ERROR));
+            return;
+        }
+
+        // 2. Prepare the HTTP response
+        // You can return it as plain text (PEM) or embed it in JSON.
+        // Returning as text/plain is simpler for direct certificate download.
+        // If the client expects JSON, you can embed it as a string within JSON.
+
+        // Option A: Return as plain text (PEM format)
+        //res.set_content(cert_content, "application/x-pem-file"); // Or "text/plain"
+
+        // Option B: Return as JSON (e.g., if you want to include other info)
+        res_ok(res, json({
+            {"message", "TDX Attested Certificate retrieved successfully"},
+            {"certificate_pem", cert_content} // Embed the PEM string in JSON
+        }));
+
+        std::cout << "Successfully served TDX Attested Certificate from file: " << certFilePath << std::endl;
+
+    } catch (const std::exception& e) {
+        // Catch any other exceptions during file reading or JSON parsing
+        res_error(res, format_error_response(std::string("Error retrieving certificate: ") + e.what(), ERROR_TYPE_INTERNAL_SERVER_ERROR));
+    }
+};
 //OWL END
 
 
@@ -5725,6 +5773,7 @@ const auto handle_rag_db_admin = [&ctx_server, &res_error, &res_ok](const httpli
     svr->Post("/apply-template",      handle_apply_template);
     svr->Post("/chunking",            handle_chunking); //OWL WAS HERE
     svr->Post("/rag_db_admin",        handle_rag_db_admin); //OWL WAS HERE
+    svr->Post("/provide-quote",       provide_quote); //OWL WAS HERE
     // LoRA adapters hotswap
     svr->Get ("/lora-adapters",       handle_lora_adapters_list);
     svr->Post("/lora-adapters",       handle_lora_adapters_apply);

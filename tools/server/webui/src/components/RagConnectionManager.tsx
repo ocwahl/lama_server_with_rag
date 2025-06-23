@@ -435,6 +435,37 @@ export const RagConnectionManager: React.FC<RagConnectionManagerProps> = ({
   };
 
   // --- NEW: Function to drop schema ---
+  const handleGetQuote = async () => {
+    try {
+      const response = await fetch('/provide-quote', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          action: 'drop',
+          rag_connection: {
+            host: 'toto',
+            port: 123,
+          },
+        }),
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        alert(`Provision of TDX Quote successful: ${result.message}`);
+      } else {
+        const errorData = await response.json();
+        alert(
+          `Failed to Get TDX quote: ${errorData.message || response.statusText}`
+        );
+      }
+    } catch (error) {
+      console.error('Error getting TDX quote:', error);
+      alert('An error occurred while trying to get TDX quote.');
+    }
+  };
+  // --- NEW: Function to drop schema ---
   const handleDumpConfig = async () => {
     const body = JSON.stringify({
       rag_connections: localConfig.rag_connections,
@@ -535,6 +566,14 @@ export const RagConnectionManager: React.FC<RagConnectionManagerProps> = ({
           onClick={handleDropSchema}
         >
           Drop Schema
+        </Button>
+        <Button
+          variant="destructive"
+          size="sm"
+          className="flex-grow hover:cursor-pointer"
+          onClick={handleGetQuote}
+        >
+          Get Quote
         </Button>
         <Button
           variant="outline"
