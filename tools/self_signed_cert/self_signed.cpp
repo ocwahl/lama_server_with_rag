@@ -39,7 +39,7 @@ EC_KEY* self_signed::generateECCKeyPair(const std::string& privateKeyPath, const
         return nullptr;
     }
 
-    std::unique_ptr<EC_GROUP, decltype(EC_GROUP_free)*> ec_group(EC_GROUP_new_by_curve_name(NID_X9_62_prime256v1),EC_GROUP_free);
+    std::unique_ptr<EC_GROUP, decltype(EC_GROUP_free)*> ec_group(EC_GROUP_new_by_curve_name(NID_secp384r1),EC_GROUP_free);
     if (!ec_group) {
         handleOpenSSLError("Failed to get EC group for secp256r1.");
         return nullptr;
