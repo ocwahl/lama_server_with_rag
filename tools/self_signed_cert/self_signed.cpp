@@ -12,6 +12,8 @@
 #include "sgx_ttls.h"
 #include "sgx_quote_3.h"
 
+#define RSA_3072_PUBLIC_KEY_SIZE 650
+#define RSA_3072_PRIVATE_KEY_SIZE 3072
 
 // Function to handle OpenSSL errors
 void self_signed::handleOpenSSLError(const std::string& message) {
@@ -27,33 +29,55 @@ void self_signed::handleOpenSSLError(const std::string& message) {
 
 
 
+static int get_pkey_by_ec(EVP_PKEY *pk)
+{
+    std::unique_ptr<EVP_PKEY_CTX, decltype(EVP_PKEY_CTX_free)*> ctx(EVP_PKEY_CTX_new_id(EVP_PKEY_EC, NULL), EVP_PKEY_CTX_free);
+    if (ctx == nullptr)
+        return 1;
+    int res = EVP_PKEY_keygen_init(ctx.get());
+    if (res <= 0)
+    {
+        std::cout << "EC_generate_key failed " << res << std::endl;
+        return 1;
+    }
+
+    res = EVP_PKEY_CTX_set_ec_paramgen_curve_nid(ctx.get(), NID_secp384r1);
+    if (res <= 0)
+    {
+        std::cout << "EC_generate_key failed " << res << std::endl;
+        return 1;
+    }
+
+    /* Generate key */
+    res = EVP_PKEY_keygen(ctx.get(), &pk);
+    if (res <= 0)
+    {
+        std::cout << "EC_generate_key failed " << res << std::endl;
+        return 1;
+    }
+    return 0;
+}
+
 
 // Function to generate an ECC key pair and save it to a PEM file
 // Modified to return the generated EC_KEY*
-EC_KEY* self_signed::generateECCKeyPair(const std::string& privateKeyPath, const std::string& publicKeyPath) {
-    std::cout << "Self-Certificate Generation: Generating ECC key pair (secp256r1)..." << std::endl;
+EVP_PKEY* self_signed::generateECCKeyPair(const std::string& privateKeyPath, const std::string& publicKeyPath) {
+    size_t key_size = 48;
 
-    std::unique_ptr<EC_KEY, decltype(EC_KEY_free)*> ec_key(EC_KEY_new(),EC_KEY_free);
-    if (!ec_key) {
+    std::unique_ptr<EVP_PKEY, decltype(EVP_PKEY_free)*> pkey(EVP_PKEY_new(), EVP_PKEY_free);
+    if (!pkey) {
         handleOpenSSLError("Failed to create EC_KEY object.");
         return nullptr;
     }
 
-    std::unique_ptr<EC_GROUP, decltype(EC_GROUP_free)*> ec_group(EC_GROUP_new_by_curve_name(NID_secp384r1),EC_GROUP_free);
-    if (!ec_group) {
-        handleOpenSSLError("Failed to get EC group for secp256r1.");
+    int error_code = get_pkey_by_ec(pkey.get());
+    if (error_code != 0) {
+        handleOpenSSLError("Failed to get EC group for secp384r1.");
         return nullptr;
     }
+    //std::unique_ptr<EC_KEY, decltype(EC_KEY_free)*> ec_key(EVP_PKEY_get1_EC_KEY(pkey.get()),EC_KEY_free);
 
-    if (EC_KEY_set_group(ec_key.get(), ec_group.get()) != 1) {
-        handleOpenSSLError("Failed to set EC group to EC_KEY.");
-        return nullptr;
-    }
 
-    if (EC_KEY_generate_key(ec_key.get()) != 1) {
-        handleOpenSSLError("Failed to generate EC key pair.");
-        return nullptr;
-    }
     std::cout << "Self-Certificate Generation: ECC key pair generated successfully." << std::endl;
 
     if(privateKeyPath != "") {
@@ -64,7 +88,8 @@ EC_KEY* self_signed::generateECCKeyPair(const std::string& privateKeyPath, const
             return nullptr;
         }
 
-        if (PEM_write_bio_ECPrivateKey(private_key_bio.get(), ec_key.get(), NULL, NULL, 0, NULL, NULL) != 1) {
+        if (PEM_write_bio_PrivateKey(private_key_bio.get(), pkey.get(), NULL, NULL, 0, NULL, NULL) != 1) {
+        //if (PEM_write_bio_ECPrivateKey(private_key_bio.get(), ec_key.get(), NULL, NULL, 0, NULL, NULL) != 1) {
             handleOpenSSLError("Failed to write private key to PEM file.");
             return nullptr;
         }
@@ -83,7 +108,8 @@ EC_KEY* self_signed::generateECCKeyPair(const std::string& privateKeyPath, const
             return nullptr;
         }
 
-        if (PEM_write_bio_EC_PUBKEY(public_key_bio.get(), ec_key.get()) != 1) {
+        if (PEM_write_bio_PUBKEY(public_key_bio.get(), pkey.get()) != 1) {
+        //if (PEM_write_bio_EC_PUBKEY(public_key_bio.get(), ec_key.get()) != 1) {
             handleOpenSSLError("Self-Certificate Generation: Failed to write public key to PEM file.");
             return nullptr;
         }
@@ -92,8 +118,7 @@ EC_KEY* self_signed::generateECCKeyPair(const std::string& privateKeyPath, const
     else {
         std::cout << "Self-Certificate Generation: Public key not saved (path not provided) " << std::endl;
     }
-
-    return ec_key.release(); // Return the key for self-signed cert creation
+    return pkey.release(); // Return the key for self-signed cert creation
 }
 
 std::vector<uint8_t> to_vector(BIO* bio)
@@ -108,9 +133,9 @@ std::vector<uint8_t> to_vector(BIO* bio)
 }
 
 // Function to create a self-signed certificate
-bool self_signed::createSelfSignedCertificate(EC_KEY* ec_key, const std::string& certPath, const std::string& commonName) {
-    if (!ec_key) {
-        std::cerr << "Self-Certificate Generation: Error: EC_KEY is null, cannot create certificate." << std::endl;
+bool self_signed::createSelfSignedCertificate(EVP_PKEY* pkey, const std::string& certPath, const std::string& commonName) {
+    if (!pkey) {
+        std::cerr << "Self-Certificate Generation: Error: EVP_PKEY is null, cannot create certificate." << std::endl;
         return false;
     }
 
@@ -141,17 +166,7 @@ bool self_signed::createSelfSignedCertificate(EC_KEY* ec_key, const std::string&
     X509_gmtime_adj(X509_get_notAfter(x509.get()), 365L * 24 * 60 * 60); // Valid for 1 year
 
     // Set public key from the generated EC_KEY
-    std::unique_ptr<EVP_PKEY, decltype(EVP_PKEY_free)*> pkey(EVP_PKEY_new(), EVP_PKEY_free);
-    if (!pkey) {
-        handleOpenSSLError("Failed to create EVP_PKEY object.");
-        return false;
-    }
-    // Corrected line: Use EVP_PKEY_set1_EC_KEY to associate the EC_KEY with pkey
-    if (EVP_PKEY_set1_EC_KEY(pkey.get(), ec_key) != 1) {
-        handleOpenSSLError("Failed to set EC_KEY to EVP_PKEY.");
-        return false;
-    }
-    if (X509_set_pubkey(x509.get(), pkey.get()) != 1) {
+    if (X509_set_pubkey(x509.get(), pkey) != 1) {
         handleOpenSSLError("Failed to set public key.");
         return false;
     }
@@ -206,25 +221,9 @@ bool self_signed::createSelfSignedCertificate(EC_KEY* ec_key, const std::string&
     if (!ex) { handleOpenSSLError("Failed to create Subject Alternative Name extension."); return false; }
     X509_add_ext(x509.get(), ex.get(), -1);
 
-    // Sign the certificate with the private key
-    // Create another EVP_PKEY for signing. This is for the *private* key used to sign.
-    // It's crucial this is the private key associated with the public key already set in x509.
-    std::unique_ptr<EVP_PKEY, decltype(EVP_PKEY_free)*> signing_pkey(EVP_PKEY_new(), EVP_PKEY_free);
-    if (!signing_pkey) {
-        // Free x509 which might have taken ownership of pkey's internal key
-        // You would need careful error handling here based on OpenSSL's memory model
-        handleOpenSSLError("Failed to create EVP_PKEY for signing.");
-        return false;
-    }
-
-    // Set the EC_KEY (which contains the private key) into the new EVP_PKEY for signing
-    if (EVP_PKEY_set1_EC_KEY(signing_pkey.get(), ec_key) != 1) {
-        handleOpenSSLError("Failed to set EC_KEY to EVP_PKEY for signing.");
-        return false;
-    }
 
     // The corrected line: use the 'signing_pkey' created above
-    if (X509_sign(x509.get(), signing_pkey.get(), EVP_sha256()) <= 0) {
+    if (X509_sign(x509.get(), pkey, EVP_sha256()) <= 0) {
         handleOpenSSLError("Failed to sign X509 certificate.");
         return false;
     }
@@ -248,28 +247,28 @@ bool self_signed::createSelfSignedCertificate(EC_KEY* ec_key, const std::string&
 
     return true;
 }
-bool self_signed::createSelfSignedTdxCertificate(EC_KEY* ec_key, const std::string& certPath)
+bool self_signed::createSelfSignedTdxCertificate(EVP_PKEY* pkey, const std::string& certPath)
 {
-    // Convert the generated EC_KEY to EVP_PKEY
-    std::unique_ptr<EVP_PKEY, decltype(EVP_PKEY_free)*> pkey(EVP_PKEY_new(), EVP_PKEY_free);
-    if (!pkey || EVP_PKEY_set1_EC_KEY(pkey.get(), ec_key) != 1)
-        return false;
-
     // Extract Public Key (DER format) to public_key_buffer
+    //std::unique_ptr<EC_KEY, decltype(EC_KEY_free)*> ec_key(EVP_PKEY_get1_EC_KEY(pkey),EC_KEY_free);
     std::unique_ptr<BIO, decltype(BIO_free_all)*> pub_bio(BIO_new(BIO_s_mem()), BIO_free_all);
     if (!pub_bio)
         return false;
-    if (PEM_write_bio_PUBKEY(pub_bio.get(), pkey.get()) <= 0)
+    if (PEM_write_bio_PUBKEY(pub_bio.get(), pkey) <= 0)
+    //if (PEM_write_bio_EC_PUBKEY(pub_bio.get(), ec_key.get()) <= 0)
         return false;
     auto public_key_buffer = to_vector(pub_bio.get());
 
     std::unique_ptr<BIO, decltype(BIO_free_all)*> priv_bio(BIO_new(BIO_s_mem()), BIO_free_all);
     if (!priv_bio)
         return false;
-    if (PEM_write_bio_PrivateKey(priv_bio.get(), pkey.get(), NULL, NULL, 0, NULL, NULL) <= 0)
+    if (PEM_write_bio_PrivateKey(priv_bio.get(), pkey, NULL, NULL, 0, NULL, NULL) <= 0)
+    //if (PEM_write_bio_ECPrivateKey(priv_bio.get(), ec_key.get(), NULL, NULL, 0, NULL, NULL) <= 0)
         return false;
     auto private_key_buffer = to_vector(priv_bio.get());
 
+    public_key_buffer.resize(RSA_3072_PUBLIC_KEY_SIZE);//desperate attempt toi replicate intel buggy code
+    private_key_buffer.resize(RSA_3072_PRIVATE_KEY_SIZE);//desperate attempt toi replicate intel buggy code
 
 
     // Now call the TEE function with the generated public key
@@ -361,16 +360,16 @@ bool self_signed::createKeyAndSelfSignedCertificate(const std::string& privateKe
     ERR_load_crypto_strings();
     OpenSSL_add_all_algorithms(); // Loads all algorithms, including EC and SHA256
     bool success = false;
-    std::unique_ptr<EC_KEY, decltype(EC_KEY_free)*> ec_key(self_signed::generateECCKeyPair(privateKeyPath, publicKeyPath),EC_KEY_free);
+    std::unique_ptr<EVP_PKEY, decltype(EVP_PKEY_free)*> pkey(self_signed::generateECCKeyPair(privateKeyPath, publicKeyPath), EVP_PKEY_free);
 
     while(true)
     {
-        if(!ec_key) {
+        if(!pkey) {
             std::cerr << "Self-Certificate Generation: Key pair generation failed, cannot create certificate." << std::endl;
             break;
             }
         if(commonName == "TDX"){
-            if (self_signed::createSelfSignedTdxCertificate(ec_key.get(), certPath)) {
+            if (self_signed::createSelfSignedTdxCertificate(pkey.get(), certPath)) {
                 std::cout << "Self-signed TDX certificate creation complete." << std::endl;
                 success = true;
                 break;
@@ -379,7 +378,7 @@ bool self_signed::createKeyAndSelfSignedCertificate(const std::string& privateKe
             break;
         }
 
-        if (self_signed::createSelfSignedCertificate(ec_key.get(), certPath, commonName)) {
+        if (self_signed::createSelfSignedCertificate(pkey.get(), certPath, commonName)) {
                 std::cout << "Self-signed certificate creation complete." << std::endl;
                 success = true;
                 break;
