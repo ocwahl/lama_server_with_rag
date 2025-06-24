@@ -286,9 +286,41 @@ bool self_signed::createSelfSignedTdxCertificate(EC_KEY* ec_key, const std::stri
         &output_certificate_size);
 
 
+        std::string quote_status = "OK";
+        switch(qresult)
+        {
+            case SGX_QL_SUCCESS :  break;
+            case SGX_QL_ERROR_INVALID_PARAMETER: 
+                quote_status = "invalid parameters";
+                break;
+            case SGX_QL_ERROR_OUT_OF_MEMORY: 
+                quote_status = "out of memory";
+                break;
+            case SGX_QL_ATT_KEY_NOT_INITIALIZED: 
+                quote_status = "SGX_QL_ATT_KEY_NOT_INITIALIZED";
+                break;
+            case SGX_QL_ATT_KEY_CERT_DATA_INVALID: 
+                quote_status = "SGX_QL_ATT_KEY_CERT_DATA_INVALID";
+                break;
+            case SGX_QL_OUT_OF_EPC: 
+                quote_status = "SGX_QL_OUT_OF_EPC";
+                break;
+            case SGX_QL_ENCLAVE_LOST: 
+                quote_status = "SGX_QL_ENCLAVE_LOST";
+                break;
+            case SGX_QL_ENCLAVE_LOAD_ERROR: 
+                quote_status = "SGX_QL_ENCLAVE_LOAD_ERROR";
+                break;
+            case SGX_QL_ERROR_UNEXPECTED: 
+                quote_status = "SGX_QL_ERROR_UNEXPECTED";
+                break;
+            default: 
+                quote_status = "unchartered error";
+                break;
+        }
         if (qresult != SGX_QL_SUCCESS || output_certificate == nullptr)
             {
-                std::cerr << "tee_get_certificate_with_evidence failed : " << (qresult ^ SGX_MK_ERROR(0)) << std::endl;
+                std::cerr << "tee_get_certificate_with_evidence failed : " << quote_status.c_str() << std::endl;
                 return false;
             }
 
