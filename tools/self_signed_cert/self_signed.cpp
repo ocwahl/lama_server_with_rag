@@ -10,6 +10,8 @@
 #include <fstream>
 #include <string>
 #include "sgx_ttls.h"
+#include "sgx_quote_3.h"
+
 
 // Function to handle OpenSSL errors
 void self_signed::handleOpenSSLError(const std::string& message) {
@@ -257,14 +259,14 @@ bool self_signed::createSelfSignedTdxCertificate(EC_KEY* ec_key, const std::stri
     std::unique_ptr<BIO, decltype(BIO_free_all)*> pub_bio(BIO_new(BIO_s_mem()), BIO_free_all);
     if (!pub_bio)
         return false;
-    if (i2d_PUBKEY_bio(pub_bio.get(), pkey.get()) <= 0)
+    if (PEM_write_bio_PUBKEY(pub_bio.get(), pkey.get()) <= 0)
         return false;
     auto public_key_buffer = to_vector(pub_bio.get());
 
     std::unique_ptr<BIO, decltype(BIO_free_all)*> priv_bio(BIO_new(BIO_s_mem()), BIO_free_all);
     if (!priv_bio)
         return false;
-    if (i2d_PrivateKey_bio(priv_bio.get(), pkey.get()) <= 0)
+    if (PEM_write_bio_PrivateKey(priv_bio.get(), pkey.get(), NULL, NULL, 0, NULL, NULL) <= 0)
         return false;
     auto private_key_buffer = to_vector(priv_bio.get());
 
@@ -285,7 +287,10 @@ bool self_signed::createSelfSignedTdxCertificate(EC_KEY* ec_key, const std::stri
 
 
         if (qresult != SGX_QL_SUCCESS || output_certificate == nullptr)
-            return false;
+            {
+                std::cerr << "tee_get_certificate_with_evidence failed : " << (qresult ^ SGX_MK_ERROR(0)) << std::endl;
+                return false;
+            }
 
         // temporary buffer required as if d2i_x509 call is successful
         // certificate_buffer_ptr is incremented to the byte following the parsed
