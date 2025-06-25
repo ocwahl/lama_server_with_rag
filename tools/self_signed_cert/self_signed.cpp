@@ -408,6 +408,7 @@ EVP_PKEY* self_signed::load_private_key(const std::string& privateKeyPath)
     // BIO_new_file opens the file directly. "r" for read mode.
     std::unique_ptr<BIO, decltype(BIO_free_all)*> bio(BIO_new_file(privateKeyPath.c_str(), "r"), BIO_free_all);
     if (!bio) {
+        std::cerr << "Failed to create BIO for file: " << privateKeyPath << std::endl;
         handleOpenSSLError("Failed to create BIO for file: " + privateKeyPath);
         return nullptr;
     }
@@ -420,6 +421,7 @@ EVP_PKEY* self_signed::load_private_key(const std::string& privateKeyPath)
     EVP_PKEY* pkey = PEM_read_bio_PrivateKey(bio.get(), nullptr, 0, nullptr);
 
     if (!pkey) {
+        std::cerr << "Failed to read private key from PEM file: " << privateKeyPath << std::endl;
         handleOpenSSLError("Failed to read private key from PEM file: " + privateKeyPath);
         return nullptr; // Returns an empty unique_ptr
     }

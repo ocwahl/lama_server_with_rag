@@ -5535,15 +5535,18 @@ const auto handle_rag_db_admin = [&ctx_server, &res_error, &res_ok](const httpli
 
 const auto provide_quote = [&ctx_server, &params, &res_error, &res_ok](const httplib::Request& req, httplib::Response& res) {
     try {
+        std::cerr << "requesting attested seld-signed certificate" << std::endl;
         std::unique_ptr<EVP_PKEY, decltype(EVP_PKEY_free)*> pkey(self_signed::load_private_key(params.ssl_file_key), EVP_PKEY_free);
         if (pkey == nullptr)
         {
+            std::cerr << "requesting attested seld-signed certificate: private key is null" << std::endl;
             res_error(res, format_error_response("Failed to open private file: " + params.ssl_file_key, ERROR_TYPE_INTERNAL_SERVER_ERROR));
             return;
         }
         std::string certificate;
         if(!self_signed::createSelfSignedTdxCertificateAsString(pkey.get(), certificate))
         {
+            std::cerr << "requesting attested seld-signed certificate: createSelfSignedTdxCertificateAsString failed" << std::endl;
             res_error(res, format_error_response("Failed to generate attested certificate" , ERROR_TYPE_INTERNAL_SERVER_ERROR));
             return;
         }
@@ -5555,6 +5558,7 @@ const auto provide_quote = [&ctx_server, &params, &res_error, &res_ok](const htt
         std::cout << "Successfully served TDX Attested Certificate from private key file: " << params.ssl_file_key << std::endl;
 
     } catch (const std::exception& e) {
+        std::cerr << "Error retrieving certificate: " << e.what() << std::endl;
         // Catch any other exceptions during file reading or JSON parsing
         res_error(res, format_error_response(std::string("Error retrieving certificate: ") + e.what(), ERROR_TYPE_INTERNAL_SERVER_ERROR));
     }
