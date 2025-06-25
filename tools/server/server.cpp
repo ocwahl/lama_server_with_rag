@@ -38,7 +38,6 @@
 #include "rag_database.h"
 #include "postgres_client.h"
 #include "self_signed.h"
-#include "sgx_ttls.h"
 
 std::shared_ptr<postgres_client> rag_db_ = nullptr;
 std::shared_ptr<rag_database> create_rag_database(const std::string & host_name, int port, const std::string & db_name)
