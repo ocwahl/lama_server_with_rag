@@ -5536,41 +5536,24 @@ const auto handle_rag_db_admin = [&ctx_server, &res_error, &res_ok](const httpli
 
 const auto provide_quote = [&ctx_server, &params, &res_error, &res_ok](const httplib::Request& req, httplib::Response& res) {
     try {
-        // Define the path to the pre-generated certificate file
-        // IMPORTANT: REPLACE THIS WITH YOUR ACTUAL CERTIFICATE FILE PATH
-        const std::string certFilePath = params.ssl_file_cert;
-
-        // 1. Read the certificate file content into a string or vector<char>
-        std::ifstream cert_file(certFilePath, std::ios::binary);
-        if (!cert_file.is_open()) {
-            res_error(res, format_error_response("Failed to open certificate file: " + certFilePath, ERROR_TYPE_INTERNAL_SERVER_ERROR));
+        std::unique_ptr<EVP_PKEY, decltype(EVP_PKEY_free)*> pkey(self_signed::load_private_key(params.ssl_file_key), EVP_PKEY_free);
+        if (pkey == nullptr)
+        {
+            res_error(res, format_error_response("Failed to open private file: " + params.ssl_file_key, ERROR_TYPE_INTERNAL_SERVER_ERROR));
             return;
         }
-
-        // Read the entire file into a string
-        std::string cert_content((std::istreambuf_iterator<char>(cert_file)), std::istreambuf_iterator<char>());
-        cert_file.close();
-
-        if (cert_content.empty()) {
-            res_error(res, format_error_response("Certificate file is empty: " + certFilePath, ERROR_TYPE_INTERNAL_SERVER_ERROR));
+        std::string certificate;
+        if(!self_signed::createSelfSignedTdxCertificateAsString(pkey.get(), certificate))
+        {
+            res_error(res, format_error_response("Failed to generate attested certificate" , ERROR_TYPE_INTERNAL_SERVER_ERROR));
             return;
         }
-
-        // 2. Prepare the HTTP response
-        // You can return it as plain text (PEM) or embed it in JSON.
-        // Returning as text/plain is simpler for direct certificate download.
-        // If the client expects JSON, you can embed it as a string within JSON.
-
-        // Option A: Return as plain text (PEM format)
-        //res.set_content(cert_content, "application/x-pem-file"); // Or "text/plain"
-
-        // Option B: Return as JSON (e.g., if you want to include other info)
         res_ok(res, json({
-            {"message", "TDX Attested Certificate retrieved successfully"},
-            {"certificate_pem", cert_content} // Embed the PEM string in JSON
+            {"message", "TDX Attested Certificate generated successfully"},
+            {"certificate_pem", certificate} // Embed the PEM string in JSON
         }));
 
-        std::cout << "Successfully served TDX Attested Certificate from file: " << certFilePath << std::endl;
+        std::cout << "Successfully served TDX Attested Certificate from private key file: " << params.ssl_file_key << std::endl;
 
     } catch (const std::exception& e) {
         // Catch any other exceptions during file reading or JSON parsing

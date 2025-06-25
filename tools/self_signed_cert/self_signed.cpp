@@ -246,7 +246,9 @@ bool self_signed::createSelfSignedCertificate(EVP_PKEY* pkey, const std::string&
 
     return true;
 }
-bool self_signed::createSelfSignedTdxCertificate(EVP_PKEY* pkey, const std::string& certPath)
+
+
+bool _createSelfSignedTdxCertificate(EVP_PKEY* pkey, BIO* output)
 {
     // Extract Public Key (DER format) to public_key_buffer
     //std::unique_ptr<EC_KEY, decltype(EC_KEY_free)*> ec_key(EVP_PKEY_get1_EC_KEY(pkey),EC_KEY_free);
@@ -333,20 +335,40 @@ bool self_signed::createSelfSignedTdxCertificate(EVP_PKEY* pkey, const std::stri
         tee_free_certificate(output_certificate);
     std::cout << "Self-signed certificate created successfully." << std::endl;
 
+    if (PEM_write_bio_X509(output, x509_cert.get()) != 1) {
+        self_signed::handleOpenSSLError("Failed to write certificate to PEM file.");
+        return false;
+    }
+    // Clean up
+    return true;
+}
+
+bool self_signed::createSelfSignedTdxCertificate(EVP_PKEY* pkey, const std::string& certPath)
+{
     // Write the certificate to a PEM file
     std::unique_ptr<BIO, decltype(BIO_free_all)*> cert_bio(BIO_new_file(certPath.c_str(), "w"), BIO_free_all);
     if (!cert_bio) {
         handleOpenSSLError("Failed to create BIO for certificate file.");
         return false;
     }
+    std::cout << "Self-Certificate Generation: Self-signed certificate saved to: " << certPath << std::endl;
+    return _createSelfSignedTdxCertificate(pkey,cert_bio.get());
+}
 
-    if (PEM_write_bio_X509(cert_bio.get(), x509_cert.get()) != 1) {
-        handleOpenSSLError("Failed to write certificate to PEM file.");
+bool self_signed::createSelfSignedTdxCertificateAsString(EVP_PKEY* pkey, std::string& certificate)
+{
+        // Write the certificate to a PEM file
+    std::unique_ptr<BIO, decltype(BIO_free_all)*> cert_bio(BIO_new(BIO_s_mem()), BIO_free_all);
+    if (!cert_bio) {
+        handleOpenSSLError("Failed to create buffer.");
         return false;
     }
-    std::cout << "Self-Certificate Generation: Self-signed certificate saved to: " << certPath << std::endl;
-
-    // Clean up
+    if(!_createSelfSignedTdxCertificate(pkey,cert_bio.get())) {
+        handleOpenSSLError("Failed to create BIO for certificate file.");
+        return false;
+    }
+    auto v = to_vector(cert_bio.get());
+    certificate = std::string(std::begin(v),std::end(v));
     return true;
 }
 
@@ -365,16 +387,6 @@ bool self_signed::createKeyAndSelfSignedCertificate(const std::string& privateKe
             std::cerr << "Self-Certificate Generation: Key pair generation failed, cannot create certificate." << std::endl;
             break;
             }
-        if(commonName == "TDX"){
-            if (self_signed::createSelfSignedTdxCertificate(pkey.get(), certPath)) {
-                std::cout << "Self-signed TDX certificate creation complete." << std::endl;
-                success = true;
-                break;
-                } 
-            std::cerr << "Self-signed TDX certificate creation failed." << std::endl;
-            break;
-        }
-
         if (self_signed::createSelfSignedCertificate(pkey.get(), certPath, commonName)) {
                 std::cout << "Self-signed certificate creation complete." << std::endl;
                 success = true;
@@ -388,6 +400,31 @@ bool self_signed::createKeyAndSelfSignedCertificate(const std::string& privateKe
     ERR_free_strings();
 
     return success;
+}
+
+EVP_PKEY* self_signed::load_private_key(const std::string& privateKeyPath)
+{
+    // 1. Create a BIO object to read from the file
+    // BIO_new_file opens the file directly. "r" for read mode.
+    std::unique_ptr<BIO, decltype(BIO_free_all)*> bio(BIO_new_file(privateKeyPath.c_str(), "r"), BIO_free_all);
+    if (!bio) {
+        handleOpenSSLError("Failed to create BIO for file: " + privateKeyPath);
+        return nullptr;
+    }
+
+    // 2. Read the private key from the BIO
+    // PEM_read_bio_PrivateKey attempts to read any supported private key format
+    // (RSA, EC, DSA) from the BIO.
+    // The last three arguments are for password callbacks if the key is encrypted.
+    // For unencrypted keys, pass NULL, NULL, 0.
+    EVP_PKEY* pkey = PEM_read_bio_PrivateKey(bio.get(), nullptr, 0, nullptr);
+
+    if (!pkey) {
+        handleOpenSSLError("Failed to read private key from PEM file: " + privateKeyPath);
+        return nullptr; // Returns an empty unique_ptr
+    }
+
+    return pkey;
 }
 
 
