@@ -454,6 +454,7 @@ export const RagConnectionManager: React.FC<RagConnectionManagerProps> = ({
       if (response.ok) {
         const result = await response.json();
         alert(`Provision of TDX Quote successful: ${result.message}`);
+        alert(`Provided Quote: ${result.certificate_pem}`);
       } else {
         const errorData = await response.json();
         alert(
