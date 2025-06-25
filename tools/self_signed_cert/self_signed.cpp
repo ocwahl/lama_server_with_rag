@@ -12,8 +12,6 @@
 #include "sgx_ttls.h"
 #include "sgx_quote_3.h"
 
-#define RSA_3072_PUBLIC_KEY_SIZE 650
-#define RSA_3072_PRIVATE_KEY_SIZE 3072
 
 // Function to handle OpenSSL errors
 void self_signed::handleOpenSSLError(const std::string& message) {
@@ -129,6 +127,7 @@ std::vector<uint8_t> to_vector(BIO* bio)
     if (!pub_mem || pub_mem->length == 0)
         return result;
     result.assign(reinterpret_cast<uint8_t*>(pub_mem->data), reinterpret_cast<uint8_t*>(pub_mem->data + pub_mem->length));
+    result.push_back('\0');
     return result;
 }
 
@@ -267,8 +266,6 @@ bool self_signed::createSelfSignedTdxCertificate(EVP_PKEY* pkey, const std::stri
         return false;
     auto private_key_buffer = to_vector(priv_bio.get());
 
-    public_key_buffer.resize(RSA_3072_PUBLIC_KEY_SIZE);//desperate attempt toi replicate intel buggy code
-    private_key_buffer.resize(RSA_3072_PRIVATE_KEY_SIZE);//desperate attempt toi replicate intel buggy code
 
 
     // Now call the TEE function with the generated public key

@@ -22,7 +22,7 @@ int main() {
     std::string selfSignedCertFile = "self_signed_certificate.pem";
     std::string commonName = "localhost"; // Or your domain, e.g., "mytestserver.com"
 
-    EC_KEY* ec_key = self_signed::generateECCKeyPair(privateKeyFile, publicKeyFile);
+    EVP_PKEY* ec_key = self_signed::generateECCKeyPair(privateKeyFile, publicKeyFile);
 
     if (ec_key) {
         if (self_signed::createSelfSignedCertificate(ec_key, selfSignedCertFile, commonName)) {
