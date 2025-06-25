@@ -369,6 +369,7 @@ bool self_signed::createSelfSignedTdxCertificateAsString(EVP_PKEY* pkey, std::st
     }
     auto v = to_vector(cert_bio.get());
     certificate = std::string(std::begin(v),std::end(v));
+    std::cerr << "generated new self-signed tdx-attested certificate:" << std::endl << certificate.c_str() << std::endl;
     return true;
 }
 
