@@ -388,7 +388,15 @@ bool self_signed::createKeyAndSelfSignedCertificate(const std::string& privateKe
             std::cerr << "Self-Certificate Generation: Key pair generation failed, cannot create certificate." << std::endl;
             break;
             }
-        if (self_signed::createSelfSignedCertificate(pkey.get(), certPath, commonName)) {
+        if(commonName == "TDX")
+        {
+            if (self_signed::createSelfSignedTdxCertificate(pkey.get(), certPath)) {
+                std::cout << "Self-signed TDX certificate creation complete." << std::endl;
+                success = true;
+                break;
+                }
+        }
+        else if (self_signed::createSelfSignedCertificate(pkey.get(), certPath, commonName)) {
                 std::cout << "Self-signed certificate creation complete." << std::endl;
                 success = true;
                 break;
