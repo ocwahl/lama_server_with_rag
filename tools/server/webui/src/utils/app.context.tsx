@@ -253,7 +253,9 @@ export const AppContextProvider = ({
       // Determine the API endpoint based on useRAG
       const apiEndpoint = config.useRAG
         ? `${BASE_URL}/v1/chat/completions-rag`
-        : `${BASE_URL}/v1/chat/completions`;
+        : params.ingest
+          ? `${BASE_URL}/ingest`
+          : `${BASE_URL}/v1/chat/completions`;
 
       // send request
       const fetchResponse = await fetch(apiEndpoint, {

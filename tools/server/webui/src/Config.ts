@@ -51,6 +51,7 @@ export const CONFIG_DEFAULT = {
   pyIntepreterEnabled: false,
   useRAG: false,
   useRERANKING: false,
+  ingest: false,
   num_chunks_to_retrieve: 7,
   num_max_augmentations: 3,
   // NEW: To store the currently selected connection's name

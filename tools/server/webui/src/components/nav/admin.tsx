@@ -13,6 +13,8 @@ import { useRef } from 'react';
 import toast from 'react-hot-toast';
 import { getSelectedRagConnection } from '../../Config';
 import { useAppContext } from '../../utils/app.context';
+import { SwitchConfigToggle } from '../SwitchSpecificConfigElem';
+import { InputConfigField } from '../InputConfigField';
 
 export function NavAdmin() {
   const navigate = useNavigate();
@@ -28,8 +30,6 @@ export function NavAdmin() {
       console.log('Selected file for upload:', file.name);
 
       const toastId = toast.loading(`Processing "${file.name}"...`); // Initial toast message
-
-      // --- START DIFF ---
 
       // Define the URL for the external upload service
       const UPLOAD_SERVICE_URL =
@@ -136,8 +136,6 @@ export function NavAdmin() {
         }
         console.warn('Unsupported file type:', file.type);
       }
-
-      // --- END DIFF ---
     }
   };
 
@@ -247,6 +245,22 @@ export function NavAdmin() {
               </Button>
             </SidebarMenuButton>
           </SidebarMenuItem>
+
+          {/* switch to ingest mode */}
+          <SwitchConfigToggle configKey="ingest" labelText="Ingest Mode" />
+
+          {/* switch to rendering vectors*/}
+          <SwitchConfigToggle
+            configKey="embedding_only"
+            labelText="Embedding Only"
+          />
+
+          {/* Sampling size for the chunk*/}
+          <InputConfigField
+            configKey="chunk_sz"
+            labelText="Chunk Size"
+            type="number"
+          />
 
           {/* Hidden file input for document upload */}
           <input

@@ -5115,6 +5115,129 @@ int main(int argc, char ** argv) {
     };
 
     //OWL BEGIN
+    const auto handle_chunk_vector = [&ctx_server, &res_error, &res_ok](const httplib::Request & req, httplib::Response & res) {
+        const json body = json::parse(req.body);
+
+        // for the shape of input/content, see tokenize_input_prompts()
+        std::string aggregation_rule = "average";
+        if (body.count("aggregation_rule") != 0) {
+            aggregation_rule = body.at("aggregation_rule");
+        };
+        int aggregation_sample = 300;
+        if (body.count("aggregation_sample") != 0) {
+            aggregation_sample = body.at("aggregation_sample");
+        };
+
+        // create and queue the task
+        int n_embd = llama_model_n_embd(ctx_server.model);
+        if(aggregation_rule != "average" & aggregation_rule != "last") {
+            res_error(res, format_error_response("unsupported aggregation rule: "+aggregation_rule, ERROR_TYPE_INVALID_REQUEST));
+            return;
+        }
+        std::vector<float> embeddings;
+        if(aggregation_rule == "last") {
+            auto embeddings_ptr = llama_get_embeddings_ith(ctx_server.ctx,-1);
+            if (!embeddings_ptr) {
+                res_error(res, format_error_response("could not get last token embedding: ", ERROR_TYPE_UNAVAILABLE));
+                return;
+            }
+            embeddings = std::vector<float>(embeddings_ptr, embeddings_ptr + n_embd);
+        } else if(aggregation_rule == "average") {
+            std::vector<float> average(n_embd);
+            for(int i = -1; i >= -aggregation_sample; i--) {
+                auto embeddings_ptr = llama_get_embeddings_ith(ctx_server.ctx,i);
+                if (!embeddings_ptr) {
+                    res_error(res, format_error_response("could not get one of the token embedding in window: ", ERROR_TYPE_UNAVAILABLE));
+                    return;
+                    }
+                for(int j=0;j<n_embd;j++)
+                    average[j]+=embeddings_ptr[j];
+            }
+            for(int j=0;j<n_embd;j++)
+                average[j] /= aggregation_sample;
+            embeddings = std::move(average);
+        }
+        //write json response
+        json root({{"chunk-embedding", embeddings}});
+        res_ok(res, root);
+
+    };
+
+    const auto handle_ingest = [&ctx_server, &res_error, &res_ok](const httplib::Request & req, httplib::Response & res/*, oaicompat_type oaicompat*/) {
+        json body = json::parse(req.body);
+        if (body.contains("messages")) {
+            body = body.at("messages")[0];
+        };
+
+        // for the shape of input/content, see tokenize_input_prompts()
+        std::vector<llama_tokens> tokenized_prompts;
+        if (body.count("input") != 0) {
+            auto prompt = body.at("input");
+            tokenized_prompts = tokenize_input_prompts(ctx_server.vocab, prompt, true, true);
+        } else if (body.contains("content")) {
+            auto prompt = body.at("content");
+            tokenized_prompts = tokenize_input_prompts(ctx_server.vocab, prompt, true, true);
+        } else if (body.contains("tokens")) {
+            llama_tokens tokens = body.at("tokens");
+            tokenized_prompts.push_back(tokens);
+        } else {
+            res_error(res, format_error_response("\"input\" or \"content\" must be provided", ERROR_TYPE_INVALID_REQUEST));
+            return;
+        }
+        
+        for (const auto & tokens : tokenized_prompts) {
+            // this check is necessary for models that do not add BOS token to the input
+            if (tokens.empty()) {
+                res_error(res, format_error_response("Input content cannot be empty", ERROR_TYPE_INVALID_REQUEST));
+                return;
+            }
+        }
+
+        // create and queue the task
+        bool error = false;
+        std::unordered_set<int> task_ids;
+        {
+            std::vector<server_task> tasks;
+            for (size_t i = 0; i < tokenized_prompts.size(); i++) {
+                server_task task = server_task(SERVER_TASK_TYPE_EMBEDDING);
+
+                task.id            = ctx_server.queue_tasks.get_new_id();
+                task.index         = i;
+                task.prompt_tokens = server_tokens(tokenized_prompts[i], ctx_server.mctx != nullptr);
+
+                // OAI-compat
+                task.params.oaicompat = OAICOMPAT_TYPE_NONE;
+
+                tasks.push_back(std::move(task));
+            }
+
+            task_ids = server_task::get_list_id(tasks);
+            ctx_server.queue_results.add_waiting_tasks(tasks);
+            ctx_server.queue_tasks.post(std::move(tasks));
+        }
+
+        // get the result
+        ctx_server.receive_multi_results(task_ids, [&](std::vector<server_task_result_ptr> & results) {
+            for (auto & res : results) {
+                GGML_ASSERT(dynamic_cast<server_task_result_embd*>(res.get()) != nullptr);
+            }
+        }, [&](const json & error_data) {
+            res_error(res, error_data);
+            error = true;
+        }, req.is_connection_closed);
+
+        ctx_server.queue_results.remove_waiting_task_ids(task_ids);
+
+        if (error) {
+            return;
+        }
+
+        // write JSON response
+        json root({{"ingestion", "ok"}});
+        res_ok(res, root);
+    };
+
+
     const auto handle_chat_completions_rag = [&ctx_server, &params, &res_error, &handle_completions_impl_with_rag](const httplib::Request & req, httplib::Response & res) {
         LOG_DBG("request: %s\n", req.body.c_str());
         if (ctx_server.params_base.embedding) {
@@ -5757,6 +5880,8 @@ const auto provide_quote = [&ctx_server, &params, &res_error, &res_ok](const htt
     svr->Post("/tokenize",            handle_tokenize);
     svr->Post("/detokenize",          handle_detokenize);
     svr->Post("/apply-template",      handle_apply_template);
+    svr->Post("/ingest",              handle_ingest); // OWL WAS HERE
+    svr->Post("/compute-chunk-vector",handle_chunk_vector); // OWL WAS HERE
     svr->Post("/chunking",            handle_chunking); //OWL WAS HERE
     svr->Post("/rag_db_admin",        handle_rag_db_admin); //OWL WAS HERE
     svr->Post("/provide-quote",       provide_quote); //OWL WAS HERE
