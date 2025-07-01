@@ -5166,7 +5166,7 @@ int main(int argc, char ** argv) {
     const auto handle_ingest = [&ctx_server, &res_error, &res_ok](const httplib::Request & req, httplib::Response & res/*, oaicompat_type oaicompat*/) {
         json body = json::parse(req.body);
         if (body.contains("messages")) {
-            body = body.at("messages")[0];
+            body = body.at("messages")[body.at("messages").size()-1];
         };
 
         // for the shape of input/content, see tokenize_input_prompts()
