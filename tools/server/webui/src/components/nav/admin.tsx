@@ -6,15 +6,17 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { MessageCirclePlus, FilePlus2 } from 'lucide-react';
+import { MessageCirclePlus, FilePlus2, SquareTerminal } from 'lucide-react';
 import { Button } from '../ui/button';
 import { useNavigate } from 'react-router';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import { getSelectedRagConnection } from '../../Config';
 import { useAppContext } from '../../utils/app.context';
 import { SwitchConfigToggle } from '../SwitchSpecificConfigElem';
 import { InputConfigField } from '../InputConfigField';
+import { EmbeddingDisplayModal } from '../EmbeddingDisplayModal';
+import StorageUtils from '@/utils/storage';
 
 export function NavAdmin() {
   const navigate = useNavigate();
@@ -213,6 +215,62 @@ export function NavAdmin() {
   const handleNewDocumentClick = () => {
     fileInputRef.current?.click();
   };
+
+  const [showEmbeddingModal, setShowEmbeddingModal] = useState(false);
+  const [embeddingVector, setEmbeddingVector] = useState<number[] | null>(null);
+
+  // New function to get embedding vector
+  const provideChunkEmbeddingVector = async () => {
+    const toastId = toast.loading('Getting embedding vector...');
+    try {
+      // The C++ backend indicates it can take aggregation_rule and aggregation_sample
+      // For now, we'll send a minimal body. If you need to specify these,
+      // you could add input fields for them in the UI.
+      const config = StorageUtils.getConfig();
+      const custom = config.custom.length ? JSON.parse(config.custom) : {};
+      const aggregation_sample: number =
+        custom['chunk_sz'] == undefined ? 300 : Number(custom['chunk_sz']);
+      const requestBody = {
+        aggregation_rule: 'average', // Example: if you want to explicitly send this
+        aggregation_sample: aggregation_sample,
+      };
+
+      const response = await fetch('/compute-chunk-vector', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestBody),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(
+          errorData.message || `HTTP error! status: ${response.status}`
+        );
+      }
+
+      const data = await response.json();
+      const embedding = data['chunk-embedding'];
+
+      if (!Array.isArray(embedding) || embedding.some(isNaN)) {
+        throw new Error('Invalid embedding vector received from backend.');
+      }
+
+      setEmbeddingVector(embedding);
+      setShowEmbeddingModal(true); // Show the modal
+      toast.success('Embedding vector retrieved!', { id: toastId });
+    } catch (error) {
+      console.error('Failed to get embedding vector:', error);
+      toast.error(
+        `Failed to get embedding vector: ${error instanceof Error ? error.message : String(error)}`,
+        { id: toastId }
+      );
+      setEmbeddingVector(null);
+      setShowEmbeddingModal(false); // Ensure modal is closed on error
+    }
+  };
+
   return (
     <SidebarGroup>
       <SidebarGroupLabel>Admin</SidebarGroupLabel>
@@ -231,7 +289,6 @@ export function NavAdmin() {
               </Button>
             </SidebarMenuButton>
           </SidebarMenuItem>
-
           {/* New RAG Document Button */}
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
@@ -245,23 +302,34 @@ export function NavAdmin() {
               </Button>
             </SidebarMenuButton>
           </SidebarMenuItem>
-
           {/* switch to ingest mode */}
           <SwitchConfigToggle configKey="ingest" labelText="Ingest Mode" />
-
           {/* switch to rendering vectors*/}
-          <SwitchConfigToggle
-            configKey="embedding_only"
-            labelText="Embedding Only"
-          />
-
+          <SidebarMenuItem>
+            <SidebarMenuButton asChild>
+              <Button
+                variant="ghost"
+                className="w-full justify-start gap-2"
+                onClick={provideChunkEmbeddingVector} // This calls the function
+              >
+                <SquareTerminal className="h-4 w-4" /> {/* New icon */}
+                <span>Get Embedding Vector</span>
+              </Button>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+          {/* Embedding Display Modal */}
+          {showEmbeddingModal && embeddingVector && (
+            <EmbeddingDisplayModal
+              vector={embeddingVector}
+              onClose={() => setShowEmbeddingModal(false)}
+            />
+          )}
           {/* Sampling size for the chunk*/}
           <InputConfigField
             configKey="chunk_sz"
             labelText="Chunk Size"
             type="number"
           />
-
           {/* Hidden file input for document upload */}
           <input
             type="file"
