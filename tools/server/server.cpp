@@ -34,10 +34,13 @@
 #include <thread>
 #include <unordered_map>
 #include <unordered_set>
+#include <filesystem>
 
 #include "rag_database.h"
 #include "postgres_client.h"
 #include "self_signed.h"
+
+namespace fs = std::filesystem;
 
 std::shared_ptr<postgres_client> rag_db_ = nullptr;
 std::shared_ptr<rag_database> create_rag_database(const std::string & host_name, int port, const std::string & db_name)
@@ -5686,6 +5689,135 @@ const auto provide_quote = [&ctx_server, &params, &res_error, &res_ok](const htt
         res_error(res, format_error_response(std::string("Error retrieving certificate: ") + e.what(), ERROR_TYPE_INTERNAL_SERVER_ERROR));
     }
 };
+
+
+const auto handle_model_list_models = [&ctx_server, &res_error, &res_ok, &params](const json & body, const httplib::Request& req, httplib::Response& res) {
+    try {
+        std::string fullyQualifiedFilePath = params.model.path;
+
+        // 1. Get the directory of the provided file path
+        fs::path filePath(fullyQualifiedFilePath);
+        fs::path directoryPath = filePath.parent_path();
+
+        // Check if the directory exists
+        if (!fs::exists(directoryPath) || !fs::is_directory(directoryPath)) {
+            std::cerr << "Error: Directory '" << directoryPath << "' does not exist or is not a directory." << std::endl;
+            return;
+        }
+        std::cout << "Searching for .gguf files in: " << directoryPath << std::endl;
+
+        std::vector<std::string> ggufFiles;
+        for (const auto& entry : fs::directory_iterator(directoryPath)) {
+            // Check if it's a regular file
+            if (fs::is_regular_file(entry.status())) {
+                // Get the file extension
+                std::string extension = entry.path().extension().string();
+
+                // Convert extension to lowercase for case-insensitive comparison (optional but good practice)
+                std::transform(extension.begin(), extension.end(), extension.begin(),
+                               [](unsigned char c){ return std::tolower(c); });
+
+                // Check if the extension is ".gguf"
+                if (extension == ".gguf") {
+                    ggufFiles.push_back(entry.path().filename().string());
+                }
+            }
+        }
+        json models = {
+            {"models", ggufFiles}
+            };
+        res_ok(res, models);
+
+
+    } catch (const std::exception& e) {
+        // Handle database errors using res_error
+        res_error(res, format_error_response(std::string("Internal error: ") + e.what(), ERROR_TYPE_INTERNAL_SERVER_ERROR));
+    }
+};
+
+const auto handle_model_change_model = [&ctx_server, &res_error, &res_ok, &state, &params](const json & body, const httplib::Request& req, httplib::Response& res) {
+    try {
+         // 1. Validate the request body:
+        if (!body.contains("model")) {
+            res_error(res, format_error_response("Missing required parameters: model", ERROR_TYPE_INVALID_REQUEST));
+            return;
+        }
+        std::string new_model_name = body.at("model");
+
+        std::string fullyQualifiedFilePath = params.model.path;
+        // 1. Get the directory of the provided file path
+        fs::path filePath(fullyQualifiedFilePath);
+        fs::path directoryPath = filePath.parent_path();
+
+        // Check if the directory exists
+        if (!fs::exists(directoryPath) || !fs::is_directory(directoryPath)) {
+            std::cerr << "Error: Directory '" << directoryPath << "' does not exist or is not a directory." << std::endl;
+            res_error(res, format_error_response("Internal Error (File System directory for present model could not be found)", ERROR_TYPE_INVALID_REQUEST));
+            return;
+        }
+
+        // 2. Construct the full path for the potential new file with .gguf extension
+        //    We use operator/ to correctly concatenate path components.
+        fs::path targetFilePath = directoryPath / new_model_name ;
+
+        // 3. Check if the target file exists and is a regular file
+        if (!fs::exists(targetFilePath) && fs::is_regular_file(targetFilePath)) {
+            std::cerr << "Not found: File '" << targetFilePath << "' does not exist or is not a regular file." << std::endl;
+            res_error(res, format_error_response("Internal Error (model could not be located)", ERROR_TYPE_INVALID_REQUEST));
+            return;
+        }
+
+        params.model.path = targetFilePath;
+        state.store(SERVER_STATE_LOADING_MODEL);
+        LOG_INF("%s: reloading model\n", __func__);
+
+        if (!ctx_server.load_model(params)) {
+            LOG_ERR("%s: exiting due to model loading error\n", __func__);
+            res_error(res, format_error_response("Internal Error (model could not be loaded)", ERROR_TYPE_INVALID_REQUEST));
+            return;
+        }
+    ctx_server.slots.clear();
+    ctx_server.init();
+    state.store(SERVER_STATE_READY);
+
+    LOG_INF("%s: model loaded\n", __func__);
+
+
+    json models = {
+        {"success", true},
+        {"new_model_path", (std::string)targetFilePath}
+        };
+        res_ok(res, models);
+
+    } catch (const std::exception& e) {
+        // Handle database errors using res_error
+        res_error(res, format_error_response(std::string("Internal error: ") + e.what(), ERROR_TYPE_INTERNAL_SERVER_ERROR));
+    }
+};
+
+
+const auto handle_model_request = [&ctx_server, &res_error, &res_ok, &handle_model_list_models, &handle_model_change_model](const httplib::Request& req, httplib::Response& res) {
+    try {
+        const json body = json::parse(req.body);
+
+        // 1. Validate the request body:
+        if (!body.contains("action")) {
+            res_error(res, format_error_response("Missing required parameters: action", ERROR_TYPE_INVALID_REQUEST));
+            return;
+        }
+        const std::string action = body["action"].get<std::string>();
+        if(action == "list-models")
+            handle_model_list_models(body,req,res);
+        else if(action == "change-model")
+            handle_model_change_model(body,req,res);
+        else {
+            res_error(res, format_error_response("Invalid action" + action + " Must be 'list-models' or 'change-model'.", ERROR_TYPE_INVALID_REQUEST));
+        }
+    } catch (const std::exception& e) {
+        // Handle database errors using res_error
+        res_error(res, format_error_response(std::string("Internal error: ") + e.what(), ERROR_TYPE_INTERNAL_SERVER_ERROR));
+    }
+};
 //OWL END
 
 
@@ -5885,6 +6017,8 @@ const auto provide_quote = [&ctx_server, &params, &res_error, &res_ok](const htt
     svr->Post("/chunking",            handle_chunking); //OWL WAS HERE
     svr->Post("/rag_db_admin",        handle_rag_db_admin); //OWL WAS HERE
     svr->Post("/provide-quote",       provide_quote); //OWL WAS HERE
+    svr->Post("/model-action",        handle_model_request); //OWL WAS HERE
+    
     // LoRA adapters hotswap
     svr->Get ("/lora-adapters",       handle_lora_adapters_list);
     svr->Post("/lora-adapters",       handle_lora_adapters_apply);

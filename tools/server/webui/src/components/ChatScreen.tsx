@@ -22,6 +22,8 @@ import toast from 'react-hot-toast';
 import ChatInputExtraContextItem from './ChatInputExtraContextItem.tsx';
 import { scrollToBottom, useChatScroll } from './useChatScroll.tsx';
 
+import { ServerInfo2 } from './AvailableModelDisplay.tsx';
+
 /**
  * A message display is a message node with additional information for rendering.
  * For example, siblings of the message node are stored as their last node (aka leaf node).
@@ -278,20 +280,8 @@ export default function ChatScreen() {
 }
 
 function ServerInfo() {
-  const { serverProps } = useAppContext();
-  return (
-    <div className="card card-sm shadow-sm border-1 border-base-content/20 text-base-content/70 mb-6">
-      <div className="card-body">
-        <b>Server Info</b>
-        <p>
-          <b>Model</b>: {serverProps?.model_path?.split(/(\\|\/)/).pop()}
-          <br />
-          <b>Build</b>: {serverProps?.build_info}
-          <br />
-        </p>
-      </div>
-    </div>
-  );
+  //const { serverProps } = useAppContext();
+  return <ServerInfo2 />;
 }
 
 function ChatInput({
