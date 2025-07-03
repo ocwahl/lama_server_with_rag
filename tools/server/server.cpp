@@ -5161,7 +5161,7 @@ int main(int argc, char ** argv) {
             embeddings = std::move(average);
         }
         //write json response
-        json root({{"chunk-embedding", embeddings}});
+        json root({{"chunk_embedding", embeddings}});
         res_ok(res, root);
 
     };
@@ -5325,7 +5325,7 @@ int main(int argc, char ** argv) {
                 const auto& document = rag_params.at("document");
                 std::string date_str = (document.count("date")==0)?"":document.at("date").template get<std::string>();
                 std::string version_str = (document.count("version")==0)?"":document.at("version").template get<std::string>();
-                std::string content_type_str = (document.count("content-type")==0)?"":document.at("content-type").template get<std::string>();
+                std::string content_type_str = (document.count("content_type")==0)?"":document.at("content_type").template get<std::string>();
                 std::string url_str = (document.count("url")==0)?"":document.at("url").template get<std::string>();
                 int length = (document.count("length")==0)?0:document.at("length").template get<int>();
 
